@@ -9,6 +9,7 @@
     "test:service3d": "node service-3d.test.mjs",
     "test:service3d:browser": "node service-3d.browser.test.mjs",
     "test:online3d": "node online-3d.browser.test.mjs",
+    "test:storage3d": "node storage-isolation.browser.test.mjs",
     "test:cleaning": "node cleaning-walk.test.mjs && node cleaning-ownership.test.mjs && node service-tasks.test.mjs && node tab-persist.test.mjs",
     "check": "npm test"
   },
