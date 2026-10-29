@@ -64,16 +64,16 @@ export function updateHud(){
 }
 /* v28: barra de inventario plegable. Se despliega sola cuando un producto
    pasa a estado bajo o agotado; la preferencia manual se recuerda. */
-let stockMini=false;try{stockMini=localStorage.getItem('lalioli-stockmini')==='1';}catch(e){}
+let stockMini=false;try{stockMini=localStorage.getItem('lalioli-3d-stockmini')==='1';}catch(e){}
 let stockLowSeen=new Set();
 function applyStockMode(){const bar=$('#stockbar');if(!bar)return;bar.classList.toggle('mini',stockMini);const tg=$('#stock-toggle');if(!tg)return;tg.setAttribute('aria-expanded',String(!stockMini));tg.setAttribute('aria-label',stockMini?'Desplegar inventario':'Plegar inventario');tg.innerHTML=stockMini?'<svg viewBox="0 0 20 20"><path d="M10 5v10m0 0l-4-4m4 4l4-4"/></svg>':'<svg viewBox="0 0 20 20"><path d="M10 15V5m0 0l-4 4m4-4l4 4"/></svg>';}
-document.addEventListener('click',e=>{if(!e.target.closest?.('#stock-toggle'))return;stockMini=!stockMini;try{localStorage.setItem('lalioli-stockmini',stockMini?'1':'0');}catch(err){}applyStockMode();});
+document.addEventListener('click',e=>{if(!e.target.closest?.('#stock-toggle'))return;stockMini=!stockMini;try{localStorage.setItem('lalioli-3d-stockmini',stockMini?'1':'0');}catch(err){}applyStockMode();});
 export function updateStockbar(){
   const list=$('#stockbar .stock-list');if(!list)return;
   const items=activeItems();let newLow=false;const low=new Set();
   for(const id of items){const n=Game.stock[id];if(n===0||n<6){low.add(id);if(!stockLowSeen.has(id))newLow=true;}}
   stockLowSeen=low;
-  if(newLow&&stockMini){stockMini=false;try{localStorage.setItem('lalioli-stockmini','0');}catch(e){}}
+  if(newLow&&stockMini){stockMini=false;try{localStorage.setItem('lalioli-3d-stockmini','0');}catch(e){}}
   list.innerHTML=items.map(id=>{const n=Game.stock[id];return `<div class="stock ${n===0?'out':n<6?'low':''}" title="${ITEMS[id].name}"><img src="${ICON_URL[id]}" alt="${ITEMS[id].name}">${n}</div>`;}).join('');
   applyStockMode();
 }

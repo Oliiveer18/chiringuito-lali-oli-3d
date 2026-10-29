@@ -4,7 +4,7 @@ import { showPlan, Plan } from './ui.js?v=28.16.0-vfx3d';
 import { buildTables } from './world.js?v=28.16.0-vfx3d';
 import { netDirty } from './net.js?v=28.16.0-vfx3d';
 import { showReportUI } from './report.js?v=28.16.0-vfx3d';
-const KEY='lali-oli.library.v2', BACK=KEY+'.backup';
+const KEY='lali-oli.3d.library.v2', BACK=KEY+'.backup';
 const fields=['day','money','rep','stock','prices','enabled','upgrades','staff','forecast','season','lastDebt','starsLog','revUsed','revPrev','regulars','regVisited','buzz','pendingPurchases'];
 const encode=x=>JSON.stringify(x,(_,v)=>v instanceof Set?{__laliSet:[...v]}:v);
 const decode=s=>JSON.parse(s,(_,v)=>v&&Array.isArray(v.__laliSet)?new Set(v.__laliSet):v);
@@ -16,7 +16,7 @@ function message(t){
   if(t)console.warn('[guardado]',t);
 }
 function parse(raw){const a=decode(raw);if(!Array.isArray(a)||!a.every(valid))throw Error('Guardado incompatible');return a;}
-try{const raw=localStorage.getItem(KEY);if(raw!==null)library=parse(raw);else{for(const kind of ['solo','coop']){const rawOld=localStorage.getItem('lali-oli.save.v1.'+kind);if(rawOld){const s=decode(rawOld);if(valid(s))library.push({...s,id:uid()});}}}}catch(e){try{const raw=localStorage.getItem(BACK);if(!raw)throw e;library=parse(raw);message('Recuperada la copia anterior.');}catch(e){locked=true;message('No se pudieron leer las partidas. No se sobrescribirán los datos.');}}
+try{const raw=localStorage.getItem(KEY);if(raw!==null)library=parse(raw);else{for(const kind of ['solo','coop']){const rawOld=localStorage.getItem('lali-oli.3d.save.v1.'+kind);if(rawOld){const s=decode(rawOld);if(valid(s))library.push({...s,id:uid()});}}}}catch(e){try{const raw=localStorage.getItem(BACK);if(!raw)throw e;library=parse(raw);message('Recuperada la copia anterior.');}catch(e){locked=true;message('No se pudieron leer las partidas. No se sobrescribirán los datos.');}}
 function uid(){return Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10);}
 const settled=()=>{const p=Game.upgrades&&Game.upgrades.progression;if(!p)return true;const d=((Game.upgrades.career&&Game.upgrades.career.season)||1)-1;return p.last>=d*30+Game.day;};
 function save(){if(locked||pending||Net.role==='guest'||!['plan','report'].includes(Game.mode)||Game.mode==='report'&&(!Net.ui||!Game.revModel)||Game.mode==='report'&&!settled())return;

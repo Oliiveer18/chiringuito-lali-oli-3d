@@ -38,7 +38,7 @@ async function run(browser,url,viewport,coop){
       const fields=['day','money','rep','stock','prices','enabled','upgrades','staff','forecast','season','regulars','pendingPurchases'];
       return Object.fromEntries(fields.map(k=>[k,structuredClone(Game[k])]));
     });
-    assert(await page.evaluate(()=>JSON.parse(localStorage.getItem('lali-oli.library.v2')||'[]').length>0),'Save fixture was not written');
+    assert(await page.evaluate(()=>JSON.parse(localStorage.getItem('lali-oli.3d.library.v2')||'[]').length>0),'Save fixture was not written');
     await page.reload({waitUntil:'domcontentloaded'});await loaded();await page.locator('#btn-start').click();await page.locator('.save-row').first().getByRole('button',{name:'Continuar',exact:true}).click();
     const restored=await page.evaluate(fields=>Object.fromEntries(fields.map(k=>[k,structuredClone(Game[k])])),Object.keys(saved));
     assert.deepEqual(restored,saved,'Existing-format save did not round-trip');
@@ -50,7 +50,7 @@ async function run(browser,url,viewport,coop){
       function capture(label){
         R.render();const seen=new WeakSet();
         const state=JSON.parse(JSON.stringify(Game,(_,v)=>{if(v instanceof Set)return {set:[...v]};if(v instanceof Map)return {map:[...v]};if(typeof v==='number'&&!Number.isFinite(v))return String(v);if(v&&typeof v==='object'){if(seen.has(v))return '[reference]';seen.add(v);}return v;}));
-        samples.push({label,state,canvas:document.querySelector('#game').toDataURL(),storage:JSON.parse(localStorage.getItem('lali-oli.library.v2')||'[]')});
+        samples.push({label,state,canvas:document.querySelector('#game').toDataURL(),storage:JSON.parse(localStorage.getItem('lali-oli.3d.library.v2')||'[]')});
       }
       const signatures=module=>Object.fromEntries(Object.keys(module).sort().map(k=>[k,typeof module[k]==='function'?{type:'function',name:module[k].name,length:module[k].length}:{type:typeof module[k]}]));
       samples.push({sim:signatures(S),render:signatures(R)});

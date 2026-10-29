@@ -32,7 +32,7 @@ export function setCam(mode) {
   if (!CAM.zones[mode]) return;
   CAM.mode = mode;
   CAM.target = mode;
-  try { sessionStorage.setItem('lali-oli.cam-beta', mode); } catch (e) { }
+  try { sessionStorage.setItem('lali-oli.3d.cam-beta', mode); } catch (e) { }
   document.querySelectorAll('#cam-bar button').forEach(b => b.classList.toggle('on', b.dataset.cam === mode));
 }
 export function camTick(dt) {
@@ -80,6 +80,6 @@ export function initCamBeta() {
   document.body.append(bar);
   bar.addEventListener('click', e => { const b = e.target.closest('button'); if (b) setCam(b.dataset.cam); });
   let saved = 'auto';
-  try { saved = sessionStorage.getItem('lali-oli.cam-beta') || 'auto'; } catch (e) { }
+  try { saved = sessionStorage.getItem('lali-oli.3d.cam-beta') || 'auto'; } catch (e) { }
   setCam(saved);
 }

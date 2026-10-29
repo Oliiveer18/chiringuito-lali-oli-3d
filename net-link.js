@@ -22,7 +22,7 @@ const PEERJS_CLOUDS = [
   { host: '0.peerjs.com', port: 443, path: '/', secure: true },
   { host: 'peerjs-server.herokuapp.com', port: 443, path: '/', secure: true }
 ];
-const CLOUD_KEY = 'lali-oli.peerjs-cloud';
+const CLOUD_KEY = 'lali-oli.3d.peerjs-cloud';
 let cloudIdx = 0;
 try {
   const saved = parseInt(sessionStorage.getItem(CLOUD_KEY), 10);

@@ -31,7 +31,7 @@ const num = v => (Number.isFinite(v) ? v : 0);
 const fmtN = n => Math.round(n).toLocaleString('es-ES');
 
 // ---------- Legado (persistente entre carreras; vive en el móvil del anfitrión) ----------
-const LKEY = 'lali-oli.legacy.v1';
+const LKEY = 'lali-oli.3d.legacy.v1';
 export function loadLegacy() {
   try {
     if (typeof localStorage === 'undefined') return { points: 0, owned: [], keys: [] };

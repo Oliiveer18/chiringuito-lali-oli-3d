@@ -1,7 +1,7 @@
 import { Game, Net } from './state.js?v=28.16.0-vfx3d';
 import { setSpeed, toastLocal } from './ui.js?v=28.16.0-vfx3d';
 const Base=window.Peer;
-let sessionToken;try{sessionToken=sessionStorage.getItem('lali-oli.peer-token');if(!sessionToken){sessionToken=crypto.randomUUID();sessionStorage.setItem('lali-oli.peer-token',sessionToken);}}catch(e){sessionToken=String(Date.now())+Math.random();}
+let sessionToken;try{sessionToken=sessionStorage.getItem('lali-oli.3d.peer-token');if(!sessionToken){sessionToken=crypto.randomUUID();sessionStorage.setItem('lali-oli.3d.peer-token',sessionToken);}}catch(e){sessionToken=String(Date.now())+Math.random();}
 function notice(text){const el=document.querySelector('#lobby-status');if(el)el.textContent=text;}
 const LINK_WINDOW_MS=45000;
 function lost(){if(Game.mode==='service'&&Game.speed){Net.pausedByDrop=true;setSpeed(0);}Net.peer=false;notice('Conexión interrumpida. Reconectando durante 45 segundos…');}

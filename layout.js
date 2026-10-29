@@ -5,7 +5,7 @@ const root=document.documentElement;
 let uiTop=0,uiBottom=0;
 const CAM_SPAN=700,CAM_CX={barra:290,mesas:930};
 const cam={mode:'todo'};
-try{const m=sessionStorage.getItem('lali-oli.cam');if(m==='barra'||m==='mesas')cam.mode=m;}catch(e){}
+try{const m=sessionStorage.getItem('lali-oli.3d.cam');if(m==='barra'||m==='mesas')cam.mode=m;}catch(e){}
 let camInputsKey='';
 function camInputsKeyNow(){
   const b=document.body,vp=window.visualViewport;
@@ -56,7 +56,7 @@ for(const [k,t]of [['todo','Todo'],['barra','Barra y cola'],['mesas','Mesas']]){
 }
 document.body.append(bar);
 function setCam(m){
-  cam.mode=m;try{sessionStorage.setItem('lali-oli.cam',m);}catch(e){}
+  cam.mode=m;try{sessionStorage.setItem('lali-oli.3d.cam',m);}catch(e){}
   document.body.classList.toggle('cam-zoom',m!=='todo');
   bar.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.cam===m));
   refresh();

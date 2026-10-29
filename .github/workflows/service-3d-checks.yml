@@ -1,7 +1,7 @@
 name: Service 3D integrity
 on:
   push:
-    branches: [fix/3d-service-integrity, experiment/vfx-clientes-3d]
+    branches: [preview-3d]
   pull_request:
     paths:
       - 'service-3d*'

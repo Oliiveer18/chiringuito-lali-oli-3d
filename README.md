@@ -1,14 +1,26 @@
-# Chiringuito de Lali y Oli
+# Chiringuito de Lali y Oli 3D
+
+Esta es la copia 3D independiente, publicada desde la rama `preview-3d`.
+Procede de `fix/3d-service-integrity` en el repositorio original, commit
+`8d2d667b3dbc7640ffb39da23fed34a07faec6a1`. No sustituye ni modifica el juego 2D.
+Los guardados y preferencias usan claves `lali-oli.3d.*` independientes de las
+del 2D, aunque las dos webs comparten el dominio de GitHub Pages.
 
 Juego de gestión de un chiringuito en Tenerife, con modo individual y cooperativo online para dos móviles.
 
 ## Jugar
 
-El juego está publicado en GitHub Pages: https://oliiveer18.github.io/chiringuito-de-lali-y-oli/
+La copia 3D tiene su propia publicación:
+[Abrir Lali y Oli 3D](https://oliiveer18.github.io/chiringuito-lali-oli-3d/).
+El [juego 2D original](https://oliiveer18.github.io/chiringuito-de-lali-y-oli/)
+mantiene su enlace y su publicación desde `main`, sin cambios.
 
-El cooperativo usa PeerJS (WebRTC), así que no necesita servidor propio. Hace falta conexión a internet para cargar PeerJS y las fuentes.
+El cooperativo usa PeerJS (WebRTC). Las pruebas entre perfiles del mismo entorno
+pasan; una prueba entre máquinas de redes distintas no logró conectar. Falta
+configurar un relay TURN operativo y repetir esa validación. No se presenta
+el online entre redes distintas como terminado. Consulta `SERVICE-3D-FIXES.md`.
 
-## Líneas de producto: oficial, preview y camera-beta
+## Referencias del repositorio original
 
 | Línea | Ubicación | Uso |
 |--------|-----------|-----|
