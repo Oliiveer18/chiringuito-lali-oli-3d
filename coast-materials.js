@@ -1,4 +1,4 @@
-/* coast-materials.js · Agua y arena estilizadas (GPU) · KLO-49 */
+/* coast-materials.js · Agua y arena estilizadas (GPU) · KLO-49 + mejora olas */
 import * as THREE from './lib/three.module.js';
 import { SHORE_WORLD_Z, coastPalette } from './coast-palette.js?v=28.16.2-vfx3d';
 
@@ -24,21 +24,51 @@ varying vec3 vWorldPos;
 varying vec3 vNormalW;
 varying vec2 vUv;
 
+// Gerstner-like simple (2 capas)
+vec3 gerstner(vec2 pos, float t, float w) {
+  float a1 = 0.18 * w;
+  float f1 = 0.32;
+  float s1 = 1.6 * w;
+  vec2 d1 = normalize(vec2(0.85, 0.35));
+  float phase1 = dot(pos, d1) * f1 + t * s1;
+  float h1 = a1 * sin(phase1);
+
+  float a2 = 0.11 * w;
+  float f2 = 0.55;
+  float s2 = 2.1 * w;
+  vec2 d2 = normalize(vec2(-0.4, 0.9));
+  float phase2 = dot(pos, d2) * f2 + t * s2;
+  float h2 = a2 * sin(phase2);
+
+  float a3 = 0.06 * w;
+  float f3 = 0.18;
+  float s3 = 1.15 * w;
+  vec2 d3 = normalize(vec2(0.2, -0.7));
+  float phase3 = dot(pos, d3) * f3 + t * s3;
+  float h3 = a3 * sin(phase3);
+
+  return vec3(0.0, h1 + h2 + h3, 0.0);
+}
+
 void main() {
   vUv = uv;
   vec3 pos = position;
   float t = uTime;
   float w = uWind;
-  pos.y += sin(pos.x * 0.35 + t * 1.8 * w) * 0.16;
-  pos.y += cos(pos.z * 0.28 + t * 1.4 * w) * 0.11;
-  pos.y += sin(pos.x * 0.12 + pos.z * 0.15 + t * 2.05 * w) * 0.07 * w;
+
+  vec3 disp = gerstner(pos.xz, t, w);
+  pos += disp;
 
   vec4 wp = modelMatrix * vec4(pos, 1.0);
   vWorldPos = wp.xyz;
 
-  float dx = cos(pos.x * 0.35 + t * 1.8 * w) * 0.35 * 0.16 * w;
-  float dz = -sin(pos.z * 0.28 + t * 1.4 * w) * 0.28 * 0.11;
-  vec3 n = normalize(vec3(-dx, 1.0, -dz));
+  // Normal aproximada por derivadas
+  float eps = 0.15;
+  float hL = gerstner(pos.xz - vec2(eps, 0.0), t, w).y;
+  float hR = gerstner(pos.xz + vec2(eps, 0.0), t, w).y;
+  float hD = gerstner(pos.xz - vec2(0.0, eps), t, w).y;
+  float hU = gerstner(pos.xz + vec2(0.0, eps), t, w).y;
+  vec3 n = normalize(vec3(hL - hR, 2.0 * eps, hD - hU));
   vNormalW = normalize(mat3(modelMatrix) * n);
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
@@ -76,30 +106,41 @@ float noise(vec2 p) {
 
 void main() {
   vec3 viewDir = normalize(cameraPosition - vWorldPos);
-  vec3 n = normalize(vNormalW + vec3(noise(vWorldPos.xz * 0.35 + uTime * 0.15) - 0.5, 0.0, noise(vWorldPos.xz * 0.28 - uTime * 0.12) - 0.5) * 0.08);
+  vec3 n = normalize(vNormalW);
 
-  float depthT = smoothstep(-32.0, -5.5, vWorldPos.z);
+  // Pequeña perturbación de normal para micro-detalle
+  float nDetail = noise(vWorldPos.xz * 0.42 + uTime * 0.18 * uWind) - 0.5;
+  n = normalize(n + vec3(nDetail * 0.06, 0.0, nDetail * 0.04));
+
+  float depthT = smoothstep(-38.0, -4.0, vWorldPos.z);
   vec3 waterCol = mix(uDeep, uShallow, depthT);
 
-  float fresnel = pow(1.0 - max(dot(n, viewDir), 0.0), 2.8);
-  waterCol = mix(waterCol, vec3(0.55, 0.82, 0.92), fresnel * (0.35 + uNightness * 0.2));
+  // Fresnel más suave
+  float fresnel = pow(1.0 - max(dot(n, viewDir), 0.0), 2.4);
+  vec3 skyTint = mix(vec3(0.62, 0.85, 0.95), vec3(0.35, 0.55, 0.75), uNightness);
+  waterCol = mix(waterCol, skyTint, fresnel * 0.42);
 
+  // Espuma de orilla más orgánica
   float shoreDist = abs(vWorldPos.z - uShoreZ);
-  float foamBase = 1.0 - smoothstep(0.0, 2.8, shoreDist);
-  float foamNoise = noise(vec2(vWorldPos.x * 0.08 + uTime * 0.9 * uWind, vWorldPos.z * 0.2 + uTime * 0.6));
-  float foam = foamBase * (0.55 + 0.45 * foamNoise) * (1.0 - uNightness * 0.35);
-  foam *= 0.85 + 0.15 * sin(uTime * 1.8 * uWind + vWorldPos.x * 0.2);
+  float foamBase = 1.0 - smoothstep(0.4, 3.6, shoreDist);
+  float foamNoise = noise(vec2(vWorldPos.x * 0.11 + uTime * 0.75 * uWind, vWorldPos.z * 0.25 + uTime * 0.45));
+  float foamPulse = 0.7 + 0.3 * sin(uTime * 1.4 * uWind + vWorldPos.x * 0.18);
+  float foam = foamBase * (0.45 + 0.55 * foamNoise) * foamPulse * (1.0 - uNightness * 0.4);
+  foam = smoothstep(0.25, 0.75, foam);
 
-  if (uSunSpec > 0.02) {
+  // Specular solar
+  if (uSunSpec > 0.01) {
     vec3 halfV = normalize(viewDir + uSunDir);
-    float spec = pow(max(dot(n, halfV), 0.0), 48.0) * uSunSpec;
-    waterCol += vec3(1.0, 0.78, 0.45) * spec * 0.9;
-    float streak = exp(-abs(vWorldPos.x * 0.04) * 0.35) * uSunSpec * 0.25;
-    waterCol += vec3(1.0, 0.82, 0.55) * streak * smoothstep(-8.0, -2.0, vWorldPos.z);
+    float spec = pow(max(dot(n, halfV), 0.0), 64.0) * uSunSpec;
+    waterCol += vec3(1.0, 0.82, 0.5) * spec * 1.1;
+
+    // Brillo alargado suave
+    float streak = exp(-abs(vWorldPos.x) * 0.035) * uSunSpec * 0.22;
+    waterCol += vec3(1.0, 0.85, 0.6) * streak * smoothstep(-12.0, -1.5, vWorldPos.z);
   }
 
-  waterCol = mix(waterCol, vec3(1.0), foam);
-  float alpha = 0.82 + fresnel * 0.12;
+  waterCol = mix(waterCol, vec3(0.98, 0.99, 1.0), foam * 0.92);
+  float alpha = 0.78 + fresnel * 0.16;
   gl_FragColor = vec4(waterCol, alpha);
 }
 `;
@@ -139,41 +180,14 @@ export function createSandMaterial() {
     shader.uniforms.uSandWet = { value: new THREE.Color(0x0f8b8d) };
     shader.uniforms.uNightness = { value: 0 };
 
-    shader.vertexShader = `
-attribute float shoreDist;
-varying float vShoreDist;
-varying vec2 vSandXZ;
-${shader.vertexShader}`.replace(
+    shader.vertexShader = `\nattribute float shoreDist;\nvarying float vShoreDist;\nvarying vec2 vSandXZ;\n${shader.vertexShader}`.replace(
       '#include <begin_vertex>',
-      `#include <begin_vertex>
-vShoreDist = shoreDist;
-vSandXZ = (modelMatrix * vec4(transformed, 1.0)).xz;`
+      `#include <begin_vertex>\nvShoreDist = shoreDist;\nvSandXZ = (modelMatrix * vec4(transformed, 1.0)).xz;`
     );
 
-    shader.fragmentShader = `
-uniform float uTime;
-uniform float uShoreDistScale;
-uniform vec3 uSandDry;
-uniform vec3 uSandWet;
-uniform float uNightness;
-varying float vShoreDist;
-varying vec2 vSandXZ;
-
-float sandHash(vec2 p) {
-  return fract(sin(dot(p, vec2(41.7, 289.1))) * 45758.5453);
-}
-
-${shader.fragmentShader}`.replace(
+    shader.fragmentShader = `\nuniform float uTime;\nuniform float uShoreDistScale;\nuniform vec3 uSandDry;\nuniform vec3 uSandWet;\nuniform float uNightness;\nvarying float vShoreDist;\nvarying vec2 vSandXZ;\n\nfloat sandHash(vec2 p) {\n  return fract(sin(dot(p, vec2(41.7, 289.1))) * 45758.5453);\n}\n\n${shader.fragmentShader}`.replace(
       '#include <color_fragment>',
-      `#include <color_fragment>
-float wet = 1.0 - smoothstep(-7.0, 2.5, vShoreDist);
-wet *= 1.0 - uNightness * 0.25;
-vec3 grain = vec3(sandHash(vSandXZ * 120.0) * 0.04 - 0.02);
-vec3 dryCol = uSandDry + grain;
-vec3 wetCol = uSandWet + grain * 0.5;
-float caust = wet * (0.08 + 0.06 * sin(vSandXZ.x * 6.0 + uTime * 1.3) * sin(vSandXZ.y * 5.0 - uTime * 1.1));
-wetCol += vec3(0.15, 0.35, 0.32) * caust;
-diffuseColor.rgb = mix(dryCol, wetCol, wet);`
+      `#include <color_fragment>\nfloat wet = 1.0 - smoothstep(-7.0, 2.5, vShoreDist);\nwet *= 1.0 - uNightness * 0.25;\nvec3 grain = vec3(sandHash(vSandXZ * 120.0) * 0.04 - 0.02);\nvec3 dryCol = uSandDry + grain;\nvec3 wetCol = uSandWet + grain * 0.5;\nfloat caust = wet * (0.08 + 0.06 * sin(vSandXZ.x * 6.0 + uTime * 1.3) * sin(vSandXZ.y * 5.0 - uTime * 1.1));\nwetCol += vec3(0.15, 0.35, 0.32) * caust;\ndiffuseColor.rgb = mix(dryCol, wetCol, wet);`
     );
 
     mat.userData.coastUniforms = {
@@ -218,7 +232,7 @@ export function sampleCharacterFootY(worldX, worldZ, footOffset = CHARACTER_FOOT
   return base + footOffset;
 }
 
-/** Escribe atributo shoreDist (worldZ - SHORE_WORLD_Z) tras displazar arena */
+/** Escribe atributo shoreDist (worldZ - SHORE_WORLD_Z) tras desplazar arena */
 export function applySandShoreAttribute(sandGeo, meshWorldZ = 0) {
   const pos = sandGeo.attributes.position;
   const shoreDist = new Float32Array(pos.count);
