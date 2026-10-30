@@ -38,6 +38,19 @@ Se inspeccionaron vistas frontales, de mejoras completas y desde la orilla
 con viento; las suites de navegador registraron cero errores de página.
 No se amplían las garantías del broker público descritas más abajo.
 
+### Validación de la publicación final
+
+La versión `v28.17.3-flat-sand`, commit
+`5061c8a3eaea87485e8c81e6ad8114bebd6fa62c`, está publicada en
+[la copia 3D de GitHub Pages](https://oliiveer18.github.io/chiringuito-lali-oli-3d/?v=28.17.3-flat-sand).
+En esa URL pasaron las pruebas de apoyos de escritorio y móvil, las diez de
+jornada, las nueve del online y el guardado aislado con recarga y continuación.
+Las suites registraron cero errores de página. Un intento online agotó el
+tiempo de navegación mientras competían varias suites WebGL por software;
+repetido sin las otras suites, completó las nueve comprobaciones.
+La prueba de online incluye interrupción real, reconexión al mismo servicio y
+acciones posteriores. Se conserva el límite del proveedor público, sin SLA.
+
 ## Cambios
 
 - **Estado único:** `Game.service3D` contiene bandejas, unidades con calidad y

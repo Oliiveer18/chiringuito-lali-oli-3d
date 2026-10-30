@@ -123,3 +123,19 @@ Original prompt: Sí, empieza las correcciones en una rama nueva de mi copia 3D.
   and crypto stay on their existing URLs. Add a source-graph regression.
 - Fresh release namespace avoids reusing either pre-terrain or interim files.
 - Terrain geometry and online rules are unchanged from the verified b21db71.
+
+## Final hosted terrain handoff
+- Live runtime: 5061c8a3eaea87485e8c81e6ad8114bebd6fa62c, preview-3d,
+  v28.17.3-flat-sand, independent GitHub Pages only.
+- Final hosted desktop/mobile support suite, isolated save/name/reload suite,
+  all ten service flows and all nine online flows pass with zero page errors.
+- One online attempt timed out waiting for guest DOMContentLoaded during
+  simultaneous software-WebGL suites; the page itself had initialized without
+  errors. Repeated that suite without competing suites: all nine flows pass,
+  including real socket interruption, recovery and post-recovery commands.
+- Final game-client click, state capture and screenshot loop passes on Pages.
+- Reviewed final hosted desktop/mobile screenshots and earlier low-angle wind
+  view. No dry-ground intersections in furniture supports; the 2D refs remain
+  original main 3f487bb and experiment e011f02.
+- Existing public-broker availability limitation still applies; this visual
+  repair does not claim a production SLA or universal network compatibility.
