@@ -68,3 +68,12 @@ Original prompt: Sí, empieza las correcciones en una rama nueva de mi copia 3D.
   preparations, movement, guest pause/host resume, real socket interruption,
   same floor id, retained trays/money and zero recorded page errors.
 - Six relay regression groups pass, including retained/replay/tamper rejection.
+
+## v28.17.1 save/name consistency
+- Hosted nine-flow online suite passed; storage suite exposed a generic title
+  before the optional market UI refreshed the save browser.
+- Save browser now reads the persisted kiosk name directly. Assigning a kiosk
+  name triggers immediate saving instead of waiting for the 500ms autosave.
+- Storage test now also checks the exact persisted name before reload.
+- Fixed local storage test passes: new save, name, reload, same id, planning,
+  service, pause, zero errors and unchanged original 2D sentinels.

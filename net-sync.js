@@ -1,15 +1,15 @@
 /* Mensajes, snapshot y estado del invitado. Lo importa net.js. */
-import { floorCommand } from './floor-service.js?v=28.17.0-online-web';
-import { $, clamp, escapeHtml } from './util.js?v=28.17.0-online-web';
-import { Audio } from './audio.js?v=28.17.0-online-web';
-import { Game, Net, guestCust, hostLive, isGuest } from './state.js?v=28.17.0-online-web';
-import { TABLE_POS } from './world.js?v=28.17.0-online-web';
-import { cleanFx, cleanTable, hud, newSeason, servable, slotOf, tryServe } from './sim.js?v=28.17.0-online-web';
-import { applyRevResp, refreshReportUI, revSigOf, showReportUI } from './report.js?v=28.17.0-online-web';
-import { Plan, applyPlanAction, applyUrgent, refreshPlanMoney, renderForecast, renderTab, renderUrgent, setSpeed, showFinalUI, showPlan, showPlanUI, showServiceUI, toastLocal, toggleReady, updateHud, updateReadyUI, updateStockbar } from './ui.js?v=28.17.0-online-web';
-import { REJECT_MSG, guestPendTick } from './net-guest.js?v=28.17.0-online-web';
-import { netDirty, netSend } from './net-link.js?v=28.17.0-online-web';
-import { hideNetMsg, lobbyError, netLost, renderLobby, showPing } from './net-lobby.js?v=28.17.0-online-web';
+import { floorCommand } from './floor-service.js?v=28.17.1-online-web';
+import { $, clamp, escapeHtml } from './util.js?v=28.17.1-online-web';
+import { Audio } from './audio.js?v=28.17.1-online-web';
+import { Game, Net, guestCust, hostLive, isGuest } from './state.js?v=28.17.1-online-web';
+import { TABLE_POS } from './world.js?v=28.17.1-online-web';
+import { cleanFx, cleanTable, hud, newSeason, servable, slotOf, tryServe } from './sim.js?v=28.17.1-online-web';
+import { applyRevResp, refreshReportUI, revSigOf, showReportUI } from './report.js?v=28.17.1-online-web';
+import { Plan, applyPlanAction, applyUrgent, refreshPlanMoney, renderForecast, renderTab, renderUrgent, setSpeed, showFinalUI, showPlan, showPlanUI, showServiceUI, toastLocal, toggleReady, updateHud, updateReadyUI, updateStockbar } from './ui.js?v=28.17.1-online-web';
+import { REJECT_MSG, guestPendTick } from './net-guest.js?v=28.17.1-online-web';
+import { netDirty, netSend } from './net-link.js?v=28.17.1-online-web';
+import { hideNetMsg, lobbyError, netLost, renderLobby, showPing } from './net-lobby.js?v=28.17.1-online-web';
 import { applyService3DCommand } from './service-3d.js';
 import { service3D, createService3D } from './service-3d-model.mjs';
 import { acceptGuestPose3D } from './net-movement-3d.js';

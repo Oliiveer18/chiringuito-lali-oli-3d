@@ -6,7 +6,7 @@
    gofrera, coctelera, churrera, algodonera y pizarra de Instagram.
    ========================================================= */
 import * as THREE from './lib/three.module.js';
-import { Game, lvl } from './state.js?v=28.17.0-online-web';
+import { Game, lvl } from './state.js?v=28.17.1-online-web';
 
 let upgradesGroup = null;
 const upgradeMeshes = new Map();

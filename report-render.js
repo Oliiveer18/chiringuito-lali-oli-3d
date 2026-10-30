@@ -1,14 +1,14 @@
 /* Render del informe de fin de día. Lo importa report.js. */
-import {operatingResult,ledgerHtml,capitalNote} from './bookkeeping.js?v=28.17.0-online-web';
-import { ITEMS, ITEM_IDS, REGULARS, REG_TOWN, RENT, SEASON_DAYS, STATION_COLOR, STATION_LABEL, TYPES } from './config.js?v=28.17.0-online-web';
-import { $, clamp, escapeHtml, eur, rnd, stars } from './util.js?v=28.17.0-online-web';
-import { rr } from './icons.js?v=28.17.0-online-web';
-import { Audio } from './audio.js?v=28.17.0-online-web';
-import { reputation } from './ratings-model.mjs?v=28.17.0-online-web';
-import { Game, Net, closeHour, dayName, isCoop, isGuest, lvl, wages } from './state.js?v=28.17.0-online-web';
-import { hideAll, showFinal, showPlan, toast, updateReadyUI } from './ui.js?v=28.17.0-online-web';
-import { netAct, netDirty } from './net.js?v=28.17.0-online-web';
-import { dayStarsSummary, buildRevModel, opinionLine, Rev, REV_RESP_MAX, REV_INVITE_COST, REV_INVITE_REP, REV_APOLOGY_REP } from './report-model.js?v=28.17.0-online-web';
+import {operatingResult,ledgerHtml,capitalNote} from './bookkeeping.js?v=28.17.1-online-web';
+import { ITEMS, ITEM_IDS, REGULARS, REG_TOWN, RENT, SEASON_DAYS, STATION_COLOR, STATION_LABEL, TYPES } from './config.js?v=28.17.1-online-web';
+import { $, clamp, escapeHtml, eur, rnd, stars } from './util.js?v=28.17.1-online-web';
+import { rr } from './icons.js?v=28.17.1-online-web';
+import { Audio } from './audio.js?v=28.17.1-online-web';
+import { reputation } from './ratings-model.mjs?v=28.17.1-online-web';
+import { Game, Net, closeHour, dayName, isCoop, isGuest, lvl, wages } from './state.js?v=28.17.1-online-web';
+import { hideAll, showFinal, showPlan, toast, updateReadyUI } from './ui.js?v=28.17.1-online-web';
+import { netAct, netDirty } from './net.js?v=28.17.1-online-web';
+import { dayStarsSummary, buildRevModel, opinionLine, Rev, REV_RESP_MAX, REV_INVITE_COST, REV_INVITE_REP, REV_APOLOGY_REP } from './report-model.js?v=28.17.1-online-web';
 import { discardService3D } from './service-3d-model.mjs';
 
 export function endDay(){

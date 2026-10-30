@@ -2,17 +2,17 @@
    main.js
    Arranque: bucle principal, exposición de pruebas (window.__api/__test) y arranque inicial.
    ========================================================= */
-import { ITEMS, UPGRADES } from './config.js?v=28.17.0-online-web';
-import { buildIcons } from './icons.js?v=28.17.0-online-web';
-import { Game, NET_SIM, Net, isGuest, weatherToday } from './state.js?v=28.17.0-online-web';
-import { buyStock, cleanTable, newSeason, spawnCustomer, startDay, tryServe, update } from './sim.js?v=28.17.0-online-web';
-import { endDay } from './report.js?v=28.17.0-online-web';
-import { Plan, pressReady, showPlan, toggleReady } from './ui.js?v=28.17.0-online-web';
-import { applyState, guestClean, guestServe, guestTick, netOpen, netSend, netTick } from './net.js?v=28.17.0-online-web';
-import { render } from './render.js?v=28.17.0-online-web';
-import { ctx } from './canvas.js?v=28.17.0-online-web';
-import { init3D, is3DReady, render3D, getPlayerMesh } from './render-3d.js?v=28.17.0-online-web';
-import './variety.js?v=28.17.0-online-web';
+import { ITEMS, UPGRADES } from './config.js?v=28.17.1-online-web';
+import { buildIcons } from './icons.js?v=28.17.1-online-web';
+import { Game, NET_SIM, Net, isGuest, weatherToday } from './state.js?v=28.17.1-online-web';
+import { buyStock, cleanTable, newSeason, spawnCustomer, startDay, tryServe, update } from './sim.js?v=28.17.1-online-web';
+import { endDay } from './report.js?v=28.17.1-online-web';
+import { Plan, pressReady, showPlan, toggleReady } from './ui.js?v=28.17.1-online-web';
+import { applyState, guestClean, guestServe, guestTick, netOpen, netSend, netTick } from './net.js?v=28.17.1-online-web';
+import { render } from './render.js?v=28.17.1-online-web';
+import { ctx } from './canvas.js?v=28.17.1-online-web';
+import { init3D, is3DReady, render3D, getPlayerMesh } from './render-3d.js?v=28.17.1-online-web';
+import './variety.js?v=28.17.1-online-web';
 
 // ---------- Bucle ----------
 let last=performance.now(), acc=0; const STEP=1/60;

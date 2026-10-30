@@ -1,5 +1,5 @@
-import { Game, Net } from './state.js?v=28.17.0-online-web';
-import { netAct } from './net-link.js?v=28.17.0-online-web';
+import { Game, Net } from './state.js?v=28.17.1-online-web';
+import { netAct } from './net-link.js?v=28.17.1-online-web';
 import { playerPoses3D, acceptGuestMovement3D } from './movement-3d-model.mjs';
 let blocked=()=>false;
 const guestBudget={};

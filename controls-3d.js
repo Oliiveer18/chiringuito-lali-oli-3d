@@ -3,10 +3,10 @@
    Joystick virtual flotante (pulgar izquierdo) + Botón contextual gigante (pulgar derecho)
    con respuesta háptica y detección inteligente de proximidad.
    ========================================================= */
-import { Game, Net } from './state.js?v=28.17.0-online-web';
-import { cleanTable, servable, tryServe } from './sim.js?v=28.17.0-online-web';
-import { Audio } from './audio.js?v=28.17.0-online-web';
-import { tablePosTo3D } from './world.js?v=28.17.0-online-web';
+import { Game, Net } from './state.js?v=28.17.1-online-web';
+import { cleanTable, servable, tryServe } from './sim.js?v=28.17.1-online-web';
+import { Audio } from './audio.js?v=28.17.1-online-web';
+import { tablePosTo3D } from './world.js?v=28.17.1-online-web';
 import {
   startBeerPour,
   releaseBeerPour,
@@ -17,10 +17,10 @@ import {
   trayGetItems,
   initStationUI,
   STATIONS_LOGIC
-} from './stations-3d.js?v=28.17.0-online-web';
+} from './stations-3d.js?v=28.17.1-online-web';
 import { preparedMatch } from './service-3d-model.mjs';
-import { customerInteractionPosition } from './render-3d-customers.js?v=28.17.0-online-web';
-import { guestClean, guestServe } from './net-guest.js?v=28.17.0-online-web';
+import { customerInteractionPosition } from './render-3d-customers.js?v=28.17.1-online-web';
+import { guestClean, guestServe } from './net-guest.js?v=28.17.1-online-web';
 
 export const CONTROLS3D = {
   // Estado del joystick virtual

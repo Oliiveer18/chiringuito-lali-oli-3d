@@ -7,8 +7,8 @@
    - Camarero de terraza (Servicio exterior con bandeja)
    ========================================================= */
 import * as THREE from './lib/three.module.js';
-import { Game } from './state.js?v=28.17.0-online-web';
-import { tablePosTo3D } from './world.js?v=28.17.0-online-web';
+import { Game } from './state.js?v=28.17.1-online-web';
+import { tablePosTo3D } from './world.js?v=28.17.1-online-web';
 
 let staffGroup = null;
 const staffMeshes = new Map();

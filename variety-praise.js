@@ -1,5 +1,5 @@
 /* Elogios por producto. Lo importa variety.js. */
-import { PRAISE } from './report.js?v=28.17.0-online-web';
+import { PRAISE } from './report.js?v=28.17.1-online-web';
 const add = (arr, items) => { for (const it of items) if (!arr.includes(it)) arr.push(it); };
 // ---------- Elogios con más sabor canario ----------
 add(PRAISE.cerveza, [

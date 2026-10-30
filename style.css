@@ -1,8 +1,8 @@
 /* =========================================================
    Chiringuito de Lali y Oli · entry point CSS v28.15
    ========================================================= */
-@import url("style-tokens.css?v=28.17.0-online-web");
-@import url("style-main.css?v=28.17.0-online-web");
+@import url("style-tokens.css?v=28.17.1-online-web");
+@import url("style-main.css?v=28.17.1-online-web");
 /* Private relay room codes must remain readable at narrow widths. */
 #lobby .code-box{max-width:100%;padding:12px;font:600 18px/1.6 monospace;letter-spacing:.08em;white-space:pre-line;overflow-wrap:anywhere;word-break:break-all}
 #lobby .relay-note{font-size:12px;line-height:1.5;color:#46585b;margin:0 0 12px}

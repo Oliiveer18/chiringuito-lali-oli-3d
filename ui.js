@@ -2,26 +2,26 @@
    ui.js
    Pantallas y HUD: plan de apertura, servicio, urgente, avisos (toasts) y acciones del jugador.
    ========================================================= */
-import { GOAL, HOUR_CURVE, ITEMS, ITEM_IDS, RENT, SEASON_DAYS, SPECIAL_DAYS, STAFF, STATION_COLOR, STATION_LABEL, UPGRADES, WEATHER, who } from './config.js?v=28.17.0-online-web';
-import { $, clamp, escapeHtml, eur, eur2, hhmm, stars } from './util.js?v=28.17.0-online-web';
-import { ICON_URL } from './icons.js?v=28.17.0-online-web';
-import { Audio } from './audio.js?v=28.17.0-online-web';
-import { Game, Net, activeItems, closeHour, dayName, hostLive, isCoop, isGuest, isWeekend, itemUnlocked, lvl, partner, simProgressDay, wages, weatherToday } from './state.js?v=28.17.0-online-web';
-import { buyStock, cleanTable, difficultyProfile, difficultyRush, newSeason, repArrivalMult, servable, startDay, tryServe } from './sim.js?v=28.17.0-online-web';
-import { Rev, advanceFromReport, refreshReportUI, respondReview } from './report.js?v=28.17.0-online-web';
-import { canvas, toWorld } from './canvas.js?v=28.17.0-online-web';
-import { guestClean, guestServe, netAct, netDirty } from './net.js?v=28.17.0-online-web';
-import { drawPerson } from './render.js?v=28.17.0-online-web';
+import { GOAL, HOUR_CURVE, ITEMS, ITEM_IDS, RENT, SEASON_DAYS, SPECIAL_DAYS, STAFF, STATION_COLOR, STATION_LABEL, UPGRADES, WEATHER, who } from './config.js?v=28.17.1-online-web';
+import { $, clamp, escapeHtml, eur, eur2, hhmm, stars } from './util.js?v=28.17.1-online-web';
+import { ICON_URL } from './icons.js?v=28.17.1-online-web';
+import { Audio } from './audio.js?v=28.17.1-online-web';
+import { Game, Net, activeItems, closeHour, dayName, hostLive, isCoop, isGuest, isWeekend, itemUnlocked, lvl, partner, simProgressDay, wages, weatherToday } from './state.js?v=28.17.1-online-web';
+import { buyStock, cleanTable, difficultyProfile, difficultyRush, newSeason, repArrivalMult, servable, startDay, tryServe } from './sim.js?v=28.17.1-online-web';
+import { Rev, advanceFromReport, refreshReportUI, respondReview } from './report.js?v=28.17.1-online-web';
+import { canvas, toWorld } from './canvas.js?v=28.17.1-online-web';
+import { guestClean, guestServe, netAct, netDirty } from './net.js?v=28.17.1-online-web';
+import { drawPerson } from './render.js?v=28.17.1-online-web';
 import {
   hideAll, Plan, showPlan, showPlanUI, renderForecast, refreshPlanMoney, updateReadyUI,
   flashMoney, demandHint, avatarCache, staffAvatar,
   applyPlanAction, pressReady, toggleReady,
-} from './ui-plan.js?v=28.17.0-online-web';
+} from './ui-plan.js?v=28.17.1-online-web';
 import {
   showServiceUI, showFinal, showFinalUI, renderUrgent, applyUrgent,
   updateHud, updateStockbar, setSpeed, toastsEl, toast, toastLocal,
-} from './ui-service.js?v=28.17.0-online-web';
-import { renderMejorasTab } from './ui-mejoras.js?v=28.17.0-online-web';
+} from './ui-service.js?v=28.17.1-online-web';
+import { renderMejorasTab } from './ui-mejoras.js?v=28.17.1-online-web';
 export {
   hideAll, Plan, showPlan, showPlanUI, renderForecast, refreshPlanMoney, updateReadyUI,
   flashMoney, demandHint, avatarCache, staffAvatar,
@@ -93,8 +93,8 @@ export function routePlanTab(){
   const b=$('#tab-body');
   if(b){ delete b.__owner; delete b.__last; delete b.__rd; delete b.__pgNode; delete b.__mkNode; }
   renderForecast();
-  if(Plan.tab==='show') import('./features.js?v=28.17.0-online-web').then(m=>{ if(Plan.tab==='show') m.renderShow?.(); });
-  else if(Plan.tab==='chiringo') import('./chiringo-ui.js?v=28.17.0-online-web').then(m=>{ if(Plan.tab==='chiringo') m.renderChiringo?.(); });
+  if(Plan.tab==='show') import('./features.js?v=28.17.1-online-web').then(m=>{ if(Plan.tab==='show') m.renderShow?.(); });
+  else if(Plan.tab==='chiringo') import('./chiringo-ui.js?v=28.17.1-online-web').then(m=>{ if(Plan.tab==='chiringo') m.renderChiringo?.(); });
   document.dispatchEvent(new Event('plan-tab-repaint'));
 }
 export function estimateCustomers(){

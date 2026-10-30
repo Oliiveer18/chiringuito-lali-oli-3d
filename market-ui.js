@@ -1,15 +1,15 @@
-import {leaguePanel} from './management-ui.js?v=28.17.0-online-web';
+import {leaguePanel} from './management-ui.js?v=28.17.1-online-web';
 // v23: nombre por carrera y panel de las tres ligas simultáneas.
-import {Game,Net,simProgressDay} from './state.js?v=28.17.0-online-web';
-import {Plan} from './ui.js?v=28.17.0-online-web';
-import {netDirty} from './net.js?v=28.17.0-online-web';
-import {escapeHtml as E,eur} from './util.js?v=28.17.0-online-web';
-import {ctx,view} from './canvas.js?v=28.17.0-online-web';
-import * as R from './market-model.mjs?v=28.17.0-online-web';
+import {Game,Net,simProgressDay} from './state.js?v=28.17.1-online-web';
+import {Plan} from './ui.js?v=28.17.1-online-web';
+import {netDirty} from './net.js?v=28.17.1-online-web';
+import {escapeHtml as E,eur} from './util.js?v=28.17.1-online-web';
+import {ctx,view} from './canvas.js?v=28.17.1-online-web';
+import * as R from './market-model.mjs?v=28.17.1-online-web';
 let draft=null,area=0,tier=0,detail=null;
 const day=()=>simProgressDay();
 const name=()=>R.nameValue(Game.upgrades.kioskName);
-function setName(){if(Net.role==='guest'||!['plan','report'].includes(Game.mode))return;if(!Game.upgrades.kioskName){Game.upgrades.kioskName=R.nameValue(draft);draft=null;netDirty();}}
+function setName(){if(Net.role==='guest'||!['plan','report'].includes(Game.mode))return;if(!Game.upgrades.kioskName){Game.upgrades.kioskName=R.nameValue(draft);draft=null;netDirty();document.dispatchEvent(new Event('kiosk-name-changed'));}}
 function form(parent){if(!parent||parent.querySelector('[data-kiosk-name]'))return;const label=document.createElement('label');label.textContent='Nombre para la nueva carrera';const input=document.createElement('input');input.type='text';input.dataset.kioskName='1';input.placeholder='El Charco Azul';input.value=name();input.setAttribute('aria-label','Nombre del kiosco para la nueva carrera');label.append(input);parent.prepend(label);}
 function library(){const sheet=document.querySelector('.save-browser:not([hidden]) .save-sheet');if(!sheet)return;form(sheet);try{const kind=sheet.querySelector('h2')?.textContent==='Vuestras partidas'?'coop':'solo';const saves=JSON.parse(localStorage.getItem('lali-oli.3d.library.v2')||'[]').filter(s=>s.kind===kind).sort((a,b)=>String(b.date).localeCompare(String(a.date)));sheet.querySelectorAll('.save-row strong').forEach((el,i)=>{const s=saves[i];if(!s)return;const value=R.nameValue(s.data.upgrades.kioskName)+(kind==='coop'?' · '+(s.names?.p1||'Jugador 1')+' y '+(s.names?.p2||'Jugador 2'):'');if(el.textContent!==value)el.textContent=value;});}catch(e){console.warn('No se pudieron mostrar los nombres de las partidas',e);}}
 window.addEventListener('click',e=>{const b=e.target.closest?.('button');if(!b)return;if(b.classList.contains('save-action')&&b.textContent==='Nueva partida')draft=R.nameValue(b.closest('.save-sheet')?.querySelector('[data-kiosk-name]')?.value);if(b.dataset.cr==='new')draft=R.nameValue(document.querySelector('#final-card [data-kiosk-name]')?.value);},true);

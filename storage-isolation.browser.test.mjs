@@ -47,9 +47,10 @@ try{
   await page.waitForFunction(()=>Game.mode==='plan'&&localStorage.getItem('lali-oli.3d.library.v2'));
   await unchanged();
   assert.equal(await page.evaluate(async()=>{
-    const {loadLegacy}=await import('./career.js?v=28.17.0-online-web');return loadLegacy().points;
+    const {loadLegacy}=await import('./career.js?v=28.17.1-online-web');return loadLegacy().points;
   }),0);
   const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('lali-oli.3d.library.v2'))[0].id);
+  assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('lali-oli.3d.library.v2'))[0].data.upgrades.kioskName),'QA 3D independiente');
   console.log('OK: separate 3D save and legacy; original 2D storage unchanged');
   await page.reload({waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>window.__api&&window.is3DReady?.());

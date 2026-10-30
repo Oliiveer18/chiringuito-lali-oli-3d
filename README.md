@@ -15,7 +15,7 @@ La copia 3D tiene su propia publicación:
 El [juego 2D original](https://oliiveer18.github.io/chiringuito-de-lali-y-oli/)
 mantiene su enlace y su publicación desde `main`, sin cambios.
 
-El cooperativo de `v28.17.0-online-web` usa mensajes cifrados sobre WebSocket
+El cooperativo de `v28.17.1-online-web` usa mensajes cifrados sobre WebSocket
 seguro, sin WebRTC, TURN, cuentas ni tarjeta. Crear sala genera un código privado
 de 26 caracteres: usa «Copiar código privado» y pégalo en el otro dispositivo.
 El anfitrión debe mantener la página abierta.

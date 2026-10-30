@@ -2,7 +2,7 @@
 
 Rama `fix/3d-service-integrity`, basada en `experiment/vfx-clientes-3d` en
 `e011f02b1b623cf8861603e76907520c08744e4a`. Identificador de versión:
-`v28.17.0-online-web`.
+`v28.17.1-online-web`.
 
 ## Cambios
 
@@ -113,6 +113,12 @@ navegador cloud separado. Ambos cargaron `v28.17.0-online-web`. Se verificaron:
 
 Esta prueba valida esa conexión entre dos entornos separados. No equivale a
 una garantía universal para todos los operadores o a un SLA de producción.
+
+`v28.17.1` mantiene el mismo transporte y corrige además la carrera de nombres
+en el guardado: persistencia inmediata al asignar el nombre y título de partida
+desde el dato guardado, sin esperar al módulo visual. La prueba de aislamiento
+comprueba el nombre en el almacenamiento antes de recargar y vuelve a continuar
+la misma partida. Las claves del 2D permanecen separadas e intactas.
 
 ## Cómo probar el cooperativo
 

@@ -5,9 +5,9 @@
    de coordenadas 3D → Pantalla 2D para burbujas de comandas.
    ========================================================= */
 import * as THREE from './lib/three.module.js';
-import { Game } from './state.js?v=28.17.0-online-web';
-import { tablePosTo3D } from './world.js?v=28.17.0-online-web';
-import { sampleCharacterFootY } from './coast-materials.js?v=28.17.0-online-web';
+import { Game } from './state.js?v=28.17.1-online-web';
+import { tablePosTo3D } from './world.js?v=28.17.1-online-web';
+import { sampleCharacterFootY } from './coast-materials.js?v=28.17.1-online-web';
 
 // Cache de materiales PBR para bañistas y clientes
 const CUST_MATS = {
