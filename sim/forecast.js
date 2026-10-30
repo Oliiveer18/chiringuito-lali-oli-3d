@@ -1,6 +1,6 @@
 /* Season weather table; no Game/DOM imports (safe for career.js in Node tests). */
-import { SEASON_DAYS, SPECIAL_DAYS } from '../config.js?v=28.17.1-online-web';
-import { pickW } from '../util.js?v=28.17.1-online-web';
+import { SEASON_DAYS, SPECIAL_DAYS } from '../config.js?v=28.17.2-flat-sand';
+import { pickW } from '../util.js?v=28.17.2-flat-sand';
 
 export function buildSeasonForecast() {
   const f = [];

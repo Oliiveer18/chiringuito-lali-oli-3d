@@ -6,7 +6,8 @@
    gofrera, coctelera, churrera, algodonera y pizarra de Instagram.
    ========================================================= */
 import * as THREE from './lib/three.module.js';
-import { Game, lvl } from './state.js?v=28.17.1-online-web';
+import { Game, lvl } from './state.js?v=28.17.2-flat-sand';
+import { sampleSandHeight, sampleWalkableHeight, KIOSK_DECK } from './coast-materials.js?v=28.17.2-flat-sand';
 
 let upgradesGroup = null;
 const upgradeMeshes = new Map();
@@ -65,7 +66,8 @@ function buildHamacas(parent) {
     const col = i % 4;
     const hGroup = new THREE.Group();
     hGroup.name = 'hamaca_' + i;
-    hGroup.position.set(4.8 + col * 1.9, 0.05, -2.6 - row * 1.6);
+    const x = 4.8 + col * 1.9, z = -2.6 - row * 1.6;
+    hGroup.position.set(x, sampleSandHeight(x, z), z);
     hGroup.rotation.y = -0.15 + (col * 0.05);
 
     // Armazón de madera plegable
@@ -81,6 +83,16 @@ function buildHamacas(parent) {
     legR.rotation.x = 0.12;
     legR.castShadow = true;
     hGroup.add(legR);
+
+    // Cuatro apoyos reales entre el armazón inclinado y la arena plana.
+    for (const fx of [-0.35, 0.35]) for (const fz of [-0.52, 0.52]) {
+      const height = 0.18 - Math.sin(0.12) * fz - 0.03 * Math.cos(0.12);
+      const foot = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.055, height, 8), UMAT.woodTeak);
+      foot.name = 'hamaca-foot';
+      foot.position.set(fx, height / 2, fz);
+      foot.castShadow = true;
+      hGroup.add(foot);
+    }
 
     // Respaldo inclinado
     const backGeo = new THREE.BoxGeometry(0.72, 0.05, 0.55);
@@ -191,7 +203,7 @@ function buildRedesSign(parent) {
   const g = new THREE.Group();
   g.name = 'up_redes';
   // Ubicada en la entrada de arena del chiringuito sin solapar taburetes ni clientes
-  g.position.set(-7.0, 0, 4.4);
+  g.position.set(-7.0, sampleWalkableHeight(-7.0, 4.4), 4.4);
   g.rotation.y = 0.35;
 
   // Caballete rústico
@@ -371,7 +383,8 @@ function buildChurrera(kiosk) {
 function buildAlgodonera(kiosk) {
   const g = new THREE.Group();
   g.name = 'up_algodonera';
-  g.position.set(-4.0, 0.2, -0.8);
+  // El borde exterior de la rueda está 3 cm por debajo del origen del carro.
+  g.position.set(-4.0, KIOSK_DECK.height + 0.03, -0.8);
   g.rotation.y = Math.PI / 2;
 
   // Carrito rosa
@@ -382,7 +395,7 @@ function buildAlgodonera(kiosk) {
 
   // Ruedas doradas
   [-0.38, 0.38].forEach(wx => {
-    const wheel = new THREE.Mesh(new THREE.TorusGeometry(0.22, 0.03, 6, 14), UMAT.gold);
+    const wheel = new THREE.Mesh(new THREE.TorusGeometry(0.22, 0.03, 6, 16), UMAT.gold);
     wheel.position.set(wx, 0.22, 0);
     wheel.rotation.y = Math.PI / 2;
     g.add(wheel);

@@ -7,8 +7,9 @@
    - Camarero de terraza (Servicio exterior con bandeja)
    ========================================================= */
 import * as THREE from './lib/three.module.js';
-import { Game } from './state.js?v=28.17.1-online-web';
-import { tablePosTo3D } from './world.js?v=28.17.1-online-web';
+import { Game } from './state.js?v=28.17.2-flat-sand';
+import { tablePosTo3D } from './world.js?v=28.17.2-flat-sand';
+import { sampleCharacterFootY } from './coast-materials.js?v=28.17.2-flat-sand';
 
 let staffGroup = null;
 const staffMeshes = new Map();
@@ -311,5 +312,9 @@ export function syncStaff3D(dt = 0.016, time = 0) {
       ud.legR.rotation.x = Math.sin(ud.walkPhase) * 0.35;
       ud.armL.rotation.x = -0.5; // Sosteniendo bandeja
     }
+  }
+  // También al cruzar entre arena y tarima, sin alturas fijas de 15 cm.
+  for (const mesh of staffMeshes.values()) {
+    mesh.position.y = sampleCharacterFootY(mesh.position.x, mesh.position.z, 0.015);
   }
 }

@@ -1,5 +1,5 @@
 /* Nombres de clientes. Lo importa variety.js. */
-import { NAMES } from './config.js?v=28.17.1-online-web';
+import { NAMES } from './config.js?v=28.17.2-flat-sand';
 const add = (arr, items) => { for (const it of items) if (!arr.includes(it)) arr.push(it); };
 // ---------- Nombres y pueblos (turistas, locales y surfistas) ----------
 add(NAMES.turista, [

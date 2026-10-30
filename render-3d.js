@@ -3,17 +3,17 @@
    Fase 1: Escena 3D de alta gama, iluminación de estudio y cámara móvil cinemática.
    ========================================================= */
 import * as THREE from './lib/three.module.js';
-import { Game, Net, weatherToday, lvl } from './state.js?v=28.17.1-online-web';
-import { createCharacter3D, animateCharacter } from './render-3d-actors.js?v=28.17.1-online-web';
-import { CONTROLS3D, STATIONS_3D, initControls3D, updateContextualProximity, syncControls3DForGameMode, resetControls3DInput } from './controls-3d.js?v=28.17.1-online-web';
-import { syncCustomers3D, clearAllCustomers3D, customerInteractionPosition } from './render-3d-customers.js?v=28.17.1-online-web';
+import { Game, Net, weatherToday, lvl } from './state.js?v=28.17.2-flat-sand';
+import { createCharacter3D, animateCharacter } from './render-3d-actors.js?v=28.17.2-flat-sand';
+import { CONTROLS3D, STATIONS_3D, initControls3D, updateContextualProximity, syncControls3DForGameMode, resetControls3DInput } from './controls-3d.js?v=28.17.2-flat-sand';
+import { syncCustomers3D, clearAllCustomers3D, customerInteractionPosition } from './render-3d-customers.js?v=28.17.2-flat-sand';
 import { playerPoses3D } from './movement-3d-model.mjs';
 import { setMovementCollision3D, publishLocalPose3D, consumeLocalCorrection3D } from './net-movement-3d.js';
 import { setService3DProximityCheck } from './service-3d.js';
-import { tablePosTo3D } from './world.js?v=28.17.1-online-web';
-import { initUpgrades3D, syncUpgrades3D } from './upgrades-3d.js?v=28.17.1-online-web';
-import { initStaff3D, syncStaff3D } from './staff-3d.js?v=28.17.1-online-web';
-import { initVFX3D, updateVFX3D, spawnCleanSparkles3D, triggerBeerPourVFX } from './vfx-3d.js?v=28.17.1-online-web';
+import { tablePosTo3D } from './world.js?v=28.17.2-flat-sand';
+import { initUpgrades3D, syncUpgrades3D } from './upgrades-3d.js?v=28.17.2-flat-sand';
+import { initStaff3D, syncStaff3D } from './staff-3d.js?v=28.17.2-flat-sand';
+import { initVFX3D, updateVFX3D, spawnCleanSparkles3D, triggerBeerPourVFX } from './vfx-3d.js?v=28.17.2-flat-sand';
 import {
   attachTrayToCharacter,
   updateTrayAnimation,
@@ -23,13 +23,16 @@ import {
   trayGetItems,
   createItem3D,
   STATIONS_LOGIC
-} from './stations-3d.js?v=28.17.1-online-web';
+} from './stations-3d.js?v=28.17.2-flat-sand';
 import {
   buildCoastMeshes,
   getCoastGeometryProfile,
   updateCoastMaterials,
-  sampleCharacterFootY
-} from './coast-materials.js?v=28.17.1-online-web';
+  sampleCharacterFootY,
+  sampleSandHeight,
+  SAND_MESH_WORLD_Y,
+  KIOSK_DECK
+} from './coast-materials.js?v=28.17.2-flat-sand';
 
 const getPlayer = () => (typeof window !== 'undefined' ? window.PLAYER : null);
 
@@ -180,20 +183,22 @@ function buildBeach(scene) {
 
 function buildKiosk(scene) {
   const kiosk = new THREE.Group();
-  kiosk.position.set(-2, 0, 1.5);
+  kiosk.name = 'kiosk';
+  kiosk.position.set(KIOSK_DECK.originX, SAND_MESH_WORLD_Y, KIOSK_DECK.originZ);
 
   // 1. Tarima de madera del chiringuito (deck)
-  const deckGeo = new THREE.BoxGeometry(15, 0.35, 10.5);
+  const deckGeo = new THREE.BoxGeometry(KIOSK_DECK.width, KIOSK_DECK.height, KIOSK_DECK.depth);
   const deckMesh = new THREE.Mesh(deckGeo, MAT.woodTeak);
-  deckMesh.position.set(0, 0.175, 0);
+  deckMesh.name = 'kiosk-deck';
+  deckMesh.position.set(KIOSK_DECK.centerX, KIOSK_DECK.height / 2, 0);
   deckMesh.receiveShadow = true;
   deckMesh.castShadow = true;
   kiosk.add(deckMesh);
 
   // Bordes del deck con bisel
-  const edgeGeo = new THREE.BoxGeometry(15.2, 0.15, 0.2);
+  const edgeGeo = new THREE.BoxGeometry(KIOSK_DECK.width + 0.2, 0.15, 0.2);
   const edgeFront = new THREE.Mesh(edgeGeo, MAT.woodDark);
-  edgeFront.position.set(0, 0.3, 5.25);
+  edgeFront.position.set(KIOSK_DECK.centerX, 0.275, KIOSK_DECK.depth / 2);
   kiosk.add(edgeFront);
 
   // 2. Pilares de madera noble en esquinas y laterales (frente despejado)
@@ -493,7 +498,8 @@ function syncTerraceTables3D(sceneRef) {
 
     if (!tGroup) {
       tGroup = new THREE.Group();
-      tGroup.position.set(pos.x, 0, pos.z);
+      tGroup.name = 'terrace-table-' + i;
+      tGroup.position.set(pos.x, sampleSandHeight(pos.x, pos.z), pos.z);
 
       // Tablero de mesa redondo de madera de teca
       const topGeo = new THREE.CylinderGeometry(0.85, 0.85, 0.08, 16);
@@ -507,12 +513,15 @@ function syncTerraceTables3D(sceneRef) {
       const legGeo = new THREE.CylinderGeometry(0.08, 0.12, 1.0, 10);
       const leg = new THREE.Mesh(legGeo, MAT.woodDark);
       leg.position.y = 0.52;
+      leg.castShadow = true;
       tGroup.add(leg);
 
       // Base de forja
       const baseGeo = new THREE.CylinderGeometry(0.42, 0.48, 0.06, 12);
       const base = new THREE.Mesh(baseGeo, MAT.woodDark);
-      base.position.y = 0.05;
+      base.name = 'table-base';
+      base.position.y = 0.03;
+      base.castShadow = true;
       tGroup.add(base);
 
       // Sillas de terraza (radio ampliado para no amontonar)
@@ -525,7 +534,9 @@ function syncTerraceTables3D(sceneRef) {
         tGroup.add(chairSeat);
 
         const chairLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 0.62, 8), MAT.woodDark);
+        chairLeg.name = 'chair-support-' + s;
         chairLeg.position.set(chairSeat.position.x, 0.31, chairSeat.position.z);
+        chairLeg.castShadow = true;
         tGroup.add(chairLeg);
       }
 
@@ -540,7 +551,7 @@ function syncTerraceTables3D(sceneRef) {
       terraceGroup.add(tGroup);
       table3DMeshes.set(i, tGroup);
     } else {
-      tGroup.position.set(pos.x, 0, pos.z);
+      tGroup.position.set(pos.x, sampleSandHeight(pos.x, pos.z), pos.z);
     }
 
     setTableUmbrella3D(tGroup, i, showUmbrellas);
@@ -572,7 +583,7 @@ function buildPalms(scene) {
   const palmCoords = [
     [-11.5, 3.5, 1.25],
     [13.5, 4.2, 1.35],
-    [14.5, -2.5, 1.1]
+    [16.0, -3.2, 1.1]
   ];
 
   palmCoords.forEach(([px, pz, scale]) => {
@@ -780,11 +791,14 @@ const musicNotes = [];
 
 function buildMusicStage(sceneRef) {
   stageGroup = new THREE.Group();
-  stageGroup.position.set(13.2, 0, 0.5);
+  stageGroup.name = 'music-stage';
+  // Franja propia junto al mar: la tarima no tapa las patas de las mesas.
+  stageGroup.position.set(13.2, sampleSandHeight(13.2, -3.4), -3.4);
 
   // Tarima de madera rústica elevada
   const deckGeo = new THREE.BoxGeometry(3.2, 0.4, 2.8);
   const deck = new THREE.Mesh(deckGeo, MAT.woodTeak);
+  deck.name = 'stage-deck';
   deck.position.y = 0.2;
   deck.receiveShadow = true;
   deck.castShadow = true;
@@ -1405,7 +1419,8 @@ export function check3DCollision(px, pz, radius = 0.32) {
 
   // 5. Escenario de música (si está visible)
   if (stageGroup && stageGroup.visible) {
-    if (px > 11.5 && px < 14.9 && pz > -1.0 && pz < 2.0) {
+    const sx = stageGroup.position.x, sz = stageGroup.position.z;
+    if (px > sx - 1.7 && px < sx + 1.7 && pz > sz - 1.5 && pz < sz + 1.5) {
       return true;
     }
   }

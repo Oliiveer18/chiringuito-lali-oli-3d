@@ -1,8 +1,8 @@
-import {Game,Net,itemUnlocked} from './state.js?v=28.17.1-online-web';
-import {ITEMS} from './config.js?v=28.17.1-online-web';
-import {ICON_URL} from './icons.js?v=28.17.1-online-web';
-import {escapeHtml,eur2} from './util.js?v=28.17.1-online-web';
-import {guestSend} from './coopbridge.js?v=28.17.1-online-web';
+import {Game,Net,itemUnlocked} from './state.js?v=28.17.2-flat-sand';
+import {ITEMS} from './config.js?v=28.17.2-flat-sand';
+import {ICON_URL} from './icons.js?v=28.17.2-flat-sand';
+import {escapeHtml,eur2} from './util.js?v=28.17.2-flat-sand';
+import {guestSend} from './coopbridge.js?v=28.17.2-flat-sand';
 let root=null,send=null,waiting=false,until=0,last='';
 function delBtn(id,p,q){
   const base=p.cost*q, bill=base*2;

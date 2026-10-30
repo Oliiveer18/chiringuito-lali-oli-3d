@@ -1,22 +1,22 @@
 /* Mechanical extraction from sim.js; declaration bodies are unchanged.
    Balance curve uses simProgressDay() (continuous career track). Calendar events use Game.day 1..SEASON_DAYS. */
-import { ITEMS } from "../config.js?v=28.17.1-online-web";
-import { ITEM_IDS } from "../config.js?v=28.17.1-online-web";
-import { REGULARS } from "../config.js?v=28.17.1-online-web";
-import { SEASON_DAYS } from "../config.js?v=28.17.1-online-web";
-import { START_MONEY } from "../config.js?v=28.17.1-online-web";
-import { clamp } from "../util.js?v=28.17.1-online-web";
-import { rnd } from "../util.js?v=28.17.1-online-web";
-import { Audio } from "../audio.js?v=28.17.1-online-web";
-import { Game, simProgressDay } from "../state.js?v=28.17.1-online-web";
-import { closeHour } from "../state.js?v=28.17.1-online-web";
-import { setTimeoutGame } from "../state.js?v=28.17.1-online-web";
-import { buildTables } from "../world.js?v=28.17.1-online-web";
-import { toast } from "../ui.js?v=28.17.1-online-web";
-import { updateStockbar } from "../ui.js?v=28.17.1-online-web";
-import { spawnCustomer } from "./customers.js?v=28.17.1-online-web";
-export { buildSeasonForecast } from "./forecast.js?v=28.17.1-online-web";
-import { buildSeasonForecast } from "./forecast.js?v=28.17.1-online-web";
+import { ITEMS } from "../config.js?v=28.17.2-flat-sand";
+import { ITEM_IDS } from "../config.js?v=28.17.2-flat-sand";
+import { REGULARS } from "../config.js?v=28.17.2-flat-sand";
+import { SEASON_DAYS } from "../config.js?v=28.17.2-flat-sand";
+import { START_MONEY } from "../config.js?v=28.17.2-flat-sand";
+import { clamp } from "../util.js?v=28.17.2-flat-sand";
+import { rnd } from "../util.js?v=28.17.2-flat-sand";
+import { Audio } from "../audio.js?v=28.17.2-flat-sand";
+import { Game, simProgressDay } from "../state.js?v=28.17.2-flat-sand";
+import { closeHour } from "../state.js?v=28.17.2-flat-sand";
+import { setTimeoutGame } from "../state.js?v=28.17.2-flat-sand";
+import { buildTables } from "../world.js?v=28.17.2-flat-sand";
+import { toast } from "../ui.js?v=28.17.2-flat-sand";
+import { updateStockbar } from "../ui.js?v=28.17.2-flat-sand";
+import { spawnCustomer } from "./customers.js?v=28.17.2-flat-sand";
+export { buildSeasonForecast } from "./forecast.js?v=28.17.2-flat-sand";
+import { buildSeasonForecast } from "./forecast.js?v=28.17.2-flat-sand";
 
 const ARRIVALS_CAP = 1.72;
 const PEAK_CAP = 0.30;

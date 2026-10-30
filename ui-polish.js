@@ -1,6 +1,6 @@
 /* ui-polish v27.77: clima de hoy, agenda compacta, reseñas y sistema unificado de estrellas. */
-import { Game } from './state.js?v=28.17.1-online-web';
-import { SPECIAL_DAYS, WEATHER } from './config.js?v=28.17.1-online-web';
+import { Game } from './state.js?v=28.17.2-flat-sand';
+import { SPECIAL_DAYS, WEATHER } from './config.js?v=28.17.2-flat-sand';
 const svgWrap=inner=>`<svg class="wicon" viewBox="0 0 24 24" aria-hidden="true">${inner}</svg>`;
 const SUN=svgWrap('<circle cx="12" cy="12" r="5" fill="#f5b82e"/><g stroke="#f5b82e" stroke-width="2" stroke-linecap="round"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></g>');
 const CLOUD=svgWrap('<circle cx="9" cy="9" r="4" fill="#f5b82e"/><path d="M7 18h10a4 4 0 0 0 0-8 5 5 0 0 0-9.6 1.5A3.5 3.5 0 0 0 7 18z" fill="#cfd8dc"/>');

@@ -1,5 +1,5 @@
-import {Game,Net,simProgressDay} from './state.js?v=28.17.1-online-web';
-import {escapeHtml,eur} from './util.js?v=28.17.1-online-web';
+import {Game,Net,simProgressDay} from './state.js?v=28.17.2-flat-sand';
+import {escapeHtml,eur} from './util.js?v=28.17.2-flat-sand';
 const allowed=new Set(['delivery','social','influencers','compensations','repairs','shows','production','interest','staffExtras','posters','upgrades','training']);
 const labels={delivery:'Compras al repartidor',social:'Publicaciones de Chiringo',influencers:'Colaboraciones',compensations:'Compensaciones de Chiringo',repairs:'Reparaciones',shows:'Espectaculos (neto de devoluciones)',production:'Produccion de algodon',interest:'Intereses',staffExtras:'Primas de personal',posters:'Promocion de eventos',upgrades:'Mejoras',training:'Formacion'};
 const n=v=>Number.isFinite(v)?v:0;

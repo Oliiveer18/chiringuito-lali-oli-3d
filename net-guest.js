@@ -1,6 +1,6 @@
 /* Acciones pendientes del invitado. Lo importa net.js. */
-import { Game, Net } from './state.js?v=28.17.1-online-web';
-import { netAct } from './net-link.js?v=28.17.1-online-web';
+import { Game, Net } from './state.js?v=28.17.2-flat-sand';
+import { netAct } from './net-link.js?v=28.17.2-flat-sand';
 export const REJECT_MSG = {
   service3d:'No se pudo completar: revisa stock, bandeja, preparación y cliente.',
   busy:'Tu puesto ya estaba ocupado con otro pedido.',

@@ -1,6 +1,6 @@
 /* coast-materials.js · Agua y arena estilizadas (GPU) · KLO-49 + mejora olas */
 import * as THREE from './lib/three.module.js';
-import { SHORE_WORLD_Z, coastPalette } from './coast-palette.js?v=28.17.1-online-web';
+import { SHORE_WORLD_Z, coastPalette } from './coast-palette.js?v=28.17.2-flat-sand';
 
 export { SHORE_WORLD_Z };
 
@@ -20,6 +20,7 @@ export function getCoastGeometryProfile() {
 const WATER_VERT = /* glsl */ `
 uniform float uTime;
 uniform float uWind;
+uniform float uShoreZ;
 varying vec3 vWorldPos;
 varying vec3 vNormalW;
 varying vec2 vUv;
@@ -50,13 +51,20 @@ vec3 gerstner(vec2 pos, float t, float w) {
   return vec3(0.0, h1 + h2 + h3, 0.0);
 }
 
+// Las olas conservan su movimiento mar adentro, pero llegan sin altura a la
+// playa. El agua en tierra queda por debajo del plano de arena, incluso con viento.
+float shoreWaveScale(vec2 p) {
+  float worldZ = (modelMatrix * vec4(p.x, 0.0, p.y, 1.0)).z;
+  return 1.0 - smoothstep(uShoreZ - 3.0, uShoreZ, worldZ);
+}
+
 void main() {
   vUv = uv;
   vec3 pos = position;
   float t = uTime;
   float w = uWind;
 
-  vec3 disp = gerstner(pos.xz, t, w);
+  vec3 disp = gerstner(pos.xz, t, w) * shoreWaveScale(pos.xz);
   pos += disp;
 
   vec4 wp = modelMatrix * vec4(pos, 1.0);
@@ -64,10 +72,10 @@ void main() {
 
   // Normal aproximada por derivadas
   float eps = 0.15;
-  float hL = gerstner(pos.xz - vec2(eps, 0.0), t, w).y;
-  float hR = gerstner(pos.xz + vec2(eps, 0.0), t, w).y;
-  float hD = gerstner(pos.xz - vec2(0.0, eps), t, w).y;
-  float hU = gerstner(pos.xz + vec2(0.0, eps), t, w).y;
+  float hL = gerstner(pos.xz - vec2(eps, 0.0), t, w).y * shoreWaveScale(pos.xz - vec2(eps, 0.0));
+  float hR = gerstner(pos.xz + vec2(eps, 0.0), t, w).y * shoreWaveScale(pos.xz + vec2(eps, 0.0));
+  float hD = gerstner(pos.xz - vec2(0.0, eps), t, w).y * shoreWaveScale(pos.xz - vec2(0.0, eps));
+  float hU = gerstner(pos.xz + vec2(0.0, eps), t, w).y * shoreWaveScale(pos.xz + vec2(0.0, eps));
   vec3 n = normalize(vec3(hL - hR, 2.0 * eps, hD - hU));
   vNormalW = normalize(mat3(modelMatrix) * n);
 
@@ -202,34 +210,47 @@ export function createSandMaterial() {
   return mat;
 }
 
-/** Misma fórmula que buildCoastMeshes (coords locales del plano de arena, mesh en y=-0.2). */
-export const SAND_MESH_WORLD_Y = -0.2;
+/** Un único nivel para la playa seca, la geometría y todos sus apoyos. */
+export const SAND_MESH_WORLD_Y = 0;
 export const CHARACTER_FOOT_OFFSET = 0.035;
-const KIOSK_ORIGIN = { x: -2, z: 1.5 };
-const KIOSK_DECK_HALF = { x: 7.35, z: 5.05 };
-const KIOSK_DECK_FOOT_Y = 0.35;
+export const KIOSK_DECK = Object.freeze({
+  originX: -2, originZ: 1.5, centerX: -1.35,
+  width: 12.3, depth: 10.5, height: 0.35
+});
 
 export function sampleSandDisplacement(localX, localZ) {
-  let y = (localZ + 10) * 0.045;
-  y += Math.sin(localX * 0.12) * Math.cos(localZ * 0.1) * 0.35;
-  return y;
+  // Sin dunas en la zona de juego. Solo baja el fondo que queda bajo el mar.
+  return Math.min(0, localZ - SHORE_WORLD_Z) * 0.3;
 }
 
 export function sampleSandHeight(worldX, worldZ) {
   return SAND_MESH_WORLD_Y + sampleSandDisplacement(worldX, worldZ);
 }
 
-/** Altura de pies: dunas en playa o tarima del quiosco (la que sea mayor en el deck). */
-export function sampleCharacterFootY(worldX, worldZ, footOffset = CHARACTER_FOOT_OFFSET) {
-  const lx = worldX - KIOSK_ORIGIN.x;
-  const lz = worldZ - KIOSK_ORIGIN.z;
+/** Huella exacta de la tarima visible, sin invadir las sillas de la terraza. */
+export function sampleWalkableHeight(worldX, worldZ) {
+  const lx = worldX - KIOSK_DECK.originX - KIOSK_DECK.centerX;
+  const lz = worldZ - KIOSK_DECK.originZ;
   const onDeck =
-    Math.abs(lx) <= KIOSK_DECK_HALF.x &&
-    Math.abs(lz) <= KIOSK_DECK_HALF.z &&
-    lz > -2.85;
+    Math.abs(lx) <= KIOSK_DECK.width / 2 &&
+    Math.abs(lz) <= KIOSK_DECK.depth / 2;
   const sandY = sampleSandHeight(worldX, worldZ);
-  const base = onDeck ? Math.max(sandY, KIOSK_DECK_FOOT_Y) : sandY;
-  return base + footOffset;
+  return onDeck ? Math.max(sandY, KIOSK_DECK.height) : sandY;
+}
+
+export function sampleCharacterFootY(worldX, worldZ, footOffset = CHARACTER_FOOT_OFFSET) {
+  return sampleWalkableHeight(worldX, worldZ) + footOffset;
+}
+
+// Fuerza una fila en la frontera para que ni una triangulación móvil gruesa
+// incline la playa seca o interpole crestas de agua por encima de ella.
+function alignShoreRow(geometry, depth, segments, worldZ = 0) {
+  const pos = geometry.attributes.position;
+  const localShore = SHORE_WORLD_Z - worldZ;
+  const row = depth / 2 - Math.round((depth / 2 - localShore) / (depth / segments)) * (depth / segments);
+  for (let i = 0; i < pos.count; i++) {
+    if (Math.abs(pos.getZ(i) - row) < 0.001) pos.setZ(i, localShore);
+  }
 }
 
 /** Escribe atributo shoreDist (worldZ - SHORE_WORLD_Z) tras desplazar arena */
@@ -249,6 +270,7 @@ export function buildCoastMeshes(scene, profile = getCoastGeometryProfile()) {
 
   const sandGeo = new THREE.PlaneGeometry(80, 50, sw, sh);
   sandGeo.rotateX(-Math.PI / 2);
+  alignShoreRow(sandGeo, 50, sh);
   const pos = sandGeo.attributes.position;
   for (let i = 0; i < pos.count; i++) {
     const x = pos.getX(i);
@@ -260,14 +282,17 @@ export function buildCoastMeshes(scene, profile = getCoastGeometryProfile()) {
 
   const sandMat = createSandMaterial();
   const sandMesh = new THREE.Mesh(sandGeo, sandMat);
+  sandMesh.name = 'beach-sand';
   sandMesh.receiveShadow = true;
-  sandMesh.position.set(0, -0.2, 0);
+  sandMesh.position.set(0, SAND_MESH_WORLD_Y, 0);
   scene.add(sandMesh);
 
   const waterGeo = new THREE.PlaneGeometry(80, 36, ww, wh);
   waterGeo.rotateX(-Math.PI / 2);
+  alignShoreRow(waterGeo, 36, wh, -16);
   const waterMat = createWaterMaterial();
   const waterMesh = new THREE.Mesh(waterGeo, waterMat);
+  waterMesh.name = 'coast-water';
   waterMesh.position.set(0, -0.05, -16);
   waterMesh.receiveShadow = false;
   scene.add(waterMesh);

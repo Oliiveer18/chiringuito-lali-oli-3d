@@ -1,10 +1,10 @@
-import { Game, Net, gameTimers, guestCust } from './state.js?v=28.17.1-online-web';
-import { newSeason } from './sim.js?v=28.17.1-online-web';
-import { showPlan, Plan } from './ui.js?v=28.17.1-online-web';
-import { buildTables } from './world.js?v=28.17.1-online-web';
-import { netDirty } from './net.js?v=28.17.1-online-web';
-import { showReportUI } from './report.js?v=28.17.1-online-web';
-import { nameValue } from './market-model.mjs?v=28.17.1-online-web';
+import { Game, Net, gameTimers, guestCust } from './state.js?v=28.17.2-flat-sand';
+import { newSeason } from './sim.js?v=28.17.2-flat-sand';
+import { showPlan, Plan } from './ui.js?v=28.17.2-flat-sand';
+import { buildTables } from './world.js?v=28.17.2-flat-sand';
+import { netDirty } from './net.js?v=28.17.2-flat-sand';
+import { showReportUI } from './report.js?v=28.17.2-flat-sand';
+import { nameValue } from './market-model.mjs?v=28.17.2-flat-sand';
 const KEY='lali-oli.3d.library.v2', BACK=KEY+'.backup';
 const fields=['day','money','rep','stock','prices','enabled','upgrades','staff','forecast','season','lastDebt','starsLog','revUsed','revPrev','regulars','regVisited','buzz','pendingPurchases'];
 const encode=x=>JSON.stringify(x,(_,v)=>v instanceof Set?{__laliSet:[...v]}:v);

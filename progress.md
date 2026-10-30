@@ -89,3 +89,27 @@ Original prompt: Sí, empieza las correcciones en una rama nueva de mi copia 3D.
   experimental branch e011f02b1b623cf8861603e76907520c08744e4a; 2D Pages unchanged.
 - No active cloud-browser session or manually-driven game profiles remain.
 - Runtime has remaining manual-service/UI scope documented in SERVICE-3D-FIXES.md.
+
+## Flat beach and coherent supports, v28.17.2
+- User requested flat sand and no buried kiosk, tables or chairs.
+- Working branch: fix/3d-flat-sand; independent 3D repo only.
+- Dry beach now y=0, seabed slopes only beyond the dry shore at z=-5.6.
+- Insert exact shore rows in both mesh profiles; attenuate waves at shore.
+- Share deck dimensions between visible geometry and foot support sampling.
+- Trim terrace-facing deck wing, preserve station/table/gameplay coordinates.
+- Ground table bases, lounger feet, staff, sign and cotton cart consistently.
+- Move stage away from table legs, preserve its collision with dynamic bounds.
+- Preserve existing Gerstner-like offshore water, materials and online transport.
+- Pure geometry regression and full npm test pass.
+- Initial scene regression passed all desktop object-support checks; mobile
+  fixture needed an actual mobile UA to exercise coarse geometry, now corrected.
+- Local scene regression passes desktop and actual mobile-UA coarse profile:
+  10 tables, 20 chair supports, 32 lounger feet, both decks, sign, cart and staff.
+- Local browser service (10), online (9, including actual WSS interruption),
+  and isolated storage/reload all pass with zero page errors.
+- Inspected frontal, dense-upgrade desktop/mobile and seaward low-angle wind
+  views. No terrain intersections or unsupported furniture found; offshore
+  water and shader compile correctly, zero console errors in the wind view.
+- Required game-client action/screenshot loop passed.
+- Original main and experimental refs, plus 2D Pages source, verified unchanged.
+- Next: publish only independent preview-3d and verify the actual hosted build.

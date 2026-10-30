@@ -1,11 +1,11 @@
 /* Pantalla de Chiringo: banner, pestaña Red y reparto. Lo importa v12.js. */
-import { Game, Net, hostLive } from './state.js?v=28.17.1-online-web';
-import { ITEMS } from './config.js?v=28.17.1-online-web';
-import { Plan } from './ui.js?v=28.17.1-online-web';
-import { guestSend } from './coopbridge.js?v=28.17.1-online-web';
-import { openDelivery } from './delivery-panel.js?v=28.17.1-online-web';
-import { POSTS, INFLU, FOL, RAT } from './v12-posts.js?v=28.17.1-online-web';
-import { publish, hireInflu, respond, repairBatidora, quitBatidos, orderDelivery } from './v12-actions.js?v=28.17.1-online-web';
+import { Game, Net, hostLive } from './state.js?v=28.17.2-flat-sand';
+import { ITEMS } from './config.js?v=28.17.2-flat-sand';
+import { Plan } from './ui.js?v=28.17.2-flat-sand';
+import { guestSend } from './coopbridge.js?v=28.17.2-flat-sand';
+import { openDelivery } from './delivery-panel.js?v=28.17.2-flat-sand';
+import { POSTS, INFLU, FOL, RAT } from './v12-posts.js?v=28.17.2-flat-sand';
+import { publish, hireInflu, respond, repairBatidora, quitBatidos, orderDelivery } from './v12-actions.js?v=28.17.2-flat-sand';
 /* UI */
 function banner(){let b=document.getElementById('v12-banner');if(Game.upgrades.batidoraRota&&Game.mode==='service'){if(!b){b=document.createElement('div');b.id='v12-banner';b.style.cssText='position:fixed;left:50%;transform:translateX(-50%);top:64px;z-index:70;background:#7a1f1f;color:#fff;padding:10px 14px;border-radius:12px;font:600 13px Satoshi,system-ui;box-shadow:0 6px 18px rgba(0,0,0,.4);display:flex;gap:8px;align-items:center';document.body.append(b);}b.innerHTML='<span>🛑 Batidora rota · sin batidos</span><button id="v12-fix" style="background:#ffd36b;border:0;border-radius:8px;padding:6px 10px;font-weight:700">Reparar 120 €</button><button id="v12-quit" style="background:transparent;border:1px solid #fff;color:#fff;border-radius:8px;padding:6px 10px">Quitar hoy</button>';}else if(b)b.remove();}
 setInterval(banner,400);

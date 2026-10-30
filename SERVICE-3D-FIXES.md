@@ -3,8 +3,37 @@
 Origen: rama `fix/3d-service-integrity`, basada en `experiment/vfx-clientes-3d`
 en `e011f02b1b623cf8861603e76907520c08744e4a`. Copia independiente:
 `Oliiveer18/chiringuito-lali-oli-3d`, publicación desde `preview-3d` y registro
-de entrega en `fix/3d-online-web`. Identificador de versión:
-`v28.17.1-online-web`.
+de entrega en `fix/3d-online-web`. La corrección de terreno se desarrolla en
+`fix/3d-flat-sand`. Identificador de versión: `v28.17.2-flat-sand`.
+
+## Arena plana y apoyos
+
+- La playa seca queda a una única cota, y solo desciende el fondo sumergido.
+  Las fórmulas de apoyo y la malla usan la misma altura.
+- La orilla deja ambas filas de hamacas fuera del agua. Una fila explícita de
+  vértices en arena y agua impide desniveles por triangulación en móvil.
+- Se conservan las olas anteriores mar adentro y se atenúan antes de llegar
+  a la arena, sin crestas que atraviesen la zona de juego con viento.
+- La tarima conserva sus apoyos estructurales y deja de invadir las primeras
+  sillas. Su huella física completa determina la altura de los pies.
+- Se apoyan las bases de las mesas, las sillas, las hamacas, el cartel, el carro
+  de algodón y el personal. Las hamacas incorporan cuatro pies bajo su armazón.
+- El escenario tiene un espacio propio junto al mar, sin atravesar las mesas;
+  su colisión sigue la posición visible. La palmera contigua queda fuera de él.
+- No se cambian las coordenadas de servicio, las posiciones de las mesas, las
+  reglas de movimiento online ni los datos de las partidas.
+- Regresiones nuevas: `npm run test:terrain3d` y
+  `npm run test:terrain3d:browser`. Esta última admite `TEST_URL` para Pages.
+
+### Validación local de terreno
+
+Han pasado la regresión de triángulos y alturas para escritorio/móvil,
+la comprobación de escena con diez mesas, veinte sillas y ocho hamacas,
+las diez pruebas de jornada, las nueve online y la de almacenamiento aislado.
+Las pruebas online incluyeron interrupción real del socket y recuperación.
+Se inspeccionaron vistas frontales, de mejoras completas y desde la orilla
+con viento; las suites de navegador registraron cero errores de página.
+No se amplían las garantías del broker público descritas más abajo.
 
 ## Cambios
 

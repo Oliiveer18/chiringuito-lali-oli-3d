@@ -1,16 +1,16 @@
-import {trackCost,operatingResult} from './bookkeeping.js?v=28.17.1-online-web';
-import {closeSocialDay} from './v12.js?v=28.17.1-online-web';
+import {trackCost,operatingResult} from './bookkeeping.js?v=28.17.2-flat-sand';
+import {closeSocialDay} from './v12.js?v=28.17.2-flat-sand';
 // Integración v22: el anfitrión calcula; los invitados reciben upgrades.progression.
-import {Game,Net,simProgressDay} from './state.js?v=28.17.1-online-web';
-import {ITEMS,WEATHER,SPECIAL_DAYS,RENT} from './config.js?v=28.17.1-online-web';
-import {Plan,toast} from './ui.js?v=28.17.1-online-web';
-import {refreshReportUI} from './report.js?v=28.17.1-online-web';
-import {netDirty} from './net.js?v=28.17.1-online-web';
-import {guestSend,onGuestAction} from './coopbridge.js?v=28.17.1-online-web';
-import {escapeHtml as E,eur} from './util.js?v=28.17.1-online-web';
-import * as M from './progression-model.mjs?v=28.17.1-online-web';
-import { iconFor } from './ui-polish.js?v=28.17.1-online-web';
-import { tabHtml as careerTabHtml } from './career-ui.js?v=28.17.1-online-web';
+import {Game,Net,simProgressDay} from './state.js?v=28.17.2-flat-sand';
+import {ITEMS,WEATHER,SPECIAL_DAYS,RENT} from './config.js?v=28.17.2-flat-sand';
+import {Plan,toast} from './ui.js?v=28.17.2-flat-sand';
+import {refreshReportUI} from './report.js?v=28.17.2-flat-sand';
+import {netDirty} from './net.js?v=28.17.2-flat-sand';
+import {guestSend,onGuestAction} from './coopbridge.js?v=28.17.2-flat-sand';
+import {escapeHtml as E,eur} from './util.js?v=28.17.2-flat-sand';
+import * as M from './progression-model.mjs?v=28.17.2-flat-sand';
+import { iconFor } from './ui-polish.js?v=28.17.2-flat-sand';
+import { tabHtml as careerTabHtml } from './career-ui.js?v=28.17.2-flat-sand';
 const day=()=>simProgressDay();
 const pget=()=>Game.upgrades.progression;
 let metric='cash',windowSize=30;

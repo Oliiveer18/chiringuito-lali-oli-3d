@@ -1,5 +1,5 @@
-export const VERSION='v28.17.1-online-web';
-export const LABEL='EXPERIMENTAL · v28.17.1-online-web (copia 3D independiente)';
+export const VERSION='v28.17.2-flat-sand';
+export const LABEL='EXPERIMENTAL · v28.17.2-flat-sand (copia 3D independiente)';
 document.documentElement.dataset.version=VERSION;
 const old=document.getElementById('version-badge');if(old)old.remove();
 const title=document.getElementById('ver-title');if(title)title.textContent=LABEL;

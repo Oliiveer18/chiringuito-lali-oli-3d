@@ -2,7 +2,8 @@
 import { clamp } from './util.js?v=28.16.1-vfx3d';
 
 /** Línea de costa en Z mundo (rompiente / espuma 2D) */
-export const SHORE_WORLD_Z = -3.2;
+// Deja las dos filas de hamacas y la tarima sobre playa seca.
+export const SHORE_WORLD_Z = -5.6;
 
 export function coastNightness(h) {
   return clamp((h - 19.8) / 2, 0, 0.75);
