@@ -11,6 +11,7 @@ import { playerPoses3D } from './movement-3d-model.mjs';
 import { setMovementCollision3D, publishLocalPose3D, consumeLocalCorrection3D } from './net-movement-3d.js?v=28.17.3-flat-sand';
 import { setService3DProximityCheck } from './service-3d.js?v=28.17.3-flat-sand';
 import { tablePosTo3D } from './world.js?v=28.17.3-flat-sand';
+import { loadGLB, fitModelToBox } from './assets-3d.js?v=28.17.3-flat-sand';
 import { initUpgrades3D, syncUpgrades3D } from './upgrades-3d.js?v=28.17.3-flat-sand';
 import { initStaff3D, syncStaff3D } from './staff-3d.js?v=28.17.3-flat-sand';
 import { initVFX3D, updateVFX3D, spawnCleanSparkles3D, triggerBeerPourVFX } from './vfx-3d.js?v=28.17.3-flat-sand';
@@ -373,6 +374,8 @@ function buildKiosk(scene) {
   kiosk.add(fridgeGlass);
 
   // Estación 2: Cafetera Espresso Italiana
+  // Respaldo procedural (caja coral + tapa cromada) sustituido por un
+  // modelo GLB generado con Tripo en cuanto esté disponible.
   const coffeeBodyGeo = new THREE.BoxGeometry(0.75, 0.55, 0.5);
   const coffeeBody = new THREE.Mesh(coffeeBodyGeo, MAT.coral);
   coffeeBody.position.set(0.6, 1.6, 2.2);
@@ -382,6 +385,16 @@ function buildKiosk(scene) {
   const coffeeTop = new THREE.Mesh(coffeeTopGeo, MAT.chrome);
   coffeeTop.position.set(0.6, 1.9, 2.2);
   kiosk.add(coffeeTop);
+
+  loadGLB('assets/models/coffee-machine.glb').then((coffeeGLB) => {
+    if (!coffeeGLB) return; // Sin GLB: se conserva el respaldo procedural
+    const fitted = fitModelToBox(coffeeGLB, 0.75, 0.55, 0.5);
+    // Apoyada sobre la barra (superficie del mostrador frontal en y=1.34)
+    fitted.position.set(0.6, 1.34, 2.2);
+    coffeeBody.visible = false;
+    coffeeTop.visible = false;
+    kiosk.add(fitted);
+  });
 
   // Estación 3: Plancha de Cocina (Griddle)
   const griddleGeo = new THREE.BoxGeometry(1.4, 0.22, 0.7);
