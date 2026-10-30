@@ -61,4 +61,10 @@ Original prompt: Sí, empieza las correcciones en una rama nueva de mi copia 3D.
 - Added encrypted MQTT last wills, heartbeat recovery and 45-second resynchronization.
 - Public broker is explicitly development/testing, not production SLA; disclose this in UI/docs.
 - Local two-profile suite passed all nine flows including actual socket interruption.
-- Repeating solo/storage QA and actual hosted cross-network gameplay before signoff.
+- Solo browser suite: ten flows passed; corrected its URL normalizer to avoid
+  a double slash when TEST_URL ends with a slash.
+- Published source commit fc2abe3 preserves concurrent visual commits through 1570158.
+- Actual hosted cross-network play passed: sandbox host/cloud guest, two shared
+  preparations, movement, guest pause/host resume, real socket interruption,
+  same floor id, retained trays/money and zero recorded page errors.
+- Six relay regression groups pass, including retained/replay/tamper rejection.

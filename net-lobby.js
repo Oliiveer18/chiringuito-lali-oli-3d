@@ -24,7 +24,7 @@ export function renderLobby(){
   $('#lobby-name').closest('.field').classList.toggle('hidden', step!=='choose');
   $('#btn-lobby-go').classList.toggle('hidden', step!=='host');
   if(step==='host'){
-    $('#lobby-code').textContent = Net.code ? Net.code.match(/.{1,13}/g).join(' ') : '····';
+    $('#lobby-code').textContent = Net.code ? Net.code.match(/.{1,13}/g).join('\n') : '····';
     $('#btn-lobby-go').disabled = !Net.peer;
     if (Net.peer) {
       $('#lobby-peer').innerHTML = `<span class="dot on"></span><span><b>${escapeHtml(Net.names.p2)}</b> se ha unido a la partida</span>`;

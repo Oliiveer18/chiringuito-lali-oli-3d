@@ -98,8 +98,21 @@ al proveedor. El anfitrión debe permanecer conectado.
 `relay.test.mjs` comprueba códigos privados aleatorios, separación entre clave y
 tema público, codec MQTT con fragmentación, límites, cifrado AES-GCM, alteración,
 destino incorrecto, compresión negociada y rechazo de paquetes retenidos/repetidos.
-La comprobación adicional de juego alojado entre sandbox y cloud se documenta
-por separado cuando esté completada.
+La comprobación adicional del 30 de octubre de 2026 usó el juego publicado
+en GitHub Pages con anfitrión en Chromium del sandbox e invitado en el
+navegador cloud separado. Ambos cargaron `v28.17.0-online-web`. Se verificaron:
+
+- Entrada mediante el código privado y el mismo identificador de servicio.
+- Café preparado por el anfitrión y plancha preparada/recogida por el invitado;
+  stock y ambas bandejas coincidentes, sin cobro por preparar.
+- Movimiento del invitado mediante entrada de teclado real, reflejado en el host.
+- Pausa solicitada por el invitado y reanudación desde el anfitrión.
+- Cierre real del WebSocket del invitado: el host pausó y reconectó al mismo
+  servicio, conservando las dos bandejas y los 400 € de caja.
+- Cero errores de página registrados en ambos entornos.
+
+Esta prueba valida esa conexión entre dos entornos separados. No equivale a
+una garantía universal para todos los operadores o a un SLA de producción.
 
 ## Cómo probar el cooperativo
 
