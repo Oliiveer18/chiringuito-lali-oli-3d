@@ -1,7 +1,7 @@
 /* Command boundary: guests send intentions; only the host mutates service state. */
-import { Game, Net } from './state.js?v=28.16.0-vfx3d';
-import { netAct } from './net-link.js?v=28.16.0-vfx3d';
-import { deliverPreparedItem } from './sim/service.js?v=28.16.0-vfx3d';
+import { Game, Net } from './state.js?v=28.17.0-online-web';
+import { netAct } from './net-link.js?v=28.17.0-online-web';
+import { deliverPreparedItem } from './sim/service.js?v=28.17.0-online-web';
 import { flushLocalPose3D } from './net-movement-3d.js';
 import {
   service3D, serviceRunning, beginPreparation, finishBeer, cancelPreparation,

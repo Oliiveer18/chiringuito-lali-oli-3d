@@ -1,9 +1,9 @@
-import {Game,Net,isCoop,simProgressDay} from './state.js?v=28.16.0-vfx3d';
-import {STAFF,ITEMS,PERSONALITIES} from './config.js?v=28.16.0-vfx3d';
-import {HUT_BAR_FLOOR_Y} from './world.js?v=28.16.0-vfx3d';
-import {navFind,navLineFree,navSetTarget,navStep} from './nav.js?v=28.16.0-vfx3d';
-import {factor} from './professional-model.mjs?v=28.16.0-vfx3d';
-import * as M from './service-tasks.mjs?v=28.16.0-vfx3d';
+import {Game,Net,isCoop,simProgressDay} from './state.js?v=28.17.0-online-web';
+import {STAFF,ITEMS,PERSONALITIES} from './config.js?v=28.17.0-online-web';
+import {HUT_BAR_FLOOR_Y} from './world.js?v=28.17.0-online-web';
+import {navFind,navLineFree,navSetTarget,navStep} from './nav.js?v=28.17.0-online-web';
+import {factor} from './professional-model.mjs?v=28.17.0-online-web';
+import * as M from './service-tasks.mjs?v=28.17.0-online-web';
 let hooks=null;const active=t=>['queued','walking','working','blocked'].includes(t.state);const dirty=()=>{Net.sendT=1e9;Net.revDirty=true;};
 const actor=id=>Game.floor?.actors.find(a=>a.id===id);const job=id=>Game.floor?.tasks.find(t=>t.id===id);
 const endpoint=t=>({x:t.x+(t.x>1150?-46:46),y:t.y+34});

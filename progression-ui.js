@@ -1,16 +1,16 @@
-import {trackCost,operatingResult} from './bookkeeping.js?v=28.16.0-vfx3d';
-import {closeSocialDay} from './v12.js?v=28.16.0-vfx3d';
+import {trackCost,operatingResult} from './bookkeeping.js?v=28.17.0-online-web';
+import {closeSocialDay} from './v12.js?v=28.17.0-online-web';
 // Integración v22: el anfitrión calcula; los invitados reciben upgrades.progression.
-import {Game,Net,simProgressDay} from './state.js?v=28.16.0-vfx3d';
-import {ITEMS,WEATHER,SPECIAL_DAYS,RENT} from './config.js?v=28.16.0-vfx3d';
-import {Plan,toast} from './ui.js?v=28.16.0-vfx3d';
-import {refreshReportUI} from './report.js?v=28.16.0-vfx3d';
-import {netDirty} from './net.js?v=28.16.0-vfx3d';
-import {guestSend,onGuestAction} from './coopbridge.js?v=28.16.0-vfx3d';
-import {escapeHtml as E,eur} from './util.js?v=28.16.0-vfx3d';
-import * as M from './progression-model.mjs?v=28.16.0-vfx3d';
-import { iconFor } from './ui-polish.js?v=28.16.0-vfx3d';
-import { tabHtml as careerTabHtml } from './career-ui.js?v=28.16.0-vfx3d';
+import {Game,Net,simProgressDay} from './state.js?v=28.17.0-online-web';
+import {ITEMS,WEATHER,SPECIAL_DAYS,RENT} from './config.js?v=28.17.0-online-web';
+import {Plan,toast} from './ui.js?v=28.17.0-online-web';
+import {refreshReportUI} from './report.js?v=28.17.0-online-web';
+import {netDirty} from './net.js?v=28.17.0-online-web';
+import {guestSend,onGuestAction} from './coopbridge.js?v=28.17.0-online-web';
+import {escapeHtml as E,eur} from './util.js?v=28.17.0-online-web';
+import * as M from './progression-model.mjs?v=28.17.0-online-web';
+import { iconFor } from './ui-polish.js?v=28.17.0-online-web';
+import { tabHtml as careerTabHtml } from './career-ui.js?v=28.17.0-online-web';
 const day=()=>simProgressDay();
 const pget=()=>Game.upgrades.progression;
 let metric='cash',windowSize=30;

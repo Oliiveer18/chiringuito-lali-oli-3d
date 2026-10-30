@@ -2,7 +2,7 @@
 
 Rama `fix/3d-service-integrity`, basada en `experiment/vfx-clientes-3d` en
 `e011f02b1b623cf8861603e76907520c08744e4a`. Identificador de versión:
-`v28.16.4-online-fix`.
+`v28.17.0-online-web`.
 
 ## Cambios
 
@@ -63,10 +63,10 @@ cancelación, pausa, controles opuestos, velocidades, limpieza, snapshots,
 reinicio, redimensionado y cierre. Es posible definir `TEST_URL` para comprobar
 una vista alojada y `TEST_ARTIFACTS` para guardar sus capturas fuera del repo.
 
-`online-3d.browser.test.mjs` usa dos perfiles aislados y un canal PeerJS/WebRTC
-real. Comprueba sala/código, entrada en servicio, movimiento en ambos sentidos,
+`online-3d.browser.test.mjs` usa dos perfiles aislados y un enlace WSS cifrado
+real. Comprueba sala/código privado, entrada en servicio, movimiento en ambos sentidos,
 preparación y stock compartidos, rechazo por distancia, entrega y cobro, pausa
-y recuperación tras interrumpir el canal. La entrega usa una fixture controlada
+y recuperación tras cerrar realmente el socket. La entrega usa una fixture controlada
 de cliente y posición para aislar esa acción de la navegación.
 
 Las suites adicionales de gestión, mercado, servicio, persistencia y reputación
@@ -84,30 +84,30 @@ La plancha contextual sigue iniciando papas; la selección de otros platos, el
 panel de comandas y la reorganización de HUD son trabajo posterior. Tampoco se
 ha unificado aún la posición del jugador libre con el actor de tareas de sala.
 
-Las pruebas automáticas usan conexión WebRTC real entre perfiles aislados, pero
-no certifican todas las combinaciones de redes domésticas, datos móviles, VPN
-o cortafuegos. Señalización, STUN y TURN dependen de los servicios externos ya
-configurados; no se ha contratado un relay dedicado ni medido FPS en móvil físico.
+El transporte de `v28.17.0` ya no usa WebRTC ni depende de TURN. El anterior
+canal sí falló en la prueba sandbox/cloud, por lo que se sustituyó en lugar
+de presentar esa prueba fallida como una conexión entre redes validada.
 
-La copia alojada pasó los nueve recorridos online entre perfiles del mismo
-entorno de pruebas. Una prueba adicional entre el anfitrión del sandbox y un
-navegador cloud separado no logró abrir el canal. Una prueba forzando relay no
-obtuvo candidatos TURN y registró errores de resolución, conexión y asignación.
-Esto no demuestra un fallo en todas las redes domésticas, pero impide presentar
-el online entre redes distintas como validado. Hace falta configurar un TURN
-operativo y repetir esa prueba.
+El nuevo enlace usa el [broker público EMQX](https://www.emqx.com/en/mqtt/public-mqtt5-broker),
+que está ofrecido para prototipos y pruebas, no para disponibilidad de producción
+garantizada. No se ha abierto una cuenta, activado facturación ni contratado un
+relay. No se certifican todas las redes, datos móviles, VPN o cortafuegos, ni se
+han medido FPS en un móvil físico. El cifrado no oculta IP, horarios o volumen
+al proveedor. El anfitrión debe permanecer conectado.
 
-La [documentación de Open Relay](https://www.metered.ca/tools/openrelay/) solicita
-una cuenta y credenciales propias. Las credenciales de ejemplo heredadas de este
-proyecto no se han validado como un servicio operativo.
+`relay.test.mjs` comprueba códigos privados aleatorios, separación entre clave y
+tema público, codec MQTT con fragmentación, límites, cifrado AES-GCM, alteración,
+destino incorrecto, compresión negociada y rechazo de paquetes retenidos/repetidos.
+La comprobación adicional de juego alojado entre sandbox y cloud se documenta
+por separado cuando esté completada.
 
 ## Cómo probar el cooperativo
 
-- Abre la misma versión en dos navegadores o dispositivos. Si la vista de
-  Computer es privada, da acceso a la otra persona desde Compartir.
+- Abre [la copia 3D en GitHub Pages](https://oliiveer18.github.io/chiringuito-lali-oli-3d/)
+  en dos navegadores o dispositivos.
 - El anfitrión elige Cooperativo, una partida y Crear sala. Comparte el código
-  de cuatro letras que aparece en pantalla.
-- La otra persona elige Cooperativo y Unirme con código, lo escribe y entra.
+  privado de 26 caracteres con «Copiar código privado».
+- La otra persona elige Cooperativo y Unirme con código, lo pega y entra.
 - El anfitrión pasa a planificación. Ambos deben confirmar para abrir el servicio.
 - Deben verse personajes distintos, movimiento, productos, existencias y dinero
   compartidos. El anfitrión conserva la autoridad de la simulación.

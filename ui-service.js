@@ -1,12 +1,12 @@
 /* Servicio, cierre, urgente y avisos. Lo importa ui.js. */
-import { GOAL, ITEMS, STATION_COLOR, STATION_LABEL, WEATHER } from './config.js?v=28.16.0-vfx3d';
-import { $, eur, hhmm, stars } from './util.js?v=28.16.0-vfx3d';
-import { ICON_URL } from './icons.js?v=28.16.0-vfx3d';
-import { Audio } from './audio.js?v=28.16.0-vfx3d';
-import { Game, Net, activeItems, dayName, hostLive, isCoop, isGuest, simProgressDay, weatherToday } from './state.js?v=28.16.0-vfx3d';
-import { buyStock, newSeason } from './sim.js?v=28.16.0-vfx3d';
-import { hideAll, Plan, showPlan } from './ui-plan.js?v=28.16.0-vfx3d';
-import { netAct, netDirty } from './net.js?v=28.16.0-vfx3d';
+import { GOAL, ITEMS, STATION_COLOR, STATION_LABEL, WEATHER } from './config.js?v=28.17.0-online-web';
+import { $, eur, hhmm, stars } from './util.js?v=28.17.0-online-web';
+import { ICON_URL } from './icons.js?v=28.17.0-online-web';
+import { Audio } from './audio.js?v=28.17.0-online-web';
+import { Game, Net, activeItems, dayName, hostLive, isCoop, isGuest, simProgressDay, weatherToday } from './state.js?v=28.17.0-online-web';
+import { buyStock, newSeason } from './sim.js?v=28.17.0-online-web';
+import { hideAll, Plan, showPlan } from './ui-plan.js?v=28.17.0-online-web';
+import { netAct, netDirty } from './net.js?v=28.17.0-online-web';
 export function showServiceUI(){
   hideAll(); $('#hud').classList.remove('hidden'); $('#stockbar').classList.remove('hidden');
   $('#hud-role').classList.toggle('hidden', !isCoop()); $('#btn-ping').classList.toggle('hidden', !isCoop());

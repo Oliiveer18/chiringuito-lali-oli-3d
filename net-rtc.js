@@ -34,7 +34,7 @@ export function peerRtcConfig(turnConfig){
   return { iceServers: ice, iceCandidatePoolSize: 10 };
 }
 
-export const LOBBY_PREFIX = 'chiringuito-lali-oli-';
+export const LOBBY_PREFIX = 'chiringuito-lali-oli-3d-';
 
 export function hostPeerId(code){
   return LOBBY_PREFIX + String(code || '').toUpperCase();
@@ -56,7 +56,7 @@ export function peerErrorMessage(e, role = 'guest'){
   const t = (e && (e.type || e.message)) || 'error';
   if (t === 'peer-unavailable') {
     return role === 'guest'
-      ? 'No hay ninguna partida con ese código todavía. Comprueba las 4 letras o pide al anfitrión que pulse «Crear partida» de nuevo.'
+      ? 'No hay ninguna partida con ese código todavía. Copia el código completo o pide al anfitrión que pulse «Crear partida» de nuevo.'
       : 'Tu pareja no ha podido localizar la sala. Dile el código otra vez.';
   }
   if (t === 'unavailable-id') return 'Ese código ya está en uso. Pulsa «Crear partida» otra vez.';
@@ -65,7 +65,7 @@ export function peerErrorMessage(e, role = 'guest'){
   }
   if (t === 'browser-incompatible') return 'Tu navegador no admite la conexión cooperativa. Prueba Chrome o Safari actualizados.';
   if (t === 'connection-error' || t === 'negotiation-failed') {
-    return 'No se pudo abrir el enlace entre redes distintas (WebRTC). Prueba otra red Wi‑Fi, desactiva VPN o espera un minuto y vuelve a unirte.';
+    return 'No se pudo abrir el enlace web entre redes distintas. Comprueba internet y vuelve a unirte con el código completo.';
   }
   return role === 'guest'
     ? 'No se pudo unir a la partida (' + t + '). Revisa el código e inténtalo otra vez.'

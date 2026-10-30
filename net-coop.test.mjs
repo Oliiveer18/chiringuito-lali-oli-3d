@@ -1,7 +1,7 @@
 /* Pruebas del enlace cooperativo (ICE, mensajes de error) sin WebRTC real. */
 import {
   peerRtcConfig, peerErrorMessage, hostPeerId, isTransientJoinPeerError, guestSearchStatus
-} from './net-rtc.js?v=28.16.0-vfx3d';
+} from './net-rtc.js?v=28.17.0-online-web';
 
 let ok = 0, ko = 0;
 const check = (name, cond, extra) => {
@@ -18,8 +18,8 @@ check('TURN con credenciales', cfg.iceServers.some(s => s.username && s.credenti
 check('pool ICE > 0', cfg.iceCandidatePoolSize >= 4);
 
 console.log('hostPeerId');
-check('CHAU → id esperado', hostPeerId('CHAU') === 'chiringuito-lali-oli-CHAU');
-check('normaliza minúsculas', hostPeerId('chau') === 'chiringuito-lali-oli-CHAU');
+check('CHAU → id 3D aislado', hostPeerId('CHAU') === 'chiringuito-lali-oli-3d-CHAU');
+check('normaliza minúsculas', hostPeerId('chau') === 'chiringuito-lali-oli-3d-CHAU');
 
 console.log('peerErrorMessage');
 check('peer-unavailable invitada', peerErrorMessage({ type: 'peer-unavailable' }, 'guest').includes('código'));

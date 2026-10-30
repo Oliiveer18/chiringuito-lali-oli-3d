@@ -50,3 +50,15 @@ Original prompt: Sí, empieza las correcciones en una rama nueva de mi copia 3D.
 - Relay-only diagnostic produced no relay candidates; TURN lookup/connect/allocation errors observed.
 - Do not mark cross-network online as complete: configure a working TURN relay and repeat that test.
 - Corrected the socket-error fallback which previously retried the same cloud index.
+
+## No-account encrypted web transport, v28.17.0
+
+- User declined Cloudflare and requested no further accounts, keys or questions.
+- Tested the documented public EMQX WSS endpoint from both sandbox and cloud.
+- Replaced direct RTC with a minimal MQTT-over-WSS Peer-compatible transport.
+- Added 130-bit random room secrets, AES-GCM, domain-separated topic hashes,
+  destination authentication, bounded queues, compression negotiation and replay rejection.
+- Added encrypted MQTT last wills, heartbeat recovery and 45-second resynchronization.
+- Public broker is explicitly development/testing, not production SLA; disclose this in UI/docs.
+- Local two-profile suite passed all nine flows including actual socket interruption.
+- Repeating solo/storage QA and actual hosted cross-network gameplay before signoff.

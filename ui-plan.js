@@ -1,16 +1,16 @@
 /* Plan de apertura: compras, carta, mejoras y listo. Lo importa ui.js. */
-import { trackCost } from './bookkeeping.js?v=28.16.0-vfx3d';
-import { GOAL, HOUR_CURVE, ITEMS, ITEM_IDS, RENT, SEASON_DAYS, SPECIAL_DAYS, STAFF, UPGRADES, WEATHER } from './config.js?v=28.16.0-vfx3d';
-import { $, clamp, escapeHtml, eur, eur2 } from './util.js?v=28.16.0-vfx3d';
-import { ICON_URL } from './icons.js?v=28.16.0-vfx3d';
-import { Audio } from './audio.js?v=28.16.0-vfx3d';
-import { Game, Net, activeItems, closeHour, dayName, isCoop, isGuest, isWeekend, itemUnlocked, lvl, partner, simProgressDay, wages, weatherToday } from './state.js?v=28.16.0-vfx3d';
-import { buyStock, difficultyProfile, difficultyRush, newSeason, startDay } from './sim.js?v=28.16.0-vfx3d';
-import { advanceFromReport } from './report.js?v=28.16.0-vfx3d';
-import { netAct, netDirty } from './net.js?v=28.16.0-vfx3d';
-import { drawPerson } from './render.js?v=28.16.0-vfx3d';
-import { iconFor } from './ui-polish.js?v=28.16.0-vfx3d';
-import { renderTab } from './ui.js?v=28.16.0-vfx3d';
+import { trackCost } from './bookkeeping.js?v=28.17.0-online-web';
+import { GOAL, HOUR_CURVE, ITEMS, ITEM_IDS, RENT, SEASON_DAYS, SPECIAL_DAYS, STAFF, UPGRADES, WEATHER } from './config.js?v=28.17.0-online-web';
+import { $, clamp, escapeHtml, eur, eur2 } from './util.js?v=28.17.0-online-web';
+import { ICON_URL } from './icons.js?v=28.17.0-online-web';
+import { Audio } from './audio.js?v=28.17.0-online-web';
+import { Game, Net, activeItems, closeHour, dayName, isCoop, isGuest, isWeekend, itemUnlocked, lvl, partner, simProgressDay, wages, weatherToday } from './state.js?v=28.17.0-online-web';
+import { buyStock, difficultyProfile, difficultyRush, newSeason, startDay } from './sim.js?v=28.17.0-online-web';
+import { advanceFromReport } from './report.js?v=28.17.0-online-web';
+import { netAct, netDirty } from './net.js?v=28.17.0-online-web';
+import { drawPerson } from './render.js?v=28.17.0-online-web';
+import { iconFor } from './ui-polish.js?v=28.17.0-online-web';
+import { renderTab } from './ui.js?v=28.17.0-online-web';
 // ---------- Pantallas ----------
 export function hideAll(){ document.querySelectorAll('.overlay').forEach(o=>o.classList.remove('show')); }
 export const Plan={tab:'compras'};

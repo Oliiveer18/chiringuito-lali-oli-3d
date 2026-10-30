@@ -1,5 +1,5 @@
 /* Detalles de la reseña. Lo importa variety.js. */
-import { DETAIL } from './report.js?v=28.16.0-vfx3d';
+import { DETAIL } from './report.js?v=28.17.0-online-web';
 const add = (arr, items) => { for (const it of items) if (!arr.includes(it)) arr.push(it); };
 
 // ---------- Detalles con más variantes ----------

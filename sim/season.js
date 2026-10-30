@@ -1,22 +1,22 @@
 /* Mechanical extraction from sim.js; declaration bodies are unchanged.
    Balance curve uses simProgressDay() (continuous career track). Calendar events use Game.day 1..SEASON_DAYS. */
-import { ITEMS } from "../config.js?v=28.16.0-vfx3d";
-import { ITEM_IDS } from "../config.js?v=28.16.0-vfx3d";
-import { REGULARS } from "../config.js?v=28.16.0-vfx3d";
-import { SEASON_DAYS } from "../config.js?v=28.16.0-vfx3d";
-import { START_MONEY } from "../config.js?v=28.16.0-vfx3d";
-import { clamp } from "../util.js?v=28.16.0-vfx3d";
-import { rnd } from "../util.js?v=28.16.0-vfx3d";
-import { Audio } from "../audio.js?v=28.16.0-vfx3d";
-import { Game, simProgressDay } from "../state.js?v=28.16.0-vfx3d";
-import { closeHour } from "../state.js?v=28.16.0-vfx3d";
-import { setTimeoutGame } from "../state.js?v=28.16.0-vfx3d";
-import { buildTables } from "../world.js?v=28.16.0-vfx3d";
-import { toast } from "../ui.js?v=28.16.0-vfx3d";
-import { updateStockbar } from "../ui.js?v=28.16.0-vfx3d";
-import { spawnCustomer } from "./customers.js?v=28.16.0-vfx3d";
-export { buildSeasonForecast } from "./forecast.js?v=28.16.0-vfx3d";
-import { buildSeasonForecast } from "./forecast.js?v=28.16.0-vfx3d";
+import { ITEMS } from "../config.js?v=28.17.0-online-web";
+import { ITEM_IDS } from "../config.js?v=28.17.0-online-web";
+import { REGULARS } from "../config.js?v=28.17.0-online-web";
+import { SEASON_DAYS } from "../config.js?v=28.17.0-online-web";
+import { START_MONEY } from "../config.js?v=28.17.0-online-web";
+import { clamp } from "../util.js?v=28.17.0-online-web";
+import { rnd } from "../util.js?v=28.17.0-online-web";
+import { Audio } from "../audio.js?v=28.17.0-online-web";
+import { Game, simProgressDay } from "../state.js?v=28.17.0-online-web";
+import { closeHour } from "../state.js?v=28.17.0-online-web";
+import { setTimeoutGame } from "../state.js?v=28.17.0-online-web";
+import { buildTables } from "../world.js?v=28.17.0-online-web";
+import { toast } from "../ui.js?v=28.17.0-online-web";
+import { updateStockbar } from "../ui.js?v=28.17.0-online-web";
+import { spawnCustomer } from "./customers.js?v=28.17.0-online-web";
+export { buildSeasonForecast } from "./forecast.js?v=28.17.0-online-web";
+import { buildSeasonForecast } from "./forecast.js?v=28.17.0-online-web";
 
 const ARRIVALS_CAP = 1.72;
 const PEAK_CAP = 0.30;

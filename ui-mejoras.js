@@ -1,7 +1,7 @@
 /* Pestaña Mejoras del plan: secciones compactas. Importado desde ui.js */
-import { UPGRADES } from './config.js?v=28.16.0-vfx3d';
-import { escapeHtml, eur } from './util.js?v=28.16.0-vfx3d';
-import { Game, lvl } from './state.js?v=28.16.0-vfx3d';
+import { UPGRADES } from './config.js?v=28.17.0-online-web';
+import { escapeHtml, eur } from './util.js?v=28.17.0-online-web';
+import { Game, lvl } from './state.js?v=28.17.0-online-web';
 
 const MEJORAS_SECTIONS = [
   { title: 'Sala y mesas', ids: ['mesas', 'altavoz', 'luces', 'terraza'] },

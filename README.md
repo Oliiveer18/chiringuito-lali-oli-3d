@@ -15,10 +15,16 @@ La copia 3D tiene su propia publicación:
 El [juego 2D original](https://oliiveer18.github.io/chiringuito-de-lali-y-oli/)
 mantiene su enlace y su publicación desde `main`, sin cambios.
 
-El cooperativo usa PeerJS (WebRTC). Las pruebas entre perfiles del mismo entorno
-pasan; una prueba entre máquinas de redes distintas no logró conectar. Falta
-configurar un relay TURN operativo y repetir esa validación. No se presenta
-el online entre redes distintas como terminado. Consulta `SERVICE-3D-FIXES.md`.
+El cooperativo de `v28.17.0-online-web` usa mensajes cifrados sobre WebSocket
+seguro, sin WebRTC, TURN, cuentas ni tarjeta. Crear sala genera un código privado
+de 26 caracteres: usa «Copiar código privado» y pégalo en el otro dispositivo.
+El anfitrión debe mantener la página abierta.
+
+El transporte utiliza el [broker público de EMQX](https://www.emqx.com/en/mqtt/public-mqtt5-broker),
+ofrecido para prototipos, aprendizaje y pruebas, no como servicio de producción
+garantizado. No hay alta de cuenta ni facturación en el juego. No se promete
+disponibilidad continua, latencia fija ni conexión desde cualquier cortafuegos.
+Consulta la evidencia y los límites en `SERVICE-3D-FIXES.md`.
 
 ## Referencias del repositorio original
 
@@ -53,14 +59,29 @@ npm run check    # Alias de npm test
 
 El anfitrión simula la partida y la invitada recibe el estado. Ambas pueden comprar, mejorar, contratar personal y shows, reparar máquinas, publicar en Chiringo, contratar influencers, responder reseñas y pedir reparto.
 
-Entre redes distintas (cada jugador en su Wi‑Fi o datos) hace falta TURN además de STUN; el juego incluye relays públicos de Open Relay. Si sigue fallando en redes muy restrictivas, el anfitrión puede definir credenciales propias antes de cargar el juego: `window.TURN_CONFIG = { urls: 'turn:…', username: '…', credential: '…' }` (por ejemplo cuenta gratuita en metered.ca).
+`broker-peer.js` sustituye el canal directo por WSS público de pruebas. Los
+mensajes se cifran con AES-GCM en el navegador, usan nonces aleatorios y autentican
+el tema de destino. El secreto de sala tiene 130 bits de entropía; los temas
+usan un hash con dominio separado que no revela ni el código ni la clave AES.
+No se publican mensajes retenidos. No compartas el código fuera de tu pareja.
+El broker sigue viendo direcciones IP, horarios, tamaños y temas opacos.
+
+Las instantáneas se comprimen si ambos navegadores lo admiten. Hay límites de
+tamaño y colas, rechazo de mensajes repetidos y reconexión durante 45 segundos.
+Un corte pausa la jornada y la recuperación resincroniza el estado del anfitrión.
+Esta vía evita depender del paso de UDP/NAT; WSS todavía puede estar bloqueado
+en redes restrictivas. Una futura versión de producción debe usar un servicio
+propio o gestionado con garantías, no depender de un broker público de pruebas.
 
 ## Pruebas
 
 Las pruebas cargan los módulos reales de las ampliaciones y del canal cooperativo, simulan 15 días y comprueban reglas de tendencias, comentarios, influencers, shows, reparto, misiones y acciones de la invitada.
 
-No cubren el dibujo en pantalla ni la conexión PeerJS real.
+`npm test` no cubre el dibujo ni la conexión real. `npm run test:online3d` sí abre
+dos perfiles de navegador y conecta realmente al broker público.
 
 ## Archivos heredados
 
-`server.js` y `coop-latency.test.js` pertenecen a una versión anterior del cooperativo basada en WebSocket. El juego actual usa PeerJS, por lo que están archivados en `legacy/`.
+`server.js` y `coop-latency.test.js` pertenecen a otra versión de WebSocket con
+servidor propio y permanecen archivados en `legacy/`. Los helpers ICE de
+`net-rtc.js` son compatibilidad histórica: el transporte activo no los utiliza.

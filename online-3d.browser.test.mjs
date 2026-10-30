@@ -1,5 +1,5 @@
-/* Real PeerJS/WebRTC smoke test. Uses two isolated profiles, not mocked snapshots.
-   Optional TEST_URL can target the hosted preview. Internet signalling is required. */
+/* Real encrypted WSS smoke test. Two isolated profiles, no mocked transport.
+   Cross-network test is separate; TEST_URL can target actual GitHub Pages. */
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
@@ -34,15 +34,16 @@ async function boot(page){
 }
 try{
   await boot(host);await boot(guest);
-  await check('public room code matches the actual PeerJS id',async()=>{
+  await check('private room code uses a 130-bit secret and isolated 3D id',async()=>{
     await host.getByRole('button',{name:'Nueva partida',exact:true}).click();
     await host.locator('#lobby-name').fill('Anfitrión QA');
     await host.locator('#btn-create').click();
     await host.waitForFunction(()=>Net.signalingReady,{timeout:30000});
     const room=await host.evaluate(()=>({code:Net.code,id:__qaPeer.id}));
-    assert.equal(room.id,'chiringuito-lali-oli-'+room.code);
+    assert.match(room.code,/^[A-Z2-7]{26}$/);
+    assert.equal(room.id,'chiringuito-lali-oli-3d-'+room.code);
   });
-  await check('two profiles join by code through a real WebRTC data channel',async()=>{
+  await check('two profiles join through a real encrypted WSS broker',async()=>{
     const code=await host.evaluate(()=>Net.code);
     await guest.getByRole('button',{name:'Unirme con código',exact:true}).click();
     await guest.locator('#lobby-name').fill('Invitado QA');
@@ -50,15 +51,12 @@ try{
     await guest.locator('#btn-join').click();
     await host.waitForFunction(()=>Net.peer,{timeout:45000});
     await guest.waitForFunction(()=>Net.peer,{timeout:45000});
-    const transport=await guest.evaluate(async()=>{
+    const transport=await guest.evaluate(()=>{
       const link=[...__qaPeer.links].find(l=>l.open);
-      const pc=link.raw.peerConnection;
-      const stats=[...await pc.getStats()].map(([,v])=>v);
-      const pair=stats.find(s=>s.type==='candidate-pair'&&s.state==='succeeded'&&s.nominated);
-      const local=stats.find(s=>s.id===pair?.localCandidateId),remote=stats.find(s=>s.id===pair?.remoteCandidateId);
-      return {state:pc.connectionState,channel:link.raw.dataChannel.readyState,local:local?.candidateType,remote:remote?.candidateType};
+      return {state:__qaPeer.socket.readyState,channel:link.raw.transport,broker:__qaPeer.socket.url};
     });
-    assert.equal(transport.state,'connected');assert.equal(transport.channel,'open');
+    assert.equal(transport.state,1);assert.equal(transport.channel,'encrypted-wss');
+    assert.equal(transport.broker,'wss://broker.emqx.io:8084/mqtt');
     console.log('TRANSPORT',transport);
   });
   await check('both players enter planning and the same service after ready',async()=>{
@@ -73,6 +71,7 @@ try{
     assert.match(await guest.locator('#hud-day').textContent(),/Día 1/);
   });
   await check('guest movement reaches host and host movement reaches guest avatar',async()=>{
+    await guest.waitForFunction(()=>Game.speed>0&&!document.querySelector('#btn-action-main').classList.contains('hidden'));
     await guest.keyboard.down('ArrowLeft');
     try{await guest.waitForFunction(()=>getPlayerMesh().position.x<.3);}
     finally{await guest.keyboard.up('ArrowLeft');}
@@ -124,9 +123,9 @@ try{
         order:['papas'],itemSt:[0],inPrep:0,served:[],missing:0,partT:{},subs:{},
         eat:false,patience:1000,maxPatience:1000,personality:'tranquilo'});
       Game.customers=[c];
-      const r=await import('./render-3d.js?v=28.16.2-vfx3d');
+      const r=await import('./render-3d.js?v=28.17.0-online-web');
       for(let i=0;i<300;i++)r.render3D(.1,false);
-      const {customerInteractionPosition}=await import('./render-3d-customers.js?v=28.16.2-vfx3d');
+      const {customerInteractionPosition}=await import('./render-3d-customers.js?v=28.17.0-online-web');
       const pos=customerInteractionPosition(c),p=Game.service3D.players.p2;
       p.x=pos.x+1;p.z=pos.z+.7;p.seq++;p.correctionSeq=p.seq;
     });
@@ -134,7 +133,7 @@ try{
     await guest.waitForFunction(id=>Game.customers.length===1&&Game.customers[0].id===id,customerId);
     assert.equal(await guest.evaluate(()=>Game.customers[0].fromRight),false);
     await guest.evaluate(async()=>{
-      const r=await import('./render-3d.js?v=28.16.2-vfx3d');
+      const r=await import('./render-3d.js?v=28.17.0-online-web');
       for(let i=0;i<300;i++)r.render3D(.1,false);
     });
     await guest.waitForFunction(()=>document.querySelector('#action-lbl').textContent==='ENTREGAR');
@@ -154,7 +153,7 @@ try{
   });
   await check('real channel interruption pauses and reconnects to the same service',async()=>{
     const service=await host.evaluate(()=>Game.floor.id);
-    await guest.evaluate(()=>[...__qaPeer.links].find(l=>l.open).raw.close());
+    await guest.evaluate(()=>__qaPeer.socket.close(4000,'QA actual network interruption'));
     await host.waitForFunction(()=>Game.speed===0,{timeout:15000});
     await guest.waitForFunction(()=>Net.peer&&[...__qaPeer.links].some(l=>l.open),{timeout:45000});
     await host.waitForFunction(()=>Net.peer&&Game.speed===1,{timeout:45000});
@@ -172,7 +171,8 @@ try{
 }catch(e){
   console.error('FAILED:',e.message,'page errors:',errors);
   for(const [label,page] of [['host',host],['guest',guest]]){
-    console.error(label,await page.evaluate(()=>({mode:Game.mode,role:Net.role,peer:Net.peer,code:Net.code,
+    console.error(label,await page.evaluate(()=>({mode:Game.mode,speed:Game.speed,role:Net.role,peer:Net.peer,code:Net.code,
+      active:document.activeElement?.tagName,hidden:document.hidden,
       status:document.querySelector('#lobby-status')?.textContent,action:document.querySelector('#action-lbl')?.textContent,
       players:Game.service3D?.players,stations:Game.service3D?.stations,trays:Game.service3D?.trays,
       customers:Game.customers.map(c=>({id:c.id,state:c.state,order:c.order,itemSt:c.itemSt,fromRight:c.fromRight}))})).catch(()=>null));

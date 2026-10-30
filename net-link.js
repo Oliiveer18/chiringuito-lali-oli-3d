@@ -1,26 +1,25 @@
-/* Enlace PeerJS, sala y paso a solitario. Lo importa net.js. */
-import { $ } from './util.js?v=28.16.0-vfx3d';
-import { Audio } from './audio.js?v=28.16.0-vfx3d';
-import { Game, NET_SIM, Net } from './state.js?v=28.16.0-vfx3d';
-import { pendingIdx, slotOf } from './sim.js?v=28.16.0-vfx3d';
-import { showReportUI } from './report.js?v=28.16.0-vfx3d';
-import { hideAll, setSpeed, showPlanUI, showServiceUI } from './ui.js?v=28.16.0-vfx3d';
-import { onNet } from './net-sync.js?v=28.16.0-vfx3d';
-import { lobbyError, lobbyStatus, renderLobby } from './net-lobby.js?v=28.16.0-vfx3d';
+/* Sala privada y enlace web cifrado. Lo importa net.js. */
+import { newRoomCode } from './relay-crypto.mjs';
+import { $ } from './util.js?v=28.17.0-online-web';
+import { Audio } from './audio.js?v=28.17.0-online-web';
+import { Game, NET_SIM, Net } from './state.js?v=28.17.0-online-web';
+import { pendingIdx, slotOf } from './sim.js?v=28.17.0-online-web';
+import { showReportUI } from './report.js?v=28.17.0-online-web';
+import { hideAll, setSpeed, showPlanUI, showServiceUI } from './ui.js?v=28.17.0-online-web';
+import { onNet } from './net-sync.js?v=28.17.0-online-web';
+import { lobbyError, lobbyStatus, renderLobby } from './net-lobby.js?v=28.17.0-online-web';
 import {
   peerRtcConfig, peerErrorMessage, hostPeerId, isTransientJoinPeerError, guestSearchStatus
-} from './net-rtc.js?v=28.16.0-vfx3d';
+} from './net-rtc.js?v=28.17.0-online-web';
 export { peerRtcConfig, peerErrorMessage, hostPeerId };
 
-// ---------- Red: PeerJS (WebRTC) ----------
+// ---------- Red: WSS cifrado (sin TURN, cuentas ni NAT directo) ----------
 let peer = null, conn = null, joinGen = 0, searchTimer = null;
 const boundConnections = new WeakSet();
-const LETTERS = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
-function newCode(){ let c = ''; for (let i = 0; i < 4; i++) c += LETTERS[Math.floor(Math.random() * LETTERS.length)]; return c; }
+const newCode = newRoomCode;
 
 const PEERJS_CLOUDS = [
-  { host: '0.peerjs.com', port: 443, path: '/', secure: true },
-  { host: 'peerjs-server.herokuapp.com', port: 443, path: '/', secure: true }
+  { brokerURL: 'wss://broker.emqx.io:8084/mqtt' }
 ];
 const CLOUD_KEY = 'lali-oli.3d.peerjs-cloud';
 let cloudIdx = 0;
@@ -38,9 +37,9 @@ function peerOptions(){
   const opts = {
     debug: 0,
     ...cloud,
-    config: peerRtcConfig()
+    roomId: Net.role === 'guest' && Net.code ? hostPeerId(Net.code) : undefined
   };
-  const custom = window.PEERJS_CONFIG;
+  const custom = window.COOP_RELAY_CONFIG;
   if (custom && typeof custom === 'object') Object.assign(opts, custom);
   return opts;
 }
@@ -48,7 +47,6 @@ function peerOptions(){
 function connectOptions(extra = {}){
   return {
     reliable: true,
-    config: peerRtcConfig(),
     ...extra
   };
 }
@@ -94,7 +92,7 @@ function attachConn(c, { onOpen, onFail }){
 
 function makePeer(id, handlers){
   if (peer) { try { peer.destroy(); } catch (e) {} peer = null; }
-  // PeerJS takes the public id as its first argument, not options.id.
+  // The host id remains private; only a domain-separated digest reaches MQTT.
   peer = id ? new Peer(id, peerOptions()) : new Peer(peerOptions());
   if (handlers.open) peer.on('open', handlers.open);
   if (handlers.connection) peer.on('connection', handlers.connection);
@@ -107,8 +105,8 @@ function makePeer(id, handlers){
 
 export function netOpen(onOpen){
   if (peer && !peer.destroyed) { onOpen(); return; }
-  if (!window.Peer) { lobbyError('No se ha podido cargar el módulo de conexión (PeerJS). Recarga la página.'); return; }
-  lobbyStatus('Conectando al servidor de señalización…');
+  if (!window.Peer) { lobbyError('No se ha podido cargar el módulo de conexión. Recarga la página.'); return; }
+  lobbyStatus('Conectando al enlace web cifrado…');
   makePeer(null, {
     open: () => { saveCloudIdx(); lobbyStatus(''); onOpen(); },
     error: e => {

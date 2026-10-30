@@ -1,10 +1,10 @@
 /* Sala, avisos y mensajes de desconexión. Lo importa net.js. */
-import { STATION_LABEL } from './config.js?v=28.16.0-vfx3d';
-import { $, escapeHtml } from './util.js?v=28.16.0-vfx3d';
-import { Audio } from './audio.js?v=28.16.0-vfx3d';
-import { Game, Net, hostLive, isGuest } from './state.js?v=28.16.0-vfx3d';
-import { hideAll, toastLocal } from './ui.js?v=28.16.0-vfx3d';
-import { netAct, netDirty, netOpen, netSend } from './net-link.js?v=28.16.0-vfx3d';
+import { STATION_LABEL } from './config.js?v=28.17.0-online-web';
+import { $, escapeHtml } from './util.js?v=28.17.0-online-web';
+import { Audio } from './audio.js?v=28.17.0-online-web';
+import { Game, Net, hostLive, isGuest } from './state.js?v=28.17.0-online-web';
+import { hideAll, toastLocal } from './ui.js?v=28.17.0-online-web';
+import { netAct, netDirty, netOpen, netSend } from './net-link.js?v=28.17.0-online-web';
 export const PINGS = { ayuda:'¡Échame una mano!', mesas:'Hay mesas sucias', genero:'Se acaba el género', bien:'¡Buen trabajo!' };
 export function sendPing(k){
   $('#ping-menu').classList.add('hidden');
@@ -24,12 +24,12 @@ export function renderLobby(){
   $('#lobby-name').closest('.field').classList.toggle('hidden', step!=='choose');
   $('#btn-lobby-go').classList.toggle('hidden', step!=='host');
   if(step==='host'){
-    $('#lobby-code').textContent = Net.code||'····';
+    $('#lobby-code').textContent = Net.code ? Net.code.match(/.{1,13}/g).join(' ') : '····';
     $('#btn-lobby-go').disabled = !Net.peer;
     if (Net.peer) {
       $('#lobby-peer').innerHTML = `<span class="dot on"></span><span><b>${escapeHtml(Net.names.p2)}</b> se ha unido a la partida</span>`;
     } else if (Net.signalingReady) {
-      $('#lobby-peer').innerHTML = `<span class="dot on"></span><span>Código <b>${escapeHtml(Net.code || '')}</b> activo — comparte estas 4 letras (no cierres esta pantalla)</span>`;
+      $('#lobby-peer').innerHTML = '<span class="dot on"></span><span>Sala cifrada lista. Copia el código privado y no cierres esta pantalla.</span>';
     } else {
       $('#lobby-peer').innerHTML = '<span class="dot"></span>Preparando código en la red…';
     }

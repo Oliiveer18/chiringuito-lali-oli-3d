@@ -1,14 +1,14 @@
 /* Carrera infinita: interfaz. Pestaña «Carrera», pantalla de cierre de temporada / traspaso, ventajas y Legado.
    Funciona en solitario y en cooperativo: el anfitrión decide y la invitada envía sus clics por el canal de acciones. */
-import { Game, Net } from './state.js?v=28.16.0-vfx3d';
-import { SEASON_DAYS } from './config.js?v=28.16.0-vfx3d';
-import { Plan, showPlan, toast } from './ui.js?v=28.16.0-vfx3d';
-import { Audio } from './audio.js?v=28.16.0-vfx3d';
-import { netDirty } from './net.js?v=28.16.0-vfx3d';
-import { newSeason } from './sim.js?v=28.16.0-vfx3d';
-import { guestSend, onGuestAction } from './coopbridge.js?v=28.16.0-vfx3d';
-import { escapeHtml, eur } from './util.js?v=28.16.0-vfx3d';
-import * as C from './career.js?v=28.16.0-vfx3d';
+import { Game, Net } from './state.js?v=28.17.0-online-web';
+import { SEASON_DAYS } from './config.js?v=28.17.0-online-web';
+import { Plan, showPlan, toast } from './ui.js?v=28.17.0-online-web';
+import { Audio } from './audio.js?v=28.17.0-online-web';
+import { netDirty } from './net.js?v=28.17.0-online-web';
+import { newSeason } from './sim.js?v=28.17.0-online-web';
+import { guestSend, onGuestAction } from './coopbridge.js?v=28.17.0-online-web';
+import { escapeHtml, eur } from './util.js?v=28.17.0-online-web';
+import * as C from './career.js?v=28.17.0-online-web';
 
 const TAB = 'carrera';
 const $ = id => document.getElementById(id);

@@ -1,15 +1,15 @@
 /* Mechanical extraction from render.js; declaration bodies are unchanged. */
-import { STATION_LABEL } from "../config.js?v=28.16.0-vfx3d";
-import { W } from "../config.js?v=28.16.0-vfx3d";
-import { WHO_COLOR } from "../config.js?v=28.16.0-vfx3d";
-import { clamp } from "../util.js?v=28.16.0-vfx3d";
-import { rr } from "../icons.js?v=28.16.0-vfx3d";
-import { Game } from "../state.js?v=28.16.0-vfx3d";
-import { Net } from "../state.js?v=28.16.0-vfx3d";
-import { isCoop } from "../state.js?v=28.16.0-vfx3d";
-import { drawAngerCue } from "./scene.js?v=28.16.0-vfx3d";
-import { drawOrderIcons } from "./scene.js?v=28.16.0-vfx3d";
-import { drawPersonalityBadge } from "./characters.js?v=28.16.0-vfx3d";
+import { STATION_LABEL } from "../config.js?v=28.17.0-online-web";
+import { W } from "../config.js?v=28.17.0-online-web";
+import { WHO_COLOR } from "../config.js?v=28.17.0-online-web";
+import { clamp } from "../util.js?v=28.17.0-online-web";
+import { rr } from "../icons.js?v=28.17.0-online-web";
+import { Game } from "../state.js?v=28.17.0-online-web";
+import { Net } from "../state.js?v=28.17.0-online-web";
+import { isCoop } from "../state.js?v=28.17.0-online-web";
+import { drawAngerCue } from "./scene.js?v=28.17.0-online-web";
+import { drawOrderIcons } from "./scene.js?v=28.17.0-online-web";
+import { drawPersonalityBadge } from "./characters.js?v=28.17.0-online-web";
 
 export const STATION_ZONE = { cocina:248, barra:410 };
 

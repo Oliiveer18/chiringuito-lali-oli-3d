@@ -3,9 +3,9 @@
    Cámara por zonas (horizontal y vertical), toque ampliado y avisos fuera de plano.
    Compatible con iPhone 14 / 14 Plus. No cambia la economía ni las reglas del juego.
    ========================================================= */
-import { H, W } from './config.js?v=28.16.0-vfx3d';
-import { Game } from './state.js?v=28.16.0-vfx3d';
-import { view } from './canvas.js?v=28.16.0-vfx3d';
+import { H, W } from './config.js?v=28.17.0-online-web';
+import { Game } from './state.js?v=28.17.0-online-web';
+import { view } from './canvas.js?v=28.17.0-online-web';
 
 const CAM = {
   mode: 'auto',

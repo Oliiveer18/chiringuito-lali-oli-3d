@@ -8,8 +8,8 @@
    - Llamada periódica de gaviotas costeras en WebAudio espacial.
    ========================================================= */
 import * as THREE from './lib/three.module.js';
-import { Game, weatherToday } from './state.js?v=28.16.0-vfx3d';
-import { Audio } from './audio.js?v=28.16.0-vfx3d';
+import { Game, weatherToday } from './state.js?v=28.17.0-online-web';
+import { Audio } from './audio.js?v=28.17.0-online-web';
 
 let vfxGroup = null;
 

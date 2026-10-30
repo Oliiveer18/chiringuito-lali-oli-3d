@@ -1,17 +1,17 @@
 /* Incidentes, publicaciones y pedidos. Lo importa v12.js. */
-import { trackCost } from './bookkeeping.js?v=28.16.0-vfx3d';
-import { capturePhoto } from './management-ui.js?v=28.16.0-vfx3d';
-import { Game, Net, itemUnlocked, setTimeoutGame } from './state.js?v=28.16.0-vfx3d';
-import { ITEMS } from './config.js?v=28.16.0-vfx3d';
-import { rnd, clamp } from './util.js?v=28.16.0-vfx3d';
-import { toast } from './ui.js?v=28.16.0-vfx3d';
-import { netDirty } from './net.js?v=28.16.0-vfx3d';
-import { spawnCustomer } from './sim.js?v=28.16.0-vfx3d';
-import { onGuestAction } from './coopbridge.js?v=28.16.0-vfx3d';
-import { postEffect, influEffect } from './social-model.js?v=28.16.0-vfx3d';
-import { POSTS, INFLU, FOL, RAT } from './v12-posts.js?v=28.16.0-vfx3d';
-import { addPend } from './v12-day.js?v=28.16.0-vfx3d';
-import { rt } from './v12-state.js?v=28.16.0-vfx3d';
+import { trackCost } from './bookkeeping.js?v=28.17.0-online-web';
+import { capturePhoto } from './management-ui.js?v=28.17.0-online-web';
+import { Game, Net, itemUnlocked, setTimeoutGame } from './state.js?v=28.17.0-online-web';
+import { ITEMS } from './config.js?v=28.17.0-online-web';
+import { rnd, clamp } from './util.js?v=28.17.0-online-web';
+import { toast } from './ui.js?v=28.17.0-online-web';
+import { netDirty } from './net.js?v=28.17.0-online-web';
+import { spawnCustomer } from './sim.js?v=28.17.0-online-web';
+import { onGuestAction } from './coopbridge.js?v=28.17.0-online-web';
+import { postEffect, influEffect } from './social-model.js?v=28.17.0-online-web';
+import { POSTS, INFLU, FOL, RAT } from './v12-posts.js?v=28.17.0-online-web';
+import { addPend } from './v12-day.js?v=28.17.0-online-web';
+import { rt } from './v12-state.js?v=28.17.0-online-web';
 export function runIncident(){
  const t=Game.upgrades.incidentTipo;delete Game.upgrades.incidentHora;if(!t)return;
  if(t==='batidora'){Game.upgrades.batidoraRota=1;Game.enabled.batido=false;toast('Se rompe la batidora','Los batidos quedan bloqueados. Reparadla (120 €) o quitadlos hoy.','bad');}

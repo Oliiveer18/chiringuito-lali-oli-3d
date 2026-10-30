@@ -1,13 +1,13 @@
-import { Net } from "../state.js?v=28.16.0-vfx3d";
-import { clamp } from "../util.js?v=28.16.0-vfx3d";
+import { Net } from "../state.js?v=28.17.0-online-web";
+import { clamp } from "../util.js?v=28.17.0-online-web";
 /* Mechanical extraction from render.js; declaration bodies are unchanged. */
-import { PERSONALITIES, WHO_COLOR } from "../config.js?v=28.16.0-vfx3d";
-import { W } from "../config.js?v=28.16.0-vfx3d";
-import { rr } from "../icons.js?v=28.16.0-vfx3d";
-import { Game } from "../state.js?v=28.16.0-vfx3d";
-import { PCOLORS } from "./scene.js?v=28.16.0-vfx3d";
-import { drawPictogram } from "./scene.js?v=28.16.0-vfx3d";
-import { drawHeldItem } from "./items.js?v=28.16.0-vfx3d";
+import { PERSONALITIES, WHO_COLOR } from "../config.js?v=28.17.0-online-web";
+import { W } from "../config.js?v=28.17.0-online-web";
+import { rr } from "../icons.js?v=28.17.0-online-web";
+import { Game } from "../state.js?v=28.17.0-online-web";
+import { PCOLORS } from "./scene.js?v=28.17.0-online-web";
+import { drawPictogram } from "./scene.js?v=28.17.0-online-web";
+import { drawHeldItem } from "./items.js?v=28.17.0-online-web";
 
 export function drawPerson(c,x,y,o){
   const look=o.look||{};

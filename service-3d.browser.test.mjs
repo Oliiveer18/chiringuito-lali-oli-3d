@@ -27,7 +27,7 @@ const reset=async()=>page.evaluate(()=>{
 });
 const park=async(x,z)=>page.evaluate(async({x,z})=>{
   getPlayerMesh().position.set(x,0,z);
-  const controls=await import('./controls-3d.js?v=28.16.0-vfx3d');
+  const controls=await import('./controls-3d.js?v=28.17.0-online-web');
   controls.CONTROLS3D.currentAction=null;
   render3D(0);
 },{x,z});
@@ -60,16 +60,17 @@ async function stageCustomer(order){
 }
 async function approach(id){
   const pos=await page.evaluate(async id=>{
-    const {customerInteractionPosition}=await import('./render-3d-customers.js?v=28.16.2-vfx3d');
+    const {customerInteractionPosition}=await import('./render-3d-customers.js?v=28.17.0-online-web');
     return customerInteractionPosition(Game.customers.find(c=>c.id===id));
   },id);
   await park(pos.x+.8,pos.z);
 }
 try{
-  await page.goto(url+'/?debug=1');
+  const testUrl=new URL(url);testUrl.searchParams.set('debug','1');
+  await page.goto(testUrl.href);
   await page.waitForFunction(()=>window.__api&&window.is3DReady?.());
-  await page.evaluate(async()=>{window.render3D=(await import('./render-3d.js?v=28.16.2-vfx3d')).render3D;});
-  assert.equal(await page.getAttribute('html','data-version'),'v28.16.4-online-fix');
+  await page.evaluate(async()=>{window.render3D=(await import('./render-3d.js?v=28.17.0-online-web')).render3D;});
+  assert.equal(await page.getAttribute('html','data-version'),'v28.17.0-online-web');
   await check('title, new game and planning tabs',async()=>{
     await page.locator('#btn-start').click();
     await page.getByRole('button',{name:'Nueva partida',exact:true}).click();
@@ -106,7 +107,7 @@ try{
     assert.equal(await page.evaluate(()=>Game.slots.some(s=>s.cust)),false);
     const before=s.money;
     await page.evaluate(async id=>{
-      const {deliverPreparedItem}=await import('./sim/service.js?v=28.16.0-vfx3d');
+      const {deliverPreparedItem}=await import('./sim/service.js?v=28.17.0-online-web');
       if(deliverPreparedItem(Game.customers.find(c=>c.id===id)))throw Error('Duplicate delivery accepted');
     },id);
     assert.equal((await state()).money,before);
@@ -142,7 +143,7 @@ try{
   await check('opposite movement inputs and speed controls share simulation scale',async()=>{
     await reset();
     const open=await page.evaluate(async()=>{
-      const {check3DCollision}=await import('./render-3d.js?v=28.16.2-vfx3d');
+      const {check3DCollision}=await import('./render-3d.js?v=28.17.0-online-web');
       for(let x=-8;x<=-6;x+=.5) for(let z=3.2;z<4.5;z+=.4){
         if(Array.from({length:15},(_,i)=>(i-7)*.1).every(d=>!check3DCollision(x+d,z)&&!check3DCollision(x,z+d)))return {x,z};
       }
@@ -174,10 +175,10 @@ try{
     await reset();await pour();const id=await stageCustomer(['papas']);
     await approach(id);
     await page.evaluate(async id=>{
-      const {deliverTrayItemToCustomer}=await import('./stations-3d.js?v=28.16.0-vfx3d');
+      const {deliverTrayItemToCustomer}=await import('./stations-3d.js?v=28.17.0-online-web');
       if(deliverTrayItemToCustomer(Game.customers.find(c=>c.id===id)))throw Error('Wrong item accepted');
-      const {CONTROLS3D,updateContextualProximity}=await import('./controls-3d.js?v=28.16.0-vfx3d');
-      const {customerInteractionPosition}=await import('./render-3d-customers.js?v=28.16.2-vfx3d');
+      const {CONTROLS3D,updateContextualProximity}=await import('./controls-3d.js?v=28.17.0-online-web');
+      const {customerInteractionPosition}=await import('./render-3d-customers.js?v=28.17.0-online-web');
       const a=Game.customers[0],b={...a,id:a.id+100,spot:3};
       Game.customers=[a,b];
       // No mesh exists for the added fixture; queue fallback must match the renderer.
@@ -197,7 +198,7 @@ try{
     await park(-1.4,-.9);await action.click();
     assert.deepEqual((await state()).service.trays.p1.map(u=>u.id),['cerveza']);
     await page.evaluate(async()=>{
-      const {cleanTable}=await import('./sim.js?v=28.16.0-vfx3d');
+      const {cleanTable}=await import('./sim.js?v=28.17.0-online-web');
       const t=Game.tables[0];t.state='dirty';
       cleanTable(t,false,'p1');cleanTable(t,false,'p1');cleanTable(t,false,'p1');
       if(Game.floor.tasks.filter(t=>t.kind==='clean').length!==1)throw Error('Duplicate task');
@@ -207,7 +208,7 @@ try{
   await check('host commands deduplicate, validate service and round-trip shared station state',async()=>{
     await reset();
     await page.evaluate(async()=>{
-      const {applyAct,snapshot,applyState}=await import('./net-sync.js?v=28.16.0-vfx3d');
+      const {applyAct,snapshot,applyState}=await import('./net-sync.js?v=28.17.0-online-web');
       Net.role='host';Net.peer=true;
       Game.stock.refresco=3;
       const command={a:'service3d',q:7,command:{type:'coffee'},serviceId:Game.floor.id};

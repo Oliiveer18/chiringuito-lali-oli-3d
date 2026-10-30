@@ -1,11 +1,11 @@
 /* Mechanical extraction from sim.js; declaration bodies are unchanged. */
-import { ITEMS } from "../config.js?v=28.16.0-vfx3d";
-import { eur2 } from "../util.js?v=28.16.0-vfx3d";
-import { Audio } from "../audio.js?v=28.16.0-vfx3d";
-import { Game } from "../state.js?v=28.16.0-vfx3d";
-import { itemUnlocked } from "../state.js?v=28.16.0-vfx3d";
-import { flashMoney } from "../ui.js?v=28.16.0-vfx3d";
-import { regularOutcome } from "./customers.js?v=28.16.0-vfx3d";
+import { ITEMS } from "../config.js?v=28.17.0-online-web";
+import { eur2 } from "../util.js?v=28.17.0-online-web";
+import { Audio } from "../audio.js?v=28.17.0-online-web";
+import { Game } from "../state.js?v=28.17.0-online-web";
+import { itemUnlocked } from "../state.js?v=28.17.0-online-web";
+import { flashMoney } from "../ui.js?v=28.17.0-online-web";
+import { regularOutcome } from "./customers.js?v=28.17.0-online-web";
 
 export function charge(c, total, sync){
   if(c.charged || !Number.isFinite(total) || total<0) return false;

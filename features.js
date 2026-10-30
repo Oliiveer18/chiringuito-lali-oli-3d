@@ -1,12 +1,12 @@
-import {trackCost,trackRefund} from './bookkeeping.js?v=28.16.0-vfx3d';
+import {trackCost,trackRefund} from './bookkeeping.js?v=28.17.0-online-web';
 /* v11: algodonera automática, shows y gestión realista. Módulo aditivo. */
-import { Game, Net, hostLive, lvl } from './state.js?v=28.16.0-vfx3d';
-import { ITEMS, ITEM_IDS, UPGRADES, TYPES } from './config.js?v=28.16.0-vfx3d';
-import { rnd, clamp } from './util.js?v=28.16.0-vfx3d';
-import { Plan, toast, updateStockbar } from './ui.js?v=28.16.0-vfx3d';
-import { netDirty } from './net.js?v=28.16.0-vfx3d';
-import { ICON_URL } from './icons.js?v=28.16.0-vfx3d';
-import { guestSend, onGuestAction } from './coopbridge.js?v=28.16.0-vfx3d';
+import { Game, Net, hostLive, lvl } from './state.js?v=28.17.0-online-web';
+import { ITEMS, ITEM_IDS, UPGRADES, TYPES } from './config.js?v=28.17.0-online-web';
+import { rnd, clamp } from './util.js?v=28.17.0-online-web';
+import { Plan, toast, updateStockbar } from './ui.js?v=28.17.0-online-web';
+import { netDirty } from './net.js?v=28.17.0-online-web';
+import { ICON_URL } from './icons.js?v=28.17.0-online-web';
+import { guestSend, onGuestAction } from './coopbridge.js?v=28.17.0-online-web';
 
 ITEMS.algodon={name:'Algodón de azúcar',cost:0.4,ref:3.5,prep:0,spoil:0.2,spoilF:0.05,unlock:'algodonera'};
 ITEM_IDS.push('algodon');

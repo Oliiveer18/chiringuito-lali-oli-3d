@@ -1,13 +1,13 @@
 /* Cierre y balance diario de Chiringo. Lo importa v12.js. */
-import { socialIdle, markSocial, closePhoto } from './management-ui.js?v=28.16.0-vfx3d';
-import { Game, Net, isCoop } from './state.js?v=28.16.0-vfx3d';
-import { ITEMS } from './config.js?v=28.16.0-vfx3d';
-import { rnd, clamp } from './util.js?v=28.16.0-vfx3d';
-import { toast } from './ui.js?v=28.16.0-vfx3d';
-import { netDirty } from './net.js?v=28.16.0-vfx3d';
-import { settle, postMetrics, reachFactor, engagement, chiringoRivalLine } from './social-model.js?v=28.16.0-vfx3d';
-import { FOL, RAT, INFLU, TRENDS } from './v12-posts.js?v=28.16.0-vfx3d';
-import { rt } from './v12-state.js?v=28.16.0-vfx3d';
+import { socialIdle, markSocial, closePhoto } from './management-ui.js?v=28.17.0-online-web';
+import { Game, Net, isCoop } from './state.js?v=28.17.0-online-web';
+import { ITEMS } from './config.js?v=28.17.0-online-web';
+import { rnd, clamp } from './util.js?v=28.17.0-online-web';
+import { toast } from './ui.js?v=28.17.0-online-web';
+import { netDirty } from './net.js?v=28.17.0-online-web';
+import { settle, postMetrics, reachFactor, engagement, chiringoRivalLine } from './social-model.js?v=28.17.0-online-web';
+import { FOL, RAT, INFLU, TRENDS } from './v12-posts.js?v=28.17.0-online-web';
+import { rt } from './v12-state.js?v=28.17.0-online-web';
 const absSocial=()=>((Game.upgrades.career?.season||1)-1)*30+Game.day;
 export function migrate(){if(Game.upgrades[FOL]==null)Game.upgrades[FOL]=0;if(Game.upgrades[RAT]==null)Game.upgrades[RAT]=3;if(!Array.isArray(Game.upgrades.socialComments))Game.upgrades.socialComments=[];if(!Array.isArray(Game.upgrades.socialPend))Game.upgrades.socialPend=[];}
 export function addPend(k,n,o){const U=Game.upgrades;if(!Array.isArray(U.socialPend))U.socialPend=[];U.socialPend.push({k,n,...(o||{})});}
