@@ -1,6 +1,6 @@
 /* coast-materials.js · Agua y arena estilizadas (GPU) · KLO-49 + mejora olas */
 import * as THREE from './lib/three.module.js';
-import { SHORE_WORLD_Z, coastPalette } from './coast-palette.js?v=28.17.2-flat-sand';
+import { SHORE_WORLD_Z, coastPalette } from './coast-palette.js?v=28.17.3-flat-sand';
 
 export { SHORE_WORLD_Z };
 

@@ -1,10 +1,11 @@
 /* Geometry regression: desktop/mobile, dry beach, sea boundary and deck support. */
 import assert from 'node:assert/strict';
+import { readFile, readdir } from 'node:fs/promises';
 import * as THREE from './lib/three.module.js';
 import {
   buildCoastMeshes, sampleSandHeight, sampleWalkableHeight,
   sampleCharacterFootY, SHORE_WORLD_Z, KIOSK_DECK
-} from './coast-materials.js?v=28.17.2-flat-sand';
+} from './coast-materials.js?v=28.17.3-flat-sand';
 
 const near = (a,b,label) => assert.ok(Math.abs(a-b)<1e-5, `${label}: ${a} vs ${b}`);
 for (const coarse of [false,true]) {
@@ -60,3 +61,19 @@ for(let i=0;i<8;i++) for(const dz of [-.8,.8])
   near(sampleSandHeight(4.8+(i%4)*1.9,-2.6-Math.floor(i/4)*1.6+dz),0,'lounger support');
 assert.ok(sampleSandHeight(0,SHORE_WORLD_Z-4)<-.5,'submerged seabed does not hide the sea');
 console.log('OK: deck footprint, feet on both surfaces, all loungers and submerged seabed');
+
+// Stateful adapters must never reuse a cached, unversioned file that imports an
+// old state.js namespace. Pure geometry/model/crypto modules may remain stable.
+const release=(await readFile(new URL('./version.js',import.meta.url),'utf8'))
+  .match(/VERSION='v([^']+)'/)[1];
+let adapters=0;
+for(const name of await readdir(new URL('.',import.meta.url))) {
+  if(!/\.(?:js|mjs)$/.test(name))continue;
+  const code=await readFile(new URL(name,import.meta.url),'utf8');
+  for(const [,specifier] of code.matchAll(/(?:from\s+|import\s*\(\s*)['"](\.\/(?:service-3d|net-movement-3d)\.js(?:\?[^'"]+)?)['"]/g)) {
+    assert.ok(specifier.endsWith('?v='+release),`${name} reuses stale stateful adapter: ${specifier}`);
+    adapters++;
+  }
+}
+assert.ok(adapters>=8,'all authoritative 3D adapter imports and browser fixtures covered');
+console.log('OK: stateful 3D imports share the current release cache namespace');

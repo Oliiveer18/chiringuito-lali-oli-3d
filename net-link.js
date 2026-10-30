@@ -1,16 +1,16 @@
 /* Sala privada y enlace web cifrado. Lo importa net.js. */
 import { newRoomCode } from './relay-crypto.mjs';
-import { $ } from './util.js?v=28.17.2-flat-sand';
-import { Audio } from './audio.js?v=28.17.2-flat-sand';
-import { Game, NET_SIM, Net } from './state.js?v=28.17.2-flat-sand';
-import { pendingIdx, slotOf } from './sim.js?v=28.17.2-flat-sand';
-import { showReportUI } from './report.js?v=28.17.2-flat-sand';
-import { hideAll, setSpeed, showPlanUI, showServiceUI } from './ui.js?v=28.17.2-flat-sand';
-import { onNet } from './net-sync.js?v=28.17.2-flat-sand';
-import { lobbyError, lobbyStatus, renderLobby } from './net-lobby.js?v=28.17.2-flat-sand';
+import { $ } from './util.js?v=28.17.3-flat-sand';
+import { Audio } from './audio.js?v=28.17.3-flat-sand';
+import { Game, NET_SIM, Net } from './state.js?v=28.17.3-flat-sand';
+import { pendingIdx, slotOf } from './sim.js?v=28.17.3-flat-sand';
+import { showReportUI } from './report.js?v=28.17.3-flat-sand';
+import { hideAll, setSpeed, showPlanUI, showServiceUI } from './ui.js?v=28.17.3-flat-sand';
+import { onNet } from './net-sync.js?v=28.17.3-flat-sand';
+import { lobbyError, lobbyStatus, renderLobby } from './net-lobby.js?v=28.17.3-flat-sand';
 import {
   peerRtcConfig, peerErrorMessage, hostPeerId, isTransientJoinPeerError, guestSearchStatus
-} from './net-rtc.js?v=28.17.2-flat-sand';
+} from './net-rtc.js?v=28.17.3-flat-sand';
 export { peerRtcConfig, peerErrorMessage, hostPeerId };
 
 // ---------- Red: WSS cifrado (sin TURN, cuentas ni NAT directo) ----------

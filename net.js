@@ -1,31 +1,31 @@
-import {floorCommand} from './floor-service.js?v=28.17.2-flat-sand';
+import {floorCommand} from './floor-service.js?v=28.17.3-flat-sand';
 import { normalizeRoomCode, validRoomCode, ROOM_LENGTH } from './relay-crypto.mjs';
 /* =========================================================
    net.js
    Red: mensajes cifrados sobre WSS público de pruebas, sala compartida,
    sincronización anfitrión→invitado y acciones pendientes del invitado.
    ========================================================= */
-import { STATION_LABEL, who } from './config.js?v=28.17.2-flat-sand';
-import { $, clamp, escapeHtml } from './util.js?v=28.17.2-flat-sand';
-import { Audio } from './audio.js?v=28.17.2-flat-sand';
-import { Game, NET_SIM, Net, guestCust, hostLive, isGuest } from './state.js?v=28.17.2-flat-sand';
-import { TABLE_POS } from './world.js?v=28.17.2-flat-sand';
-import { cleanFx, cleanTable, hud, newSeason, pendingIdx, servable, slotOf, tryServe } from './sim.js?v=28.17.2-flat-sand';
-import { applyRevResp, refreshReportUI, revSigOf, showReportUI } from './report.js?v=28.17.2-flat-sand';
-import { Plan, applyPlanAction, applyUrgent, hideAll, refreshPlanMoney, renderForecast, renderTab, renderUrgent, setSpeed, showFinalUI, showPlan, showPlanUI, showServiceUI, toastLocal, toggleReady, updateHud, updateReadyUI, updateStockbar } from './ui.js?v=28.17.2-flat-sand';
+import { STATION_LABEL, who } from './config.js?v=28.17.3-flat-sand';
+import { $, clamp, escapeHtml } from './util.js?v=28.17.3-flat-sand';
+import { Audio } from './audio.js?v=28.17.3-flat-sand';
+import { Game, NET_SIM, Net, guestCust, hostLive, isGuest } from './state.js?v=28.17.3-flat-sand';
+import { TABLE_POS } from './world.js?v=28.17.3-flat-sand';
+import { cleanFx, cleanTable, hud, newSeason, pendingIdx, servable, slotOf, tryServe } from './sim.js?v=28.17.3-flat-sand';
+import { applyRevResp, refreshReportUI, revSigOf, showReportUI } from './report.js?v=28.17.3-flat-sand';
+import { Plan, applyPlanAction, applyUrgent, hideAll, refreshPlanMoney, renderForecast, renderTab, renderUrgent, setSpeed, showFinalUI, showPlan, showPlanUI, showServiceUI, toastLocal, toggleReady, updateHud, updateReadyUI, updateStockbar } from './ui.js?v=28.17.3-flat-sand';
 
 import {
   REJECT_MSG, pendHas, guestServe, guestClean, guestPendTick,
-} from './net-guest.js?v=28.17.2-flat-sand';
+} from './net-guest.js?v=28.17.3-flat-sand';
 import {
   netOpen, netSimDelay, netSend, netAct, netDirty, leaveCoop, goSolo,
-} from './net-link.js?v=28.17.2-flat-sand';
+} from './net-link.js?v=28.17.3-flat-sand';
 import {
   onNet, applyAct, pushAck, snapshot, netTick, applyState, guestTick,
-} from './net-sync.js?v=28.17.2-flat-sand';
+} from './net-sync.js?v=28.17.3-flat-sand';
 import {
   PINGS, sendPing, showPing, showLobby, lobbyStatus, lobbyError, myName, renderLobby, netLost, hideNetMsg,
-} from './net-lobby.js?v=28.17.2-flat-sand';
+} from './net-lobby.js?v=28.17.3-flat-sand';
 export {
   REJECT_MSG, pendHas, guestServe, guestClean, guestPendTick,
   netOpen, netSimDelay, netSend, netAct, netDirty, leaveCoop, goSolo,

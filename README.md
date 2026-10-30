@@ -15,7 +15,7 @@ La copia 3D tiene su propia publicación:
 El [juego 2D original](https://oliiveer18.github.io/chiringuito-de-lali-y-oli/)
 mantiene su enlace y su publicación desde `main`, sin cambios.
 
-La versión actual es `v28.17.2-flat-sand`: playa seca plana, tarima sin invadir
+La versión actual es `v28.17.3-flat-sand`: playa seca plana, tarima sin invadir
 las sillas, mobiliario apoyado y olas limitadas al mar. Conserva los guardados
 3D y el cooperativo de la versión anterior.
 

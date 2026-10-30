@@ -1,5 +1,5 @@
 /* Reseñas: cola, precios, stock, mesas y decepción. Lo importa variety.js. */
-import { REVIEW_BANK } from './report.js?v=28.17.2-flat-sand';
+import { REVIEW_BANK } from './report.js?v=28.17.3-flat-sand';
 const add = (arr, items) => { for (const it of items) if (!arr.includes(it)) arr.push(it); };
 // ---------- Reseñas: voz canaria + intensidad por caso ----------
 // Cola lenta: desde incómoda hasta muy molesta

@@ -3,17 +3,17 @@
    Fase 1: Escena 3D de alta gama, iluminación de estudio y cámara móvil cinemática.
    ========================================================= */
 import * as THREE from './lib/three.module.js';
-import { Game, Net, weatherToday, lvl } from './state.js?v=28.17.2-flat-sand';
-import { createCharacter3D, animateCharacter } from './render-3d-actors.js?v=28.17.2-flat-sand';
-import { CONTROLS3D, STATIONS_3D, initControls3D, updateContextualProximity, syncControls3DForGameMode, resetControls3DInput } from './controls-3d.js?v=28.17.2-flat-sand';
-import { syncCustomers3D, clearAllCustomers3D, customerInteractionPosition } from './render-3d-customers.js?v=28.17.2-flat-sand';
+import { Game, Net, weatherToday, lvl } from './state.js?v=28.17.3-flat-sand';
+import { createCharacter3D, animateCharacter } from './render-3d-actors.js?v=28.17.3-flat-sand';
+import { CONTROLS3D, STATIONS_3D, initControls3D, updateContextualProximity, syncControls3DForGameMode, resetControls3DInput } from './controls-3d.js?v=28.17.3-flat-sand';
+import { syncCustomers3D, clearAllCustomers3D, customerInteractionPosition } from './render-3d-customers.js?v=28.17.3-flat-sand';
 import { playerPoses3D } from './movement-3d-model.mjs';
-import { setMovementCollision3D, publishLocalPose3D, consumeLocalCorrection3D } from './net-movement-3d.js';
-import { setService3DProximityCheck } from './service-3d.js';
-import { tablePosTo3D } from './world.js?v=28.17.2-flat-sand';
-import { initUpgrades3D, syncUpgrades3D } from './upgrades-3d.js?v=28.17.2-flat-sand';
-import { initStaff3D, syncStaff3D } from './staff-3d.js?v=28.17.2-flat-sand';
-import { initVFX3D, updateVFX3D, spawnCleanSparkles3D, triggerBeerPourVFX } from './vfx-3d.js?v=28.17.2-flat-sand';
+import { setMovementCollision3D, publishLocalPose3D, consumeLocalCorrection3D } from './net-movement-3d.js?v=28.17.3-flat-sand';
+import { setService3DProximityCheck } from './service-3d.js?v=28.17.3-flat-sand';
+import { tablePosTo3D } from './world.js?v=28.17.3-flat-sand';
+import { initUpgrades3D, syncUpgrades3D } from './upgrades-3d.js?v=28.17.3-flat-sand';
+import { initStaff3D, syncStaff3D } from './staff-3d.js?v=28.17.3-flat-sand';
+import { initVFX3D, updateVFX3D, spawnCleanSparkles3D, triggerBeerPourVFX } from './vfx-3d.js?v=28.17.3-flat-sand';
 import {
   attachTrayToCharacter,
   updateTrayAnimation,
@@ -23,7 +23,7 @@ import {
   trayGetItems,
   createItem3D,
   STATIONS_LOGIC
-} from './stations-3d.js?v=28.17.2-flat-sand';
+} from './stations-3d.js?v=28.17.3-flat-sand';
 import {
   buildCoastMeshes,
   getCoastGeometryProfile,
@@ -32,7 +32,7 @@ import {
   sampleSandHeight,
   SAND_MESH_WORLD_Y,
   KIOSK_DECK
-} from './coast-materials.js?v=28.17.2-flat-sand';
+} from './coast-materials.js?v=28.17.3-flat-sand';
 
 const getPlayer = () => (typeof window !== 'undefined' ? window.PLAYER : null);
 

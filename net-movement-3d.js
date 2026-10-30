@@ -1,5 +1,5 @@
-import { Game, Net } from './state.js?v=28.17.2-flat-sand';
-import { netAct } from './net-link.js?v=28.17.2-flat-sand';
+import { Game, Net } from './state.js?v=28.17.3-flat-sand';
+import { netAct } from './net-link.js?v=28.17.3-flat-sand';
 import { playerPoses3D, acceptGuestMovement3D } from './movement-3d-model.mjs';
 let blocked=()=>false;
 const guestBudget={};

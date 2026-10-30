@@ -1,5 +1,5 @@
-import {tieVector} from './professional-model.mjs?v=28.17.2-flat-sand';
-import {weeklyPoints} from './management-model.mjs?v=28.17.2-flat-sand';
+import {tieVector} from './professional-model.mjs?v=28.17.3-flat-sand';
+import {weeklyPoints} from './management-model.mjs?v=28.17.3-flat-sand';
 // v23: tres ligas simultáneas. Simulación económica resumida y determinista por cierre.
 export const AREAS=['Pueblo','Isla','Nación'],TIERS=['Bronce','Plata','Oro'];
 const names=['La Brisa','El Muelle','La Gaviota','Salitre','La Toalla','El Faro','La Duna','La Sombrilla','El Ancla','La Ola','El Coral','La Caleta','El Alisio','La Arena','El Mirador','Las Palmeras','La Orilla','El Timón','La Espuma','El Velero','El Cangrejo','El Pez Azul','La Costa','El Horizonte','Las Conchas','El Puerto','La Marea','El Refugio','El Islote'];

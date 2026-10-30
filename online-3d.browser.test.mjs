@@ -106,7 +106,7 @@ try{
   });
   await check('host rejects an out-of-range guest station command over the live connection',async()=>{
     const q=await guest.evaluate(async()=>{
-      const {requestService3DCommand}=await import('./service-3d.js');
+      const {requestService3DCommand}=await import('./service-3d.js?v=28.17.3-flat-sand');
       requestService3DCommand({type:'cooler'});return Net.seq;
     });
     await guest.waitForFunction(q=>Net.ackLog.some(a=>a.q===q),q);
@@ -123,9 +123,9 @@ try{
         order:['papas'],itemSt:[0],inPrep:0,served:[],missing:0,partT:{},subs:{},
         eat:false,patience:1000,maxPatience:1000,personality:'tranquilo'});
       Game.customers=[c];
-      const r=await import('./render-3d.js?v=28.17.2-flat-sand');
+      const r=await import('./render-3d.js?v=28.17.3-flat-sand');
       for(let i=0;i<300;i++)r.render3D(.1,false);
-      const {customerInteractionPosition}=await import('./render-3d-customers.js?v=28.17.2-flat-sand');
+      const {customerInteractionPosition}=await import('./render-3d-customers.js?v=28.17.3-flat-sand');
       const pos=customerInteractionPosition(c),p=Game.service3D.players.p2;
       p.x=pos.x+1;p.z=pos.z+.7;p.seq++;p.correctionSeq=p.seq;
     });
@@ -133,7 +133,7 @@ try{
     await guest.waitForFunction(id=>Game.customers.length===1&&Game.customers[0].id===id,customerId);
     assert.equal(await guest.evaluate(()=>Game.customers[0].fromRight),false);
     await guest.evaluate(async()=>{
-      const r=await import('./render-3d.js?v=28.17.2-flat-sand');
+      const r=await import('./render-3d.js?v=28.17.3-flat-sand');
       for(let i=0;i<300;i++)r.render3D(.1,false);
     });
     await guest.waitForFunction(()=>document.querySelector('#action-lbl').textContent==='ENTREGAR');

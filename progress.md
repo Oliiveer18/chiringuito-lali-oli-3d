@@ -112,4 +112,14 @@ Original prompt: Sí, empieza las correcciones en una rama nueva de mi copia 3D.
   water and shader compile correctly, zero console errors in the wind view.
 - Required game-client action/screenshot loop passed.
 - Original main and experimental refs, plus 2D Pages source, verified unchanged.
-- Next: publish only independent preview-3d and verify the actual hosted build.
+- Published terrain commit b21db71 only to independent preview-3d and fix branch.
+- Hosted terrain desktop/mobile, all nine online flows and storage/reload pass.
+
+## Release cache coherence, v28.17.3
+- Final audit found stateful service/movement adapters were imported without
+  cache keys, despite importing versioned state internally. A warm browser
+  could therefore reuse an older state namespace after a release.
+- Version all six adapter imports consistently; pure unchanged models, Three
+  and crypto stay on their existing URLs. Add a source-graph regression.
+- Fresh release namespace avoids reusing either pre-terrain or interim files.
+- Terrain geometry and online rules are unchanged from the verified b21db71.

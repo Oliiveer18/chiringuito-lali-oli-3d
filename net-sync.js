@@ -1,18 +1,18 @@
 /* Mensajes, snapshot y estado del invitado. Lo importa net.js. */
-import { floorCommand } from './floor-service.js?v=28.17.2-flat-sand';
-import { $, clamp, escapeHtml } from './util.js?v=28.17.2-flat-sand';
-import { Audio } from './audio.js?v=28.17.2-flat-sand';
-import { Game, Net, guestCust, hostLive, isGuest } from './state.js?v=28.17.2-flat-sand';
-import { TABLE_POS } from './world.js?v=28.17.2-flat-sand';
-import { cleanFx, cleanTable, hud, newSeason, servable, slotOf, tryServe } from './sim.js?v=28.17.2-flat-sand';
-import { applyRevResp, refreshReportUI, revSigOf, showReportUI } from './report.js?v=28.17.2-flat-sand';
-import { Plan, applyPlanAction, applyUrgent, refreshPlanMoney, renderForecast, renderTab, renderUrgent, setSpeed, showFinalUI, showPlan, showPlanUI, showServiceUI, toastLocal, toggleReady, updateHud, updateReadyUI, updateStockbar } from './ui.js?v=28.17.2-flat-sand';
-import { REJECT_MSG, guestPendTick } from './net-guest.js?v=28.17.2-flat-sand';
-import { netDirty, netSend } from './net-link.js?v=28.17.2-flat-sand';
-import { hideNetMsg, lobbyError, netLost, renderLobby, showPing } from './net-lobby.js?v=28.17.2-flat-sand';
-import { applyService3DCommand } from './service-3d.js';
+import { floorCommand } from './floor-service.js?v=28.17.3-flat-sand';
+import { $, clamp, escapeHtml } from './util.js?v=28.17.3-flat-sand';
+import { Audio } from './audio.js?v=28.17.3-flat-sand';
+import { Game, Net, guestCust, hostLive, isGuest } from './state.js?v=28.17.3-flat-sand';
+import { TABLE_POS } from './world.js?v=28.17.3-flat-sand';
+import { cleanFx, cleanTable, hud, newSeason, servable, slotOf, tryServe } from './sim.js?v=28.17.3-flat-sand';
+import { applyRevResp, refreshReportUI, revSigOf, showReportUI } from './report.js?v=28.17.3-flat-sand';
+import { Plan, applyPlanAction, applyUrgent, refreshPlanMoney, renderForecast, renderTab, renderUrgent, setSpeed, showFinalUI, showPlan, showPlanUI, showServiceUI, toastLocal, toggleReady, updateHud, updateReadyUI, updateStockbar } from './ui.js?v=28.17.3-flat-sand';
+import { REJECT_MSG, guestPendTick } from './net-guest.js?v=28.17.3-flat-sand';
+import { netDirty, netSend } from './net-link.js?v=28.17.3-flat-sand';
+import { hideNetMsg, lobbyError, netLost, renderLobby, showPing } from './net-lobby.js?v=28.17.3-flat-sand';
+import { applyService3DCommand } from './service-3d.js?v=28.17.3-flat-sand';
 import { service3D, createService3D } from './service-3d-model.mjs';
-import { acceptGuestPose3D } from './net-movement-3d.js';
+import { acceptGuestPose3D } from './net-movement-3d.js?v=28.17.3-flat-sand';
 export function onNet(m){
   switch(m.t){
     case 'created': Net.role='host'; Net.me='p1'; Net.code=m.code; renderLobby(); break;

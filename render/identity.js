@@ -1,15 +1,15 @@
 /* Mechanical extraction from render.js; declaration bodies are unchanged. */
-import { STATION_LABEL } from "../config.js?v=28.17.2-flat-sand";
-import { W } from "../config.js?v=28.17.2-flat-sand";
-import { WHO_COLOR } from "../config.js?v=28.17.2-flat-sand";
-import { clamp } from "../util.js?v=28.17.2-flat-sand";
-import { rr } from "../icons.js?v=28.17.2-flat-sand";
-import { Game } from "../state.js?v=28.17.2-flat-sand";
-import { Net } from "../state.js?v=28.17.2-flat-sand";
-import { isCoop } from "../state.js?v=28.17.2-flat-sand";
-import { drawAngerCue } from "./scene.js?v=28.17.2-flat-sand";
-import { drawOrderIcons } from "./scene.js?v=28.17.2-flat-sand";
-import { drawPersonalityBadge } from "./characters.js?v=28.17.2-flat-sand";
+import { STATION_LABEL } from "../config.js?v=28.17.3-flat-sand";
+import { W } from "../config.js?v=28.17.3-flat-sand";
+import { WHO_COLOR } from "../config.js?v=28.17.3-flat-sand";
+import { clamp } from "../util.js?v=28.17.3-flat-sand";
+import { rr } from "../icons.js?v=28.17.3-flat-sand";
+import { Game } from "../state.js?v=28.17.3-flat-sand";
+import { Net } from "../state.js?v=28.17.3-flat-sand";
+import { isCoop } from "../state.js?v=28.17.3-flat-sand";
+import { drawAngerCue } from "./scene.js?v=28.17.3-flat-sand";
+import { drawOrderIcons } from "./scene.js?v=28.17.3-flat-sand";
+import { drawPersonalityBadge } from "./characters.js?v=28.17.3-flat-sand";
 
 export const STATION_ZONE = { cocina:248, barra:410 };
 

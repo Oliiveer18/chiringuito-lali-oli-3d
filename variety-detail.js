@@ -1,5 +1,5 @@
 /* Detalles de la reseña. Lo importa variety.js. */
-import { DETAIL } from './report.js?v=28.17.2-flat-sand';
+import { DETAIL } from './report.js?v=28.17.3-flat-sand';
 const add = (arr, items) => { for (const it of items) if (!arr.includes(it)) arr.push(it); };
 
 // ---------- Detalles con más variantes ----------

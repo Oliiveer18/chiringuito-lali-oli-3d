@@ -6,11 +6,11 @@
    requieren tocar el generador de reseñas (report.js); aquí se amplían
    los bancos compartidos con frases de voz e intensidad variadas.
    ========================================================= */
-import { NAMES } from './config.js?v=28.17.2-flat-sand';
-import { REVIEW_BANK, PRAISE, DETAIL } from './report.js?v=28.17.2-flat-sand';
+import { NAMES } from './config.js?v=28.17.3-flat-sand';
+import { REVIEW_BANK, PRAISE, DETAIL } from './report.js?v=28.17.3-flat-sand';
 
-import './variety-names.js?v=28.17.2-flat-sand';
-import './variety-reviews.js?v=28.17.2-flat-sand';
-import './variety-reviews-more.js?v=28.17.2-flat-sand';
-import './variety-praise.js?v=28.17.2-flat-sand';
-import './variety-detail.js?v=28.17.2-flat-sand';
+import './variety-names.js?v=28.17.3-flat-sand';
+import './variety-reviews.js?v=28.17.3-flat-sand';
+import './variety-reviews-more.js?v=28.17.3-flat-sand';
+import './variety-praise.js?v=28.17.3-flat-sand';
+import './variety-detail.js?v=28.17.3-flat-sand';

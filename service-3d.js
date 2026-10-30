@@ -1,8 +1,8 @@
 /* Command boundary: guests send intentions; only the host mutates service state. */
-import { Game, Net } from './state.js?v=28.17.2-flat-sand';
-import { netAct } from './net-link.js?v=28.17.2-flat-sand';
-import { deliverPreparedItem } from './sim/service.js?v=28.17.2-flat-sand';
-import { flushLocalPose3D } from './net-movement-3d.js';
+import { Game, Net } from './state.js?v=28.17.3-flat-sand';
+import { netAct } from './net-link.js?v=28.17.3-flat-sand';
+import { deliverPreparedItem } from './sim/service.js?v=28.17.3-flat-sand';
+import { flushLocalPose3D } from './net-movement-3d.js?v=28.17.3-flat-sand';
 import {
   service3D, serviceRunning, beginPreparation, finishBeer, cancelPreparation,
   collectGrill, takeColdDrink, washDirtyUnits

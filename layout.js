@@ -1,6 +1,6 @@
-import { scheduleViewportResize, view } from './canvas.js?v=28.17.2-flat-sand';
-import { W, H } from './config.js?v=28.17.2-flat-sand';
-import { Game } from './state.js?v=28.17.2-flat-sand';
+import { scheduleViewportResize, view } from './canvas.js?v=28.17.3-flat-sand';
+import { W, H } from './config.js?v=28.17.3-flat-sand';
+import { Game } from './state.js?v=28.17.3-flat-sand';
 const root=document.documentElement;
 let uiTop=0,uiBottom=0;
 const CAM_SPAN=700,CAM_CX={barra:290,mesas:930};

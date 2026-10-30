@@ -5,13 +5,13 @@
    transporte físico en bandeja 3D y entrega directa a clientes.
    ========================================================= */
 import * as THREE from './lib/three.module.js';
-import { Game, Net } from './state.js?v=28.17.2-flat-sand';
-import { Audio } from './audio.js?v=28.17.2-flat-sand';
-import { ITEMS, ITEM_IDS } from './config.js?v=28.17.2-flat-sand';
-import { triggerCustomerHappyEmote } from './render-3d-customers.js?v=28.17.2-flat-sand';
+import { Game, Net } from './state.js?v=28.17.3-flat-sand';
+import { Audio } from './audio.js?v=28.17.3-flat-sand';
+import { ITEMS, ITEM_IDS } from './config.js?v=28.17.3-flat-sand';
+import { triggerCustomerHappyEmote } from './render-3d-customers.js?v=28.17.3-flat-sand';
 import { service3D, trayUnits, addDirtyUnit, preparedMatch } from './service-3d-model.mjs';
-import { requestService3DCommand } from './service-3d.js';
-import { updateStockbar } from './ui-service.js?v=28.17.2-flat-sand';
+import { requestService3DCommand } from './service-3d.js?v=28.17.3-flat-sand';
+import { updateStockbar } from './ui-service.js?v=28.17.3-flat-sand';
 
 // ---------- Paleta de Materiales PBR para Productos y Vajilla ----------
 const ITEM_MAT = {

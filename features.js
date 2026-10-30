@@ -1,12 +1,12 @@
-import {trackCost,trackRefund} from './bookkeeping.js?v=28.17.2-flat-sand';
+import {trackCost,trackRefund} from './bookkeeping.js?v=28.17.3-flat-sand';
 /* v11: algodonera automática, shows y gestión realista. Módulo aditivo. */
-import { Game, Net, hostLive, lvl } from './state.js?v=28.17.2-flat-sand';
-import { ITEMS, ITEM_IDS, UPGRADES, TYPES } from './config.js?v=28.17.2-flat-sand';
-import { rnd, clamp } from './util.js?v=28.17.2-flat-sand';
-import { Plan, toast, updateStockbar } from './ui.js?v=28.17.2-flat-sand';
-import { netDirty } from './net.js?v=28.17.2-flat-sand';
-import { ICON_URL } from './icons.js?v=28.17.2-flat-sand';
-import { guestSend, onGuestAction } from './coopbridge.js?v=28.17.2-flat-sand';
+import { Game, Net, hostLive, lvl } from './state.js?v=28.17.3-flat-sand';
+import { ITEMS, ITEM_IDS, UPGRADES, TYPES } from './config.js?v=28.17.3-flat-sand';
+import { rnd, clamp } from './util.js?v=28.17.3-flat-sand';
+import { Plan, toast, updateStockbar } from './ui.js?v=28.17.3-flat-sand';
+import { netDirty } from './net.js?v=28.17.3-flat-sand';
+import { ICON_URL } from './icons.js?v=28.17.3-flat-sand';
+import { guestSend, onGuestAction } from './coopbridge.js?v=28.17.3-flat-sand';
 
 ITEMS.algodon={name:'Algodón de azúcar',cost:0.4,ref:3.5,prep:0,spoil:0.2,spoilF:0.05,unlock:'algodonera'};
 ITEM_IDS.push('algodon');

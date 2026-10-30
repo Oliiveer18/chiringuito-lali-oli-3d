@@ -21,7 +21,7 @@ try {
     page.on('pageerror',e=>errors.push(e.message));
     await page.goto(base.href);
     await page.waitForFunction(()=>window.__api&&window.is3DReady?.());
-    assert.equal(await page.getAttribute('html','data-version'),'v28.17.2-flat-sand');
+    assert.equal(await page.getAttribute('html','data-version'),'v28.17.3-flat-sand');
     await page.locator('#btn-start').click();
     await page.getByRole('button',{name:'Nueva partida',exact:true}).click();
     await page.locator('#btn-open').click();
@@ -29,9 +29,9 @@ try {
       __test.setManualTime(true);
       window.terrainModules={
         THREE:await import('./lib/three.module.js'),
-        coast:await import('./coast-materials.js?v=28.17.2-flat-sand'),
-        render:await import('./render-3d.js?v=28.17.2-flat-sand'),
-        world:await import('./world.js?v=28.17.2-flat-sand')
+        coast:await import('./coast-materials.js?v=28.17.3-flat-sand'),
+        render:await import('./render-3d.js?v=28.17.3-flat-sand'),
+        world:await import('./world.js?v=28.17.3-flat-sand')
       };
       Object.assign(Game.upgrades,{mesas:2,terraza:2,hamacas:2,escenario:1,
         showHoy:1,redes:1,algodonera:1,sombrillas:1});

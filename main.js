@@ -2,17 +2,17 @@
    main.js
    Arranque: bucle principal, exposición de pruebas (window.__api/__test) y arranque inicial.
    ========================================================= */
-import { ITEMS, UPGRADES } from './config.js?v=28.17.2-flat-sand';
-import { buildIcons } from './icons.js?v=28.17.2-flat-sand';
-import { Game, NET_SIM, Net, isGuest, weatherToday } from './state.js?v=28.17.2-flat-sand';
-import { buyStock, cleanTable, newSeason, spawnCustomer, startDay, tryServe, update } from './sim.js?v=28.17.2-flat-sand';
-import { endDay } from './report.js?v=28.17.2-flat-sand';
-import { Plan, pressReady, showPlan, toggleReady } from './ui.js?v=28.17.2-flat-sand';
-import { applyState, guestClean, guestServe, guestTick, netOpen, netSend, netTick } from './net.js?v=28.17.2-flat-sand';
-import { render } from './render.js?v=28.17.2-flat-sand';
-import { ctx } from './canvas.js?v=28.17.2-flat-sand';
-import { init3D, is3DReady, render3D, getPlayerMesh } from './render-3d.js?v=28.17.2-flat-sand';
-import './variety.js?v=28.17.2-flat-sand';
+import { ITEMS, UPGRADES } from './config.js?v=28.17.3-flat-sand';
+import { buildIcons } from './icons.js?v=28.17.3-flat-sand';
+import { Game, NET_SIM, Net, isGuest, weatherToday } from './state.js?v=28.17.3-flat-sand';
+import { buyStock, cleanTable, newSeason, spawnCustomer, startDay, tryServe, update } from './sim.js?v=28.17.3-flat-sand';
+import { endDay } from './report.js?v=28.17.3-flat-sand';
+import { Plan, pressReady, showPlan, toggleReady } from './ui.js?v=28.17.3-flat-sand';
+import { applyState, guestClean, guestServe, guestTick, netOpen, netSend, netTick } from './net.js?v=28.17.3-flat-sand';
+import { render } from './render.js?v=28.17.3-flat-sand';
+import { ctx } from './canvas.js?v=28.17.3-flat-sand';
+import { init3D, is3DReady, render3D, getPlayerMesh } from './render-3d.js?v=28.17.3-flat-sand';
+import './variety.js?v=28.17.3-flat-sand';
 
 // ---------- Bucle ----------
 let last=performance.now(), acc=0; const STEP=1/60;

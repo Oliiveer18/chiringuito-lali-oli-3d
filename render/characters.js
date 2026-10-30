@@ -1,13 +1,13 @@
-import { Net } from "../state.js?v=28.17.2-flat-sand";
-import { clamp } from "../util.js?v=28.17.2-flat-sand";
+import { Net } from "../state.js?v=28.17.3-flat-sand";
+import { clamp } from "../util.js?v=28.17.3-flat-sand";
 /* Mechanical extraction from render.js; declaration bodies are unchanged. */
-import { PERSONALITIES, WHO_COLOR } from "../config.js?v=28.17.2-flat-sand";
-import { W } from "../config.js?v=28.17.2-flat-sand";
-import { rr } from "../icons.js?v=28.17.2-flat-sand";
-import { Game } from "../state.js?v=28.17.2-flat-sand";
-import { PCOLORS } from "./scene.js?v=28.17.2-flat-sand";
-import { drawPictogram } from "./scene.js?v=28.17.2-flat-sand";
-import { drawHeldItem } from "./items.js?v=28.17.2-flat-sand";
+import { PERSONALITIES, WHO_COLOR } from "../config.js?v=28.17.3-flat-sand";
+import { W } from "../config.js?v=28.17.3-flat-sand";
+import { rr } from "../icons.js?v=28.17.3-flat-sand";
+import { Game } from "../state.js?v=28.17.3-flat-sand";
+import { PCOLORS } from "./scene.js?v=28.17.3-flat-sand";
+import { drawPictogram } from "./scene.js?v=28.17.3-flat-sand";
+import { drawHeldItem } from "./items.js?v=28.17.3-flat-sand";
 
 export function drawPerson(c,x,y,o){
   const look=o.look||{};

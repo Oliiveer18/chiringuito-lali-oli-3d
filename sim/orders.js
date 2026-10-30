@@ -1,10 +1,10 @@
 /* Mechanical extraction from sim.js; declaration bodies are unchanged. */
-import { ITEMS } from "../config.js?v=28.17.2-flat-sand";
-import { TYPES } from "../config.js?v=28.17.2-flat-sand";
-import { stationOf } from "../config.js?v=28.17.2-flat-sand";
-import { pickW } from "../util.js?v=28.17.2-flat-sand";
-import { Game } from "../state.js?v=28.17.2-flat-sand";
-import { activeItems } from "../state.js?v=28.17.2-flat-sand";
+import { ITEMS } from "../config.js?v=28.17.3-flat-sand";
+import { TYPES } from "../config.js?v=28.17.3-flat-sand";
+import { stationOf } from "../config.js?v=28.17.3-flat-sand";
+import { pickW } from "../util.js?v=28.17.3-flat-sand";
+import { Game } from "../state.js?v=28.17.3-flat-sand";
+import { activeItems } from "../state.js?v=28.17.3-flat-sand";
 
 export function pendingIdx(c){ const out=[]; if(!c.itemSt) return out; c.itemSt.forEach((st,i)=>{ if(st===0) out.push(i); }); return out; }
 

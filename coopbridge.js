@@ -1,8 +1,8 @@
 /* Cooperativo: canal para que la invitada ejecute acciones de los módulos v11-v14.
    La invitada envía la acción (guestSend); el anfitrión la recibe aquí y la ejecuta con la misma
    función y las mismas comprobaciones que si la hubiera pulsado él. El estado vuelve a ambos por la instantánea. */
-import { Net } from './state.js?v=28.17.2-flat-sand';
-import { netAct } from './net.js?v=28.17.2-flat-sand';
+import { Net } from './state.js?v=28.17.3-flat-sand';
+import { netAct } from './net.js?v=28.17.3-flat-sand';
 
 const handlers = {};
 export function onGuestAction(kind, fn){ handlers[kind] = fn; }

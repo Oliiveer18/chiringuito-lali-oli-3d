@@ -4,7 +4,7 @@ Origen: rama `fix/3d-service-integrity`, basada en `experiment/vfx-clientes-3d`
 en `e011f02b1b623cf8861603e76907520c08744e4a`. Copia independiente:
 `Oliiveer18/chiringuito-lali-oli-3d`, publicación desde `preview-3d` y registro
 de entrega en `fix/3d-online-web`. La corrección de terreno se desarrolla en
-`fix/3d-flat-sand`. Identificador de versión: `v28.17.2-flat-sand`.
+`fix/3d-flat-sand`. Identificador de versión: `v28.17.3-flat-sand`.
 
 ## Arena plana y apoyos
 
@@ -22,6 +22,9 @@ de entrega en `fix/3d-online-web`. La corrección de terreno se desarrolla en
   su colisión sigue la posición visible. La palmera contigua queda fuera de él.
 - No se cambian las coordenadas de servicio, las posiciones de las mesas, las
   reglas de movimiento online ni los datos de las partidas.
+- Los adaptadores de servicio y movimiento comparten el identificador de caché
+  de la versión completa, para evitar reutilizar archivos antiguos que importan
+  otra instancia del estado. Una regresión impide volver a importarlos sin versión.
 - Regresiones nuevas: `npm run test:terrain3d` y
   `npm run test:terrain3d:browser`. Esta última admite `TEST_URL` para Pages.
 

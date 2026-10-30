@@ -1,11 +1,11 @@
 /* Mechanical extraction from sim.js; declaration bodies are unchanged. */
-import { ITEMS } from "../config.js?v=28.17.2-flat-sand";
-import { eur2 } from "../util.js?v=28.17.2-flat-sand";
-import { Audio } from "../audio.js?v=28.17.2-flat-sand";
-import { Game } from "../state.js?v=28.17.2-flat-sand";
-import { itemUnlocked } from "../state.js?v=28.17.2-flat-sand";
-import { flashMoney } from "../ui.js?v=28.17.2-flat-sand";
-import { regularOutcome } from "./customers.js?v=28.17.2-flat-sand";
+import { ITEMS } from "../config.js?v=28.17.3-flat-sand";
+import { eur2 } from "../util.js?v=28.17.3-flat-sand";
+import { Audio } from "../audio.js?v=28.17.3-flat-sand";
+import { Game } from "../state.js?v=28.17.3-flat-sand";
+import { itemUnlocked } from "../state.js?v=28.17.3-flat-sand";
+import { flashMoney } from "../ui.js?v=28.17.3-flat-sand";
+import { regularOutcome } from "./customers.js?v=28.17.3-flat-sand";
 
 export function charge(c, total, sync){
   if(c.charged || !Number.isFinite(total) || total<0) return false;

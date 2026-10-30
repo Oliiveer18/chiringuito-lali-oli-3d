@@ -1,5 +1,5 @@
-import { Game, Net } from './state.js?v=28.17.2-flat-sand';
-import { setSpeed, toastLocal } from './ui.js?v=28.17.2-flat-sand';
+import { Game, Net } from './state.js?v=28.17.3-flat-sand';
+import { setSpeed, toastLocal } from './ui.js?v=28.17.3-flat-sand';
 import { BrokerPeer } from './broker-peer.js';
 const Base=BrokerPeer;
 let sessionToken;try{sessionToken=sessionStorage.getItem('lali-oli.3d.peer-token');if(!sessionToken){sessionToken=crypto.randomUUID();sessionStorage.setItem('lali-oli.3d.peer-token',sessionToken);}}catch(e){sessionToken=String(Date.now())+Math.random();}

@@ -1,13 +1,13 @@
 /* Cierre y balance diario de Chiringo. Lo importa v12.js. */
-import { socialIdle, markSocial, closePhoto } from './management-ui.js?v=28.17.2-flat-sand';
-import { Game, Net, isCoop } from './state.js?v=28.17.2-flat-sand';
-import { ITEMS } from './config.js?v=28.17.2-flat-sand';
-import { rnd, clamp } from './util.js?v=28.17.2-flat-sand';
-import { toast } from './ui.js?v=28.17.2-flat-sand';
-import { netDirty } from './net.js?v=28.17.2-flat-sand';
-import { settle, postMetrics, reachFactor, engagement, chiringoRivalLine } from './social-model.js?v=28.17.2-flat-sand';
-import { FOL, RAT, INFLU, TRENDS } from './v12-posts.js?v=28.17.2-flat-sand';
-import { rt } from './v12-state.js?v=28.17.2-flat-sand';
+import { socialIdle, markSocial, closePhoto } from './management-ui.js?v=28.17.3-flat-sand';
+import { Game, Net, isCoop } from './state.js?v=28.17.3-flat-sand';
+import { ITEMS } from './config.js?v=28.17.3-flat-sand';
+import { rnd, clamp } from './util.js?v=28.17.3-flat-sand';
+import { toast } from './ui.js?v=28.17.3-flat-sand';
+import { netDirty } from './net.js?v=28.17.3-flat-sand';
+import { settle, postMetrics, reachFactor, engagement, chiringoRivalLine } from './social-model.js?v=28.17.3-flat-sand';
+import { FOL, RAT, INFLU, TRENDS } from './v12-posts.js?v=28.17.3-flat-sand';
+import { rt } from './v12-state.js?v=28.17.3-flat-sand';
 const absSocial=()=>((Game.upgrades.career?.season||1)-1)*30+Game.day;
 export function migrate(){if(Game.upgrades[FOL]==null)Game.upgrades[FOL]=0;if(Game.upgrades[RAT]==null)Game.upgrades[RAT]=3;if(!Array.isArray(Game.upgrades.socialComments))Game.upgrades.socialComments=[];if(!Array.isArray(Game.upgrades.socialPend))Game.upgrades.socialPend=[];}
 export function addPend(k,n,o){const U=Game.upgrades;if(!Array.isArray(U.socialPend))U.socialPend=[];U.socialPend.push({k,n,...(o||{})});}
