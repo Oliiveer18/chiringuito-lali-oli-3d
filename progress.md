@@ -77,3 +77,15 @@ Original prompt: Sí, empieza las correcciones en una rama nueva de mi copia 3D.
 - Storage test now also checks the exact persisted name before reload.
 - Fixed local storage test passes: new save, name, reload, same id, planning,
   service, pause, zero errors and unchanged original 2D sentinels.
+
+## Final hosted signoff
+- Live runtime commit: 52c5bac, v28.17.1-online-web, preview-3d.
+- Actual GitHub Pages suites: 9 online + 10 service + isolated storage all pass.
+- Fresh production context: new version visible, incomplete code rejected,
+  375px room fits without horizontal overflow, two 13-character lines.
+- Clipboard tested exact; final game-client click/screenshot flow passed.
+- Public broker limitation remains explicit in UI/README; no production SLA.
+- Original main remains 3f487bb08d37807a647fc6f0b64dfd856921b05e and original
+  experimental branch e011f02b1b623cf8861603e76907520c08744e4a; 2D Pages unchanged.
+- No active cloud-browser session or manually-driven game profiles remain.
+- Runtime has remaining manual-service/UI scope documented in SERVICE-3D-FIXES.md.

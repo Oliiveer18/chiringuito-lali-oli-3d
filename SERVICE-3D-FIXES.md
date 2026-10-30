@@ -1,7 +1,9 @@
 # Integridad del servicio y cooperativo 3D
 
-Rama `fix/3d-service-integrity`, basada en `experiment/vfx-clientes-3d` en
-`e011f02b1b623cf8861603e76907520c08744e4a`. Identificador de versión:
+Origen: rama `fix/3d-service-integrity`, basada en `experiment/vfx-clientes-3d`
+en `e011f02b1b623cf8861603e76907520c08744e4a`. Copia independiente:
+`Oliiveer18/chiringuito-lali-oli-3d`, publicación desde `preview-3d` y registro
+de entrega en `fix/3d-online-web`. Identificador de versión:
 `v28.17.1-online-web`.
 
 ## Cambios
@@ -35,9 +37,9 @@ Rama `fix/3d-service-integrity`, basada en `experiment/vfx-clientes-3d` en
 - **Cooperativo:** intenciones del invitado resueltas por el anfitrión, id de
   servicio, deduplicación de secuencias y snapshots de bandejas/estaciones.
   La secuencia se recupera del snapshot para evitar bloqueos al reconectar.
-- **Sala accesible:** el código visible se registra como identificador real de
-  PeerJS, pasándolo como primer argumento y no como una opción ignorada.
-  El reintento por error de socket conserva el código y avanza al servidor alternativo.
+- **Sala privada:** código aleatorio de 26 caracteres, copia/pegado y contenido
+  cifrado con AES-GCM. El broker solo recibe temas hash y texto cifrado; no el
+  secreto de sala. La reconexión conserva la identidad de la partida.
 - **Movimiento online:** personajes locales distintos, posición y orientación
   compartidas e interpolación remota. El anfitrión valida secuencias, velocidad,
   límites, colisiones y proximidad a estaciones o clientes.
@@ -120,6 +122,16 @@ desde el dato guardado, sin esperar al módulo visual. La prueba de aislamiento
 comprueba el nombre en el almacenamiento antes de recargar y vuelve a continuar
 la misma partida. Las claves del 2D permanecen separadas e intactas.
 
+### Resultado final de la versión publicada
+
+En `v28.17.1-online-web` de GitHub Pages terminaron correctamente las nueve
+pruebas online, las diez de jornada y la prueba de guardado aislado, incluyendo
+nombre persistido, recarga y continuación. Las tres suites registraron cero
+errores de página. También pasaron `npm test`, sus seis grupos de regresión del
+transporte, y la comprobación visual de sala a 375 px con código en dos líneas,
+copiado exacto y validación del código incompleto. No son pruebas físicas de
+todos los teléfonos o redes y no alteran el límite de disponibilidad del broker.
+
 ## Cómo probar el cooperativo
 
 - Abre [la copia 3D en GitHub Pages](https://oliiveer18.github.io/chiringuito-lali-oli-3d/)
@@ -144,4 +156,4 @@ juego. También desactiva pantalla completa en ese entorno.
 Esta adaptación no modifica los archivos originales ni la publicación de
 GitHub. En la vista de pruebas se pierde el guardado al recargar; la versión
 normal conserva su mecanismo de guardado. No se ha hecho merge ni despliegue
-a la rama de producción.
+a `main` del repositorio 2D original.
